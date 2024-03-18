@@ -51,7 +51,7 @@ body {
     overflow: hidden;
     border-right: .0.5em solid grey;
     white-space: nowrap;
-    letter-spacing: .0.5em;
+    letter-spacing: .0.3em;
     animation:
         typing 3.5s steps(30, end),
         blink-caret .5s step-end infinite;
