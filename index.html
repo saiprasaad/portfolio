@@ -17,7 +17,7 @@
 <style>
     .flip-card {
         background-color: transparent;
-        width: 300px;
+        width: 360px;
         height: 250px;
         perspective: 1000px;
         border: none;
@@ -119,6 +119,10 @@
     .dark .custom-toggler.navbar-toggler {
         border-color: rgb(255, 255, 255);
     }
+
+    .flip-card .card-body {
+        padding: 1rem;
+    }
 </style>
 
 <body>
@@ -194,7 +198,7 @@
                                 id="moon-icon" style="font-size:xx-large;" class="fa fa-solid fa-envelope p-3"></i></a>
                     </p>
                     <p> <a class="anchor-tag"
-                            href="https://drive.google.com/file/d/1gVLr6IEVlZDUV8wtgWHpoISAZ8rUOU4w/view"
+                            href="https://drive.google.com/file/d/1fU1WiF7W4NZmp1Iuq8MV3u3DfKlmNIEA/view?usp=sharing"
                             style="text-decoration: none">
                             <p class="fs-6"><i class="pr-2 fa fa-solid fa-file p-3" style="font-size:xx-large;"></i></p>
                         </a></p>
@@ -210,10 +214,12 @@
     <div class="container pt-5" style="height: auto;">
         <h4 class="display-6">About Me</h4>
         <p class="lead" style="text-align: justify">
-            Software Engineer with a Master’s Degree in Computer Science at Illinois Institute of Technology and over 2
-            years of work experience in developing enterprise applications. Proven expertise in mobile application
-            development using Flutter, front-end development using React, Angular, back-end development using Spring
-            Boot, Node.js, and various databases including MySQL, PostgreSQL, MongoDB.
+            I’m a Full-Stack Software Engineer with a Master’s in Computer Science and over two years of experience
+            building scalable web and mobile applications. Currently at Afficiency, an Insurtech startup, I specialize
+            in crafting innovative solutions with React, Angular, Flask, Spring Boot, MySQL, and Redis, while also
+            exploring AI-powered tools and microservices to improve performance and workflows. A hackathon winner and
+            continuous learner, I’m passionate about blending technology and creativity to solve real-world problems and
+            deliver meaningful user experiences.
         </p>
     </div>
     <div data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="0" class="scrollspy-example"
@@ -285,7 +291,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-2">
+        </div>
+        <div class="container py-5">
+            <h4 class="display-6" id="experience">Experience</h4>
+            <div class="row pt-3">
                 <div class="shadow bg-body rounded">
                     <div class="card" style="border: none;">
                         <div class="row">
@@ -293,55 +302,35 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h5 class="fs-3">Bachelors of Computer Science</h5>
+                                            <h5 class="fs-3">Full Stack Developer</h5>
                                         </div>
-                                        <div class="pt-1">Aug 2017 - Apr 2021</div>
+                                        <div>Sept 2024 - Present</div>
                                     </div>
-                                    <h6 class="card-subtitle mb-2">St. Joseph's College of Engineering,
-                                        Chennai, India
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2">GPA: 3.86</h6>
-                                    <div class="row mt-2">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary">IEEE Student Chapter Member</span>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary">IEEE Computer Society</span>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary">Google Student Developer Club
-                                                    Member</span>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary"> Cognizant Student Club Member</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <h6 class="card-subtitle mb-2">Afficiency, New York, USA</h6>
                                     <p class="card-text">
                                     <div class="mt-1">
-                                        <dl class="row">
-                                            <dt class="h5 col-sm-4 pt-2">Coursework</dt>
-                                            <dd class="col-sm-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Python Programming</li>
-                                                    <li class="list-group-item">Programming in C</li>
-                                                    <li class="list-group-item">Object-oriented in Programming</li>
-                                                    <li class="list-group-item">Operating Systems</li>
-                                                    <li class="list-group-item">Internet Programming</li>
-                                                </ul>
-                                            </dd>
-                                            <dd class="col-sm-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Distributed Systems</li>
-                                                    <li class="list-group-item">Artificial Intelligence</li>
-                                                    <li class="list-group-item">Graph Theory and Applications</li>
-                                                    <li class="list-group-item">Cryptography and Network Security</li>
-                                                    <li class="list-group-item">Cloud Computing</li>
-                                                </ul>
-                                            </dd>
-
-                                        </dl>
+                                        <ul class="list-group">
+                                            <li class="list-group-item border-0">Designed and developed responsive user
+                                                interfaces with the <strong>React</strong> framework, building a
+                                                scalable front-end architecture that supports <strong>10,000+
+                                                    users</strong> across web and mobile platforms.</li>
+                                            <li class="list-group-item border-0">Implemented and maintained
+                                                microservices using <strong>Flask / Spring Boot</strong>, integrating
+                                                <strong>Redis</strong> for caching and <strong>MySQL</strong> for
+                                                relational data management, improving system scalability and
+                                                performance.
+                                            </li>
+                                            <li class="list-group-item border-0">Delivered enterprise applications for
+                                                <strong>three major life insurance carriers</strong>, resolving
+                                                <strong>50+ high-priority production issues</strong> via
+                                                <strong>HubSpot</strong>, resulting in improved UI/UX and more efficient
+                                                backend workflows.
+                                            </li>
+                                            <li class="list-group-item border-0">Utilized <strong>GitLab</strong> for
+                                                version control, <strong>CI/CD</strong>, and code reviews, streamlining
+                                                the deployment pipeline, ensuring reliable releases, and fostering team
+                                                collaboration.</li>
+                                        </ul>
                                     </div>
                                     </p>
                                 </div>
@@ -350,9 +339,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container py-5">
-            <h4 class="display-6" id="experience">Experience</h4>
+
             <div class="row pt-3">
                 <div class="shadow bg-body rounded">
                     <div class="card" style="border: none;">
@@ -365,17 +352,20 @@
                                         </div>
                                         <div>Feb 2024 - Apr 2024</div>
                                     </div>
-                                    <h6 class="card-subtitle mb-2">Open Avenues Career Pathways, Chicago, USA
-                                    </h6>
+                                    <h6 class="card-subtitle mb-2">Open Avenues Career Pathways, Chicago, USA</h6>
                                     <p class="card-text">
                                     <div class="mt-1">
                                         <ul class="list-group">
-                                            <li class="list-group-item border-0">Designed and developed Campus Cooks
-                                                mobile app using Flutter with Koodos Labs, simplifying the recipe
-                                                preparation with just a click of the ingredients </li>
-                                            <li class="list-group-item border-0">Elevated User Interface design
-                                                expertise through proficient utilization of Figma, enhancing visual
-                                                aesthetics and user experience across projects
+                                            <li class="list-group-item border-0">Designed and developed <strong>Campus
+                                                    Cooks</strong> mobile app using Flutter with Koodos Labs, enabling
+                                                students to prepare recipes with a single click of selected ingredients.
+                                            </li>
+                                            <li class="list-group-item border-0">Integrated <strong>Firebase</strong>
+                                                backend for real-time data storage and user authentication, ensuring
+                                                smooth app performance and secure access.</li>
+                                            <li class="list-group-item border-0">Elevated UI/UX design expertise through
+                                                <strong>Figma</strong>, creating visually appealing and user-friendly
+                                                interfaces aligned with modern design principles.
                                             </li>
                                         </ul>
                                     </div>
@@ -386,6 +376,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row pt-3">
                 <div class="shadow bg-body rounded">
                     <div class="card" style="border: none;">
@@ -398,20 +389,18 @@
                                         </div>
                                         <div>Oct 2023 - Dec 2023</div>
                                     </div>
-                                    <h6 class="card-subtitle mb-2">Hexaware Technologies, Chicago,
-                                        USA
-                                    </h6>
+                                    <h6 class="card-subtitle mb-2">Hexaware Technologies, Chicago, USA</h6>
                                     <p class="card-text">
                                     <div class="mt-1">
                                         <ul class="list-group">
                                             <li class="list-group-item border-0">Gained skills in building responsive
-                                                and
-                                                user-friendly single-page applications (SPAs) by leveraging the modular
-                                                architecture of Angular framework </li>
+                                                and user-friendly <strong>single-page applications (SPAs)</strong> by
+                                                leveraging the modular architecture of the <strong>Angular</strong>
+                                                framework.</li>
                                             <li class="list-group-item border-0">Streamlined data management by
-                                                seamlessly
-                                                combining Hibernate ORM with Spring Boot applications, enabling
-                                                efficient data access and manipulation </li>
+                                                seamlessly combining <strong>Hibernate ORM</strong> with <strong>Spring
+                                                    Boot</strong> applications, enabling efficient data access and
+                                                manipulation.</li>
                                         </ul>
                                     </div>
                                     </p>
@@ -421,6 +410,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row pt-3">
                 <div class="shadow bg-body rounded">
                     <div class="card" style="border: none;">
@@ -431,65 +421,28 @@
                                         <div>
                                             <h5 class="fs-3">Software Engineer</h5>
                                         </div>
-                                        <div>Aug 2021 - Jun 2022</div>
+                                        <div>Feb 2021 - Jun 2022</div>
                                     </div>
-                                    <h6 class="card-subtitle mb-2">Ernst and Young, Chennai,
-                                        India
-                                    </h6>
+                                    <h6 class="card-subtitle mb-2">Ernst and Young, Chennai, India</h6>
                                     <p class="card-text">
                                     <div class="mt-1">
                                         <ul class="list-group">
-                                            <li class="list-group-item border-0">Built scalable microservice application
-                                                using
-                                                Spring Boot, and integrated various types of databases to effectively
-                                                handle diverse data requirements
+                                            <li class="list-group-item border-0">Built scalable microservice
+                                                applications using <strong>Spring Boot</strong>, and integrated multiple
+                                                databases (<strong>MySQL, PostgreSQL</strong>, etc.) to effectively
+                                                handle diverse data requirements.</li>
+                                            <li class="list-group-item border-0">Deployed <strong>REST APIs</strong>
+                                                seamlessly across <strong>8 internal microservices</strong>, fostering
+                                                efficient data flow between services and ensuring a well-integrated
+                                                system.</li>
+                                            <li class="list-group-item border-0">Utilized <strong>Git</strong> for
+                                                version control to collaborate with the development team, manage code
+                                                changes, and facilitate conflict resolution during development cycles.
                                             </li>
-                                            <li class="list-group-item border-0">
-                                                Deployed REST APIs seamlessly across 8 internal microservices, fostering
-                                                efficient data flow between services, leading to a well-integrated
-                                                system</li>
-                                            <li class="list-group-item border-0">Utilized version control systems like
-                                                Git to
-                                                collaborate with the development team by managing code changes, and
-                                                facilitating conflict resolution</li>
-                                            <li class="list-group-item border-0">Acquired expertise in MySQL databases,
-                                                through designing of optimized database schemas and crafting SQL queries
-                                                to manage complex data structures</li>
-                                        </ul>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="fs-3">Software Engineer Internship</h5>
-                                        </div>
-                                        <div>Feb 2021 - Jun 2021</div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2">Ernst and Young, Chennai,
-                                        India
-                                    </h6>
-                                    <p class="card-text">
-                                    <div class="mt-1">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0">Built interactive web applications
-                                                using
-                                                Servlets and JSP, leveraging optimized resource loading to achieve a
-                                                remarkable 40% reduction in page load times</li>
-                                            <li class="list-group-item border-0"> Developed user-friendly frontend
-                                                design with
-                                                HTML, CSS, and JavaScript to create web pages, ensuring a seamless user
-                                                experience across different devices</li>
+                                            <li class="list-group-item border-0">Acquired expertise in
+                                                <strong>MySQL</strong> by designing optimized database schemas and
+                                                crafting SQL queries to manage complex data structures.
+                                            </li>
                                         </ul>
                                     </div>
                                     </p>
@@ -502,600 +455,425 @@
         </div>
         <div class="container py-5">
             <h4 class="display-6" id="skills">Skills</h4>
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Programming Languages</h5>
-                                    </div>
-                                    <p class="card-text">
-                                    <div
-                                        class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                        <div class="col"><img src="images/c.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/java.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/python.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/r.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/dart.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/swift.png" class="rounded img-fluid" /></div>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow bg-body rounded mt-4">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Database</h5>
-                                    </div>
-                                    <p class="card-text">
-                                    <div
-                                        class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                        <div class="col"><img src="images/mysql.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/postgresql.png" class="rounded img-fluid" />
-                                        </div>
-                                        <div class="col"><img src="images/sqlite.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/mongodb.png" class="rounded img-fluid" />
-                                        </div>
-                                        <div class="col"><img src="images/firebase.png" class="rounded img-fluid" />
-                                        </div>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow bg-body rounded mt-4">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Front End</h5>
-                                    </div>
-                                    <p class="card-text">
-                                    <div
-                                        class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                        <div class="col"><img src="images/html.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/css.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/react.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/angular.png" class="rounded img-fluid" />
-                                        </div>
-                                        <div class="col"><img src="images/javascript.png" class="rounded img-fluid" />
-                                        </div>
-                                        <div class="col"><img src="images/typescript.png" class="rounded img-fluid" />
-                                        </div>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="shadow bg-body rounded mt-4">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Machine Learning</h5>
-                                    </div>
-                                    <p class="card-text">
-                                        <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                            <div class="col"><img src="images/ml_algorithms.png" class="rounded img-fluid" /></div>
-                                            <div class="col"><img src="images/nlp.png" class="rounded img-fluid" /></div>
-                                            <div class="col"><img src="images/generative_ai.png" class="rounded img-fluid" /></div>
-                                        </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="shadow bg-body rounded mt-4">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Back End</h5>
-                                    </div>
-                                    <p class="card-text">
-                                    <div
-                                        class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                        <div class="col"><img src="images/springboot.png" class="rounded img-fluid" />
-                                        </div>
-                                        <div class="col"><img src="images/php.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/nodejs.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/flask.png" class="rounded img-fluid" /></div>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow bg-body rounded mt-4">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Mobile</h5>
-                                    </div>
-                                    <p class="card-text">
-                                    <div
-                                        class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                        <div class="col"><img src="images/flutter.png" class="rounded img-fluid" />
-                                        </div>
-                                        <div class="col"><img src="images/androidstudio.png"
-                                                class="rounded img-fluid" /></div>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow bg-body rounded mt-4">
-                    <div class="card" style="border: none;">
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div>
-                                        <h5 class="fs-3">Others</h5>
-                                    </div>
-                                    <p class="card-text">
-                                    <div
-                                        class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                                        <div class="col"><img src="images/git.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/docker.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/aws.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/azure.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/figma.png" class="rounded img-fluid" /></div>
-                                        <div class="col"><img src="images/streamlit.png" class="rounded img-fluid" />
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="row pt-3 g-4">
 
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">Programming Languages</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code me-1"></i> C</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-coffee me-1"></i>
+                                        Java</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-python me-1"></i>
+                                        Python</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-chart-line me-1"></i>
+                                        R</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-feather me-1"></i>
+                                        Dart</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-apple me-1"></i>
+                                        Swift</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">Database</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
+                                        MySQL</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
+                                        PostgreSQL</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
+                                        SQLite</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-leaf me-1"></i>
+                                        MongoDB</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-fire me-1"></i>
+                                        Firebase</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-memory me-1"></i>
+                                        Redis</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">Front End</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code me-1"></i> HTML</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-paint-brush me-1"></i>
+                                        CSS</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-bold me-1"></i>
+                                        Bootstrap</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-react me-1"></i>
+                                        React</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-angular me-1"></i>
+                                        Angular</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-js me-1"></i>
+                                        JavaScript</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code-branch me-1"></i>
+                                        TypeScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">Back End</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-leaf me-1"></i> Spring
+                                        Boot</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-node me-1"></i>
+                                        Node.js</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-flask me-1"></i>
+                                        Flask</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code me-1"></i> PHP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">Mobile</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-mobile-alt me-1"></i>
+                                        Flutter</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-android me-1"></i> Android
+                                        Studio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">AI & Machine Learning</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-brain me-1"></i> Generative
+                                        AI</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-robot me-1"></i>
+                                        LLMs</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
+                                        RAG</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-language me-1"></i>
+                                        NLP</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-cube me-1"></i>
+                                        Ollama</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-key me-1"></i> OpenAI
+                                        APIs</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-face-smile me-1"></i>
+                                        Hugging Face</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="shadow bg-body rounded h-100">
+                        <div class="card" style="border: none;">
+                            <div class="card-body">
+                                <h5 class="fs-3">Others</h5>
+                                <div class="d-flex flex-column gap-2 align-items-start">
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code-branch me-1"></i>
+                                        Git</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-box me-1"></i>
+                                        Docker</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-cloud me-1"></i> AWS</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-cloud me-1"></i>
+                                        Azure</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-pencil-ruler me-1"></i>
+                                        Figma</span>
+                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-stream me-1"></i>
+                                        Streamlit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container py-5">
+            <h4 class="display-6" id="projects">Projects</h4>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">AI-Powered Log Summarizer & Teams Alerts</h5>
+                                    <p class="card-text">Python, Ollama, LLMs, Teams API</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Integrated AI log summarization with Teams for real-time anomaly detection and
+                                    faster incident response.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Encryption & Decryption Module</h5>
+                                    <p class="card-text">React, Flask, AES-CBC</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Implemented AES-CBC encryption/decryption in React and Flask for secure end-to-end
+                                    data handling.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">JSON Explorer Web App</h5>
+                                    <p class="card-text">React, React Flow, Netlify</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Built and deployed an interactive JSON visualization and editing tool hosted on
+                                    Netlify.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary" href="https://jsonexplorer.netlify.app/" target="_blank"
+                                        rel="noopener">
+                                        Live Demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Asana Task Automation</h5>
+                                    <p class="card-text">Asana API, Flask, Redis, MySQL</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Automated daily ticket creation and SQL syncing between Asana and backend
+                                    dashboards.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Repo Vision</h5>
+                                    <p class="card-text">Python, Flask, React, Google Cloud</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Visualized GitHub repo data and forecasts using microservices with Elasticsearch.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/Repo-Vision"
+                                        target="_blank" rel="noopener">
+                                        See Github Repo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">YouTube Translator</h5>
+                                    <p class="card-text">Python, Streamlit, Whisper</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Translated YouTube videos with Whisper, OpenAI, gTTS, and MoviePy.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/YouTube-Translator"
+                                        target="_blank" rel="noopener">
+                                        See Github Repo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Wordle Clone</h5>
+                                    <p class="card-text">Flutter</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Developed a cross-platform mobile Wordle clone with Flutter.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/Wordle-Clone"
+                                        target="_blank" rel="noopener">
+                                        See Github Repo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Battleships</h5>
+                                    <p class="card-text">Flutter, Flask, MySQL</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Multiplayer Battleships game with APIs for authentication and gameplay.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary"
+                                        href="https://github.com/saiprasaad/Battleship-game-using-Flutter"
+                                        target="_blank" rel="noopener">
+                                        See Github Repo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Chicago Streets Harmony</h5>
+                                    <p class="card-text">Flutter, Spring Boot, Geo-location</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Geolocation-based app to improve community engagement in Chicago.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary"
+                                        href="https://github.com/saiprasaad/Chicago-Streets-Harmony" target="_blank"
+                                        rel="noopener">
+                                        See Github Repo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-body">
+                                    <h5 class="card-title">Campus Cooks</h5>
+                                    <p class="card-text">Flutter, Firebase</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="p-3 text-justify">
+                                    Suggested recipes for students based on available ingredients.
+                                </p>
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/Campus-Cooks"
+                                        target="_blank" rel="noopener">
+                                        See Github Repo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-        <div class="container py-5">
-            <h4 class="display-6" id="projects">Projects</h4>
-            <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">AI Mock Interviewer</h5>
-                                <p class="card-text">LangFlow and OpenAI</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">
-                                Built an AI-powered interviewer that uses GPT-3.5 to generate tailored interview
-                                questions and analyze resumes for various job roles.
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/AI-Mock-Interviewer"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">RAG using Spring AI</h5>
-                                <p class="card-text">Spring AI, Generative AI, Embeddings, PDF Processing</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Designed a Spring Boot application using Spring AI to create a
-                                RAG model which uses OpenAI along with PDF as data source for supplementing information
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/RAG-using-Spring-AI"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">RAG using Python</h5>
-                                <p class="card-text">Python, Generative AI, Natural Language Processing</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">
-                                Developed a RAG model for interacting with PDF documents through an interface. Utilized
-                                OpenAI embeddings, FAISS, and Streamlit to build the application.
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/RAG-using-python"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Repo Vision</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Python, Flask, React, Google Cloud, Docker, Elasticsearch</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Created a script for extracting data with GitHub API, plotting
-                                different visualizations and forecasting using various time-series forecasting models
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Repo-Vision"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">USA Social Hub</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Angular, Nodejs, PostgreSQL, Elasticsearch</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Architected a user-friendly web platform allowing users to
-                                discover nearby dining options, searching by area name, street name, or zip code</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/USA-Social-Hub"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Youtube Translator</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Python, Streamlit, gTTS, whisper, OpenAI</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Designed a translator which prompts a YouTube link, desired
-                                language and generate the same video with translated audio of selected language</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/YouTube-Translator"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Chicago Streets Harmony</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Flutter, Spring Boot, Geo-location</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Created an innovative mobile application aimed at fostering
-                                community engagement and addressing social issues in the urban landscape of Chicago</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Chicago-Streets-Harmony"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Campus Cooks</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Open Avenues Career Pathways</h6>
-                                <p class="card-text">Flutter, Firebase</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Developed a user-friendly mobile app enabling students to
-                                effortlessly discover meal suggestions tailored to their available ingredients,
-                                optimizing meal preparation</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Campus-Cooks"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Mushroom Classification Web App</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Python, Streamlit, Pandas, NumPy, Scikit-learn</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">
-                                A Mushroom Classification Web App featuring classifier selection, customizable model
-                                hyperparameters, performance metric visualization, and raw data display
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Mushroom-Classifcation-using-Streamlit"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Wordle Clone</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Flutter</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">A Wordle Clone built using Flutter, offering a mobile-friendly
-                                and cross-platform word guessing game experience</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Wordle-Clone"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Food swipe</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Ernst and Young</h6>
-                                <p class="card-text">Spring Boot, React, Kafka, Docker, MySQL</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Created a real-time microservice application empowering users to
-                                order from over 100 restaurants, offering a convenient dining experience</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">NetCart</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Ernst and Young</h6>
-                                <p class="card-text">MySQL, CSS, HTML, Servlets, Bootstrap</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">A dynamic shopping application offering seamless navigation,
-                                secure transactions, and providing a superior online shopping experience for users</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/NetCart"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Student voice</h5>
-                                <h6 class="card-subtitle mb-3">Associated with St. Joseph’s College of Engineering</h6>
-                                <p class="card-text">HTML, CSS, Bootstrap, Ajax, PHP, MySQL</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Developed a web application for students to provide feedback on
-                                courses through ratings and reviews, fostering a culture of continuous improvement</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Student-voice"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Real-Time Weather App</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Flutter, SQLite</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Created a weather app, integrating the Visual Crossing API to
-                                fetch over various weather parameters, like temperature, precipitation, and wind speed
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Weather-app-using-Flutter"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Movie Recommendation using MLLIB</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Python, Spark MLlib, Spark SQL, ALS, SVD</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Built a movie recommender system using Apache Spark's MLlib for
-                                collaborative filtering, personalizing suggestions for users</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Movie-Recommendation-System-using-Spark-MLlib"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Battleships</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Flutter, Flask, MySQL</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">Designed a collaborative multiplayer game integrating around 10
-                                RESTful APIs for streamlined user authentication, game listing, and interactive gameplay
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Battleship-game-using-Flutter"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card card m-2">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card-body">
-                                <h5 class="card-title">Rep Counter</h5>
-                                <h6 class="card-subtitle mb-3">Associated with Illinois Institute of Technology</h6>
-                                <p class="card-text">Python, OpenCV, MediaPipe</p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p class="p-3 text-justify">A Rep Counter employing advanced computer vision techniques for
-                                real-time human pose estimation and movement tracking in fitness activities</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary">
-                                    <a href="https://github.com/saiprasaad/Rep-Counter-using-MediaPipe-and-OpenCV"
-                                        style="color: white; text-decoration: none;">
-                                        See Github Repo
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="container py-5">
             <h4 class="display-6" id="accomplishments">Accomplishments</h4>
             <ul class="list-group list-group-flush">
+                <li class="list-group-item">Best Performer of the Month at Afficiency (December 2024)</li>
+                <li class="list-group-item">Judge at HackMHS X hackathon</li>
                 <li class="list-group-item">Winner of ACM Scarlet Hacks</li>
                 <li class="list-group-item">Winner of Drone Golf competition with the Robolink Codrone</li>
                 <li class="list-group-item">Winner of Leetcode Challenge organized by ACM</li>
-                <li class="list-group-item">Best Performer of the Month at Afficiency (December 2024)</li>
-                <li class="list-group-item">Judge at HackMHS X hackathon</li>
             </ul>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     <div class="container py-5" style="height: auto;">
-            <h4 class="display-6" id="certifications">Certifications</h4>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Microsoft Certified: Azure AI Fundamentals</li>
-                <li class="list-group-item">Oracle Cloud Infrastructure Foundations Certified Associate</li>
-                <li class="list-group-item">CS50’s Introduction to Computer Science by Harvard University - Edx</li>
-                <li class="list-group-item">Web Development and Coding Specialization by University of Michigan - Coursera</li>
-                <li class="list-group-item">Introduction to Generative AI by Google Cloud - Coursera</li>
-                <li class="list-group-item">Hackerrank Certification in C, Java, JavaScript, React, MySQL</li>
-                <li class="list-group-item">Postman Student Expert Badge - Postman</li>
-            </ul>
-        </div>
+        <h4 class="display-6" id="certifications">Certifications</h4>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Microsoft Certified: Azure AI Fundamentals</li>
+            <li class="list-group-item">Oracle Cloud Infrastructure Foundations Certified Associate</li>
+            <li class="list-group-item">CS50’s Introduction to Computer Science by Harvard University - Edx</li>
+            <li class="list-group-item">Web Development and Coding Specialization by University of Michigan - Coursera
+            </li>
+            <li class="list-group-item">Introduction to Generative AI by Google Cloud - Coursera</li>
+            <li class="list-group-item">Hackerrank Certification in C, Java, JavaScript, React, MySQL</li>
+            <li class="list-group-item">Postman Student Expert Badge - Postman</li>
+        </ul>
+    </div>
     <footer id="sticky-footer" class="flex-shrink-0 py-4">
         <div class="container text-center">
             <small>&copy; 2024 Saiprasaad Kalyanaraman</small>

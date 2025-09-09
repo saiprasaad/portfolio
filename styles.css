@@ -112,3 +112,10 @@ body {
 .active.dark {
     color: white !important;
 }
+
+.badge {
+  display: inline-block !important;
+  width: auto !important; 
+  font-size: 0.8rem; 
+  padding: 0.35em 0.6em; 
+}
