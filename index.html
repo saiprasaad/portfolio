@@ -1,913 +1,607 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-YWznkfwAFKUzIubl7ypxAqmIYzVcRAaSYv$lhlsyvXNPUzXGdYO4Pt0xrFJhwzvEWBrPvHhPGXHhz2jvaOCACQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+   
+  </style>
 </head>
-<style>
-    .flip-card {
-        background-color: transparent;
-        width: 360px;
-        height: 250px;
-        perspective: 1000px;
-        border: none;
-    }
-
-    .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        padding: 5px;
-        text-align: justify;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
-
-    .flip-card-front {
-        color: #28282B;
-    }
-
-    .flip-card-back {
-        color: #28282B;
-        transform: rotateY(180deg);
-    }
-
-    .flip-card-front.dark {
-        color: white;
-    }
-
-    .flip-card-back.dark {
-        color: white;
-    }
-
-    .flip-card.dark {
-        background-color: #28282B;
-    }
-
-    .container.dark {
-        background-color: #28282B;
-    }
-
-    .typewriter p.dark {
-        color: white;
-    }
-
-    .row.dark {
-        color: white;
-        background-color: #28282B;
-    }
-
-    .list-group-item.dark {
-        color: white;
-        background-color: #28282B;
-    }
-
-    .anchor-tag {
-        color: #28282B;
-    }
-
-    .anchor-tag.dark {
-        color: white;
-    }
-
-    .navbar.dark {
-        background-color: #28282B;
-    }
-
-    .navbar {
-        background-color: white;
-    }
-
-    .sticky-footer {
-        background-color: white;
-        color: black;
-    }
-
-    .sticky-footer.dark {
-        background-color: #28282B;
-        color: white;
-    }
-
-    .dark .custom-toggler .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-    }
-
-    .dark .custom-toggler.navbar-toggler {
-        border-color: rgb(255, 255, 255);
-    }
-
-    .flip-card .card-body {
-        padding: 1rem;
-    }
-</style>
 
 <body>
-    <nav id="navbar-example" class="navbar navbar-expand-lg px-3">
-        <div class="text-left">
-            <p class="fs-3 mt-3"> <a class="anchor-tag fs-3 px-3" href="#" style="text-decoration: none">Portfolio</a><i
-                    id="moon-icon" class="fa fa-solid fa-moon-o"></i>
+  <div class="finder-window">
+    <div class="title-bar">
+      <div class="traffic-lights">
+        <div class="traffic-light close"></div>
+        <div class="traffic-light minimize"></div>
+        <div class="traffic-light maximize"></div>
+      </div>
+      <div class="window-title">Portfolio — Saiprasaad Kalyanaraman</div>
+    </div>
+    <div class="toolbar">
+      <button class="nav-button" id="back-btn" disabled>◀</button>
+      <button class="nav-button" id="forward-btn" disabled>▶</button>
+      <div class="path-bar"><span id="current-path">Portfolio</span></div>
+    </div>
+
+    <button class="menu-button" id="menu-btn">☰</button>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="main-content">
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">Favorites</div>
+        <div class="sidebar-item active" data-view="main"><span class="sidebar-icon"
+            style="background:linear-gradient(135deg,#667eea,#764ba2)"></span>Portfolio</div>
+        <div class="sidebar-header" style="margin-top:12px">Quick Access</div>
+        <div class="sidebar-item" data-view="about"><span class="sidebar-icon" style="background:#c9e265"></span>About
+        </div>
+        <div class="sidebar-item" data-view="experience"><span class="sidebar-icon experience-folder"></span>Experience
+        </div>
+        <div class="sidebar-item" data-view="education"><span class="sidebar-icon education-folder"></span>Education
+        </div>
+        <div class="sidebar-item" data-view="skills"><span class="sidebar-icon skills-folder"></span>Skills</div>
+        <div class="sidebar-item" data-view="projects"><span class="sidebar-icon projects-folder"></span>Projects</div>
+        <div class="sidebar-item" data-view="accomplishments"><span class="sidebar-icon"
+            style="background:#ffd166"></span>Accomplishments</div>
+        <div class="sidebar-item" data-view="certifications"><span class="sidebar-icon"
+            style="background:#80ed99"></span>Certifications</div>
+        <div class="sidebar-item" data-view="contact"><span class="sidebar-icon contact-folder"></span>Contact</div>
+        <div class="sidebar-item" data-view="resume"><span class="sidebar-icon resume-file"></span>Resume</div>
+      </div>
+
+      <div class="content-area">
+        <div class="icon-view" id="main-view">
+          <div class="file-item" data-view="about">
+            <div class="file-icon education-folder">👋</div>
+            <div class="file-name">About Me</div>
+          </div>
+          <div class="file-item" data-view="experience">
+            <div class="file-icon experience-folder">💼</div>
+            <div class="file-name">Experience</div>
+          </div>
+          <div class="file-item" data-view="education">
+            <div class="file-icon education-folder">🎓</div>
+            <div class="file-name">Education</div>
+          </div>
+          <div class="file-item" data-view="skills">
+            <div class="file-icon skills-folder">⚡</div>
+            <div class="file-name">Skills</div>
+          </div>
+          <div class="file-item" data-view="projects">
+            <div class="file-icon projects-folder">📁</div>
+            <div class="file-name">Projects</div>
+          </div>
+          <div class="file-item" data-view="accomplishments">
+            <div class="file-icon" style="background:#ffd166">🏆</div>
+            <div class="file-name">Accomplishments</div>
+          </div>
+          <div class="file-item" data-view="certifications">
+            <div class="file-icon" style="background:#80ed99">🎖️</div>
+            <div class="file-name">Certifications</div>
+          </div>
+          <div class="file-item" data-view="contact">
+            <div class="file-icon contact-folder">📞</div>
+            <div class="file-name">Contact</div>
+          </div>
+          <div class="file-item" data-view="resume">
+            <div class="file-icon resume-file">📄</div>
+            <div class="file-name">Resume</div>
+          </div>
+        </div>
+
+        <div class="detail-view" id="about-view">
+          <div class="detail-header">
+            <img src="images/Sai.jpg" alt="Saiprasaad Kalyanaraman" class="profile-pic" />
+
+            <div>
+              <div class="detail-title">Hi, I'm Saiprasaad Kalyanaraman</div>
+              <div class="detail-subtitle">Full-Stack Developer @ Afficiency • New York, USA</div>
+            </div>
+          </div>
+
+          <div class="hero">
+            <div class="kicker">About Me</div>
+            <p>I’m a Full-Stack Software Engineer with a Master’s in Computer Science and over two years of experience
+              building scalable web and mobile applications. Currently at Afficiency, an Insurtech startup, I specialize
+              in crafting innovative solutions with React, Angular, Flask, Spring Boot, MySQL, and Redis, while also
+              exploring AI-powered tools and microservices to improve performance and workflows. A hackathon winner and
+              continuous learner, I’m passionate about blending technology and creativity to solve real-world problems
+              and deliver meaningful user experiences.</p>
+          </div>
+        </div>
+
+        <div class="detail-view" id="experience-view">
+          <div class="detail-header">
+            <div class="detail-icon experience-folder">💼</div>
+            <div>
+              <div class="detail-title">Experience</div>
+              <div class="detail-subtitle">Professional journey</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <h3>Full Stack Developer</h3>
+            <p class="meta">Afficiency, New York, USA • Sept 2024 – Present</p>
+            <ul class="list">
+              <li>Designed and developed responsive user interfaces with the React framework, building a scalable
+                front-end architecture that supports 10,000+ users across web and mobile platforms.</li>
+              <li>Implemented and maintained microservices using Flask / Spring Boot, integrating Redis for caching and
+                MySQL for relational data management, improving system scalability and performance.</li>
+              <li>Delivered enterprise applications for three major life insurance carriers, resolving 50+ high-priority
+                production issues via HubSpot, resulting in improved UI/UX and more efficient backend workflows.</li>
+              <li>Utilized GitLab for version control, CI/CD, and code reviews, streamlining the deployment pipeline,
+                ensuring reliable releases, and fostering team collaboration.</li>
+            </ul>
+            <h3>Student Consultant — Software Engineering Internship</h3>
+            <p class="meta">Open Avenues Career Pathways, Chicago • Feb 2024 – Apr 2024</p>
+            <ul class="list">
+              <li>Designed and developed Campus Cooks mobile app using Flutter with Koodos Labs, enabling students to
+                prepare recipes with a single click of selected ingredients.</li>
+              <li>Integrated Firebase backend for real-time data storage and user authentication, ensuring smooth app
+                performance and secure access.</li>
+              <li>Elevated UI/UX design expertise through Figma, creating visually appealing and user-friendly
+                interfaces aligned with modern design principles.</li>
+            </ul>
+            <h3>Software Engineer Internship</h3>
+            <p class="meta">Hexaware Technologies, Chicago • Oct 2023 – Dec 2023</p>
+            <ul class="list">
+              <li>Gained skills in building responsive and user-friendly single-page applications (SPAs) by leveraging
+                the modular architecture of the Angular framework.</li>
+              <li>Streamlined data management by seamlessly combining Hibernate ORM with Spring Boot applications,
+                enabling efficient data access and manipulation.</li>
+            </ul>
+            <h3>Software Engineer</h3>
+            <p class="meta">Ernst & Young, Chennai • Feb 2021 – Jun 2022</p>
+            <ul class="list">
+              <li>Built scalable microservice applications using Spring Boot, and integrated multiple databases (MySQL,
+                PostgreSQL, etc.) to effectively handle diverse data requirements.</li>
+              <li>Deployed REST APIs seamlessly across 8 internal microservices, fostering efficient data flow between
+                services and ensuring a well-integrated system.</li>
+              <li>Utilized Git for version control to collaborate with the development team, manage code changes, and
+                facilitate conflict resolution during development cycles.</li>
+              <li>Acquired expertise in MySQL by designing optimized database schemas and crafting SQL queries to manage
+                complex data structures.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="detail-view" id="education-view">
+          <div class="detail-header">
+            <div class="detail-icon education-folder">🎓</div>
+            <div>
+              <div class="detail-title">Education</div>
+              <div class="detail-subtitle">Degrees & coursework</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <h3>Master of Computer Science</h3>
+            <p class="meta">Illinois Institute of Technology, Chicago • Aug 2022 – May 2024 • GPA: 3.7</p>
+            <p>Activities: Senior TechNews Writer, TechNews Photographer, Library Student Advisor, ACM Member.</p>
+            <p>Coursework: Software Engineering, Enterprise Web Applications, Algorithms, Computer Networks, Machine
+              Learning, Big Data, Mobile App Dev, Software Testing & Analysis, Advanced DB, Software Project Mgmt.</p>
+          </div>
+        </div>
+
+
+
+        <div class="detail-view" id="skills-view">
+          <div class="detail-header">
+            <div class="detail-icon skills-folder">⚡</div>
+            <div>
+              <div class="detail-title">Skills & Technologies</div>
+              <div class="detail-subtitle">Programming Languages • Frontend • Backend • Mobile • Databases • AI &
+                Machine Learning • Others</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <h3>Programming Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">C</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Dart</span>
+              <span class="skill-tag">Swift</span>
+            </div>
+            <h3>Frontend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">Bootstrap</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Angular</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
+            </div>
+            <h3>Backend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Spring Boot</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">PHP</span>
+            </div>
+            <h3>Mobile</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Flutter</span>
+              <span class="skill-tag">Android Studio</span>
+            </div>
+            <h3>Databases</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">SQLite</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Redis</span>
+            </div>
+            <h3>AI & Machine Learning</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Generative AI</span>
+              <span class="skill-tag">LLMs</span>
+              <span class="skill-tag">RAG</span>
+              <span class="skill-tag">NLP</span>
+              <span class="skill-tag">Ollama</span>
+              <span class="skill-tag">OpenAI APIs</span>
+              <span class="skill-tag">Hugging Face</span>
+            </div>
+            <h3>Others</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Streamlit</span>
+            </div>
+          </div>
+        </div>
+        <div class="detail-view" id="projects-view">
+          <div class="detail-header">
+            <div class="detail-icon projects-folder">📁</div>
+            <div>
+              <div class="detail-title">Projects</div>
+              <div class="detail-subtitle">Selected work from web, mobile, AI and data</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <div class="project-grid">
+              <div class="project-card">
+                <h3>AI-Powered Log Summarizer</h3>
+                <p>Integrated AI log summarization with Teams for real-time anomaly detection and faster incident
+                  response.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Flask</span>
+                  <span class="skill-tag">Ollama</span>
+                  <span class="skill-tag">LLMs</span>
+                  <span class="skill-tag">Teams API</span>
+                </div>
+              </div>
+              <div class="project-card">
+                <h3>Encryption & Decryption Module</h3>
+                <p>Implemented AES-CBC encryption/decryption in React and Flask for secure end-to-end data handling.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Flask</span>
+                  <span class="skill-tag">AES-CBC</span>
+                </div>
+              </div>
+              <div class="project-card">
+                <h3>JSON Explorer Web App</h3>
+                <p>Built and deployed an interactive JSON visualization and editing tool hosted on Netlify.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">React Flow</span>
+                  <span class="skill-tag">Netlify</span>
+                </div>
+                <p class="metaGithub"><a href="https://jsonexplorer.netlify.app" target="_blank" rel="noopener">Live Demo</a></p>
+              </div>
+              <div class="project-card">
+                <h3>Asana Task Automation</h3>
+                <p>Automated daily ticket creation and SQL syncing between Asana and backend dashboards.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Asana API</span>
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Flask</span>
+                  <span class="skill-tag">Redis</span>
+                  <span class="skill-tag">MySQL</span>
+                </div>
+              </div>
+              <div class="project-card">
+                <h3>Repo Vision</h3>
+                <p>Visualized GitHub repo data and forecasts using microservices with Elasticsearch.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Flask</span>
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Google Cloud</span>
+                </div>
+                <p class="metaGithub"><a href="https://github.com/saiprasaad/Repo-Vision" target="_blank" rel="noopener">Github Repo</a></p>
+              </div>
+              <div class="project-card">
+                <h3>YouTube Translator</h3>
+                <p>Translated YouTube videos with Whisper, OpenAI, gTTS, and MoviePy.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Streamlit</span>
+                  <span class="skill-tag">Whisper</span>
+                </div>
+                 <p class="metaGithub"><a href="https://github.com/saiprasaad/YouTube-Translator" target="_blank" rel="noopener">Github Repo</a></p>
+              </div>
+              <div class="project-card">
+                <h3>Wordle Clone</h3>
+                <p>Developed a cross-platform mobile Wordle clone with Flutter.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Flutter</span>
+                </div>
+                <p class="metaGithub"><a href="https://github.com/saiprasaad/Wordle-Clone" target="_blank" rel="noopener">Github Repo</a></p>
+              </div>
+              <div class="project-card">
+                <h3>Battleships</h3>
+                <p>Multiplayer Battleships game with APIs for authentication and gameplay.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Flutter</span>
+                  <span class="skill-tag">Flask</span>
+                  <span class="skill-tag">MySQL</span>
+                </div>
+                <p class="metaGithub"><a href="https://github.com/saiprasaad/Battleships" target="_blank" rel="noopener">Github Repo</a></p>
+              </div>
+              <div class="project-card">
+                <h3>Chicago Streets Harmony</h3>
+                <p>Geolocation-based app to improve community engagement in Chicago.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Flutter</span>
+                  <span class="skill-tag">Spring Boot</span>
+                  <span class="skill-tag">Geo-location</span>
+                </div>
+                <p class="metaGithub"><a href="https://github.com/saiprasaad/Chicago-Streets-Harmony" target="_blank" rel="noopener">Github Repo</a></p>
+              </div>
+              <div class="project-card">
+                <h3>Campus Cooks</h3>
+                <p>Suggested recipes for students based on available ingredients.</p>
+                <div class="skill-tags">
+                  <span class="skill-tag">Flutter</span>
+                  <span class="skill-tag">Firebase</span>
+                </div>
+                <p class="metaGithub"><a href="https://github.com/saiprasaad/Campus-Cooks" target="_blank" rel="noopener">Github Repo</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-view" id="accomplishments-view">
+          <div class="detail-header">
+            <div class="detail-icon" style="background:#ffd166">🏆</div>
+            <div>
+              <div class="detail-title">Accomplishments</div>
+              <div class="detail-subtitle">Highlights & recognition</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <ul class="list">
+              <li>Best Performer of the Month at Afficiency</li>
+              <li>Winner of ACM Scarlet Hackathon</li>
+              <li>Judge at HackMHS X Hackathon</li>
+              <li>Winner of LeetCode Challenge at ACM</li>
+              <li>Cognizant Student Club's Star Performer</li>
+              <li>Winner of debugging contest held by IEEE Computer Society SBC</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="detail-view" id="certifications-view">
+          <div class="detail-header">
+            <div class="detail-icon" style="background:#80ed99">🎖️</div>
+            <div>
+              <div class="detail-title">Certifications</div>
+              <div class="detail-subtitle">Selected credentials</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <ul class="list">
+              <li>Microsoft Certified: Azure AI Fundamentals</li>
+              <li>Oracle Cloud Infrastructure Foundations Certified Associate</li>
+              <li>CS50's Introduction to Computer Science — Harvard/edX</li>
+              <li>Web Development and Coding Specialization — Univ. of Michigan (Coursera)</li>
+              <li>Introduction to Generative AI — Google Cloud (Coursera)</li>
+              <li>Hackerrank Certifications — C, Java, JavaScript, React, MySQL</li>
+              <li>Postman Student Expert</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="detail-view" id="contact-view">
+          <div class="detail-header">
+            <div class="detail-icon contact-folder">📞</div>
+            <div>
+              <div class="detail-title">Contact</div>
+              <div class="detail-subtitle">Let's connect</div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <p><strong>Location:</strong> New York, USA</p>
+            <p><strong>Email:</strong>
+              <a href="mailto:saiprasaad1999@gmail.com">saiprasaad1999@gmail.com</a>
             </p>
+            <p><strong>GitHub:</strong>
+              <a href="https://github.com/saiprasaad" target="_blank" rel="noopener">
+                github.com/saiprasaad
+              </a>
+            </p>
+            <p><strong>LinkedIn:</strong>
+              <a href="https://www.linkedin.com/in/saiprasaadk" target="_blank" rel="noopener">
+                linkedin.com/in/saiprasaadk
+              </a>
+            </p>
+            <p><strong>HackerRank:</strong>
+              <a href="https://www.hackerrank.com/profile/saiprasaad1999" target="_blank" rel="noopener">
+                hackerrank.com/saiprasaad1999
+              </a>
+            </p>
+          </div>
         </div>
-        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav mt-3">
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#">
-                        <p class="fs-5"><i class=" fa fa-solid fa-home"></i>Home</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#education">
-                        <p class="fs-5"><i class=" fa fa-solid fa-graduation-cap"></i>Education</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#experience">
-                        <p class="fs-5"><i class=" fa fa-solid fa-briefcase"></i>Experience</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#skills">
-                        <p class="fs-5"><i class=" fa fa-solid fa-gears"></i>Skills</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#projects">
-                        <p class="fs-5"><i class=" fa fa-solid fa-folder"></i>Projects</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#accomplishments">
-                        <p class="fs-5"><i class="fa fa-award"></i> Accomplishments</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="anchor-tag nav-link" href="#certifications">
-                        <p class="fs-5"><i class=" fa fa-solid fa-certificate"></i>Certifications</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container py-5" style="height: auto;">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-7 mb-3 mb-md-0 pe-md-5 align-self-center text-md-end text-center">
-                <h1 class="fs-1 pb-2 fw-bold">Hi There <span class="wave">👋</span></h1>
-                <div class="typewriter">
-                    <p class="fw-bolder fs-5">I'm Saiprasaad Kalyanaraman</p>
-                </div>
-                <p class="fst-italic fs-4">Full Stack Developer at Afficiency</p>
-                <p class="fst-italic fs-6">New York, USA</p>
 
-                <div class="col d-flex justify-content-center justify-content-md-end">
-                    <p> <a class="anchor-tag" href="https://www.github.com/saiprasaad" style="text-decoration: none"><i
-                                id="moon-icon" style="font-size:xx-large;" class="fa fa-brands fa-github p-3"></i></a>
-                    </p>
-                    <p> <a class="anchor-tag" href="https://www.linkedin.com/in/saiprasaad"
-                            style="text-decoration: none"><i id="moon-icon" style="font-size:xx-large;"
-                                class="fa fa-brands fa-linkedin p-3"></i></a>
-                    </p>
-                    <p> <a class="anchor-tag" href="mailto:saiprasaad1999@gmail.com" style="text-decoration: none"><i
-                                id="moon-icon" style="font-size:xx-large;" class="fa fa-solid fa-envelope p-3"></i></a>
-                    </p>
-                    <p> <a class="anchor-tag"
-                            href="https://drive.google.com/file/d/1fU1WiF7W4NZmp1Iuq8MV3u3DfKlmNIEA/view?usp=sharing"
-                            style="text-decoration: none">
-                            <p class="fs-6"><i class="pr-2 fa fa-solid fa-file p-3" style="font-size:xx-large;"></i></p>
-                        </a></p>
-                </div>
-
+        <div class="detail-view" id="resume-view">
+          <div class="detail-header">
+            <div class="detail-icon resume-file">📄</div>
+            <div>
+              <div class="detail-title">Resume</div>
+              <div class="detail-subtitle">Open or preview directly below</div>
             </div>
-            <div class="col-lg-6 col-md-5 align-self-center">
-                <img src="images/Sai.jpg" class="rounded img-fluid" width="500" height="500">
-            </div>
-        </div>
+          </div>
+          <div class="detail-content">
+            <p class="resume-intro">You can view my resume below:</p>
 
+            <div class="resume-actions">
+              <button class="resume-btn preview" onclick="toggleResumePreview()">👁️ Preview</button>
+              <a href="https://drive.google.com/file/d/1fU1WiF7W4NZmp1Iuq8MV3u3DfKlmNIEA/view?usp=sharing"
+                target="_blank" rel="noopener" class="resume-btn download">
+                📄 Open Resume
+              </a>
+            </div>
+
+            <div id="resume-preview" class="resume-preview">
+              <iframe src="https://drive.google.com/file/d/1fU1WiF7W4NZmp1Iuq8MV3u3DfKlmNIEA/preview" width="100%"
+                height="100%" style="border:none;"></iframe>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
     </div>
-    <div class="container pt-5" style="height: auto;">
-        <h4 class="display-6">About Me</h4>
-        <p class="lead" style="text-align: justify">
-            I’m a Full-Stack Software Engineer with a Master’s in Computer Science and over two years of experience
-            building scalable web and mobile applications. Currently at Afficiency, an Insurtech startup, I specialize
-            in crafting innovative solutions with React, Angular, Flask, Spring Boot, MySQL, and Redis, while also
-            exploring AI-powered tools and microservices to improve performance and workflows. A hackathon winner and
-            continuous learner, I’m passionate about blending technology and creativity to solve real-world problems and
-            deliver meaningful user experiences.
-        </p>
-    </div>
-    <div data-bs-spy="scroll" data-bs-target="#navbar-example" data-bs-offset="0" class="scrollspy-example"
-        tabindex="0">
-        <div class="container mt-5">
-            <h4 class="display-6" id="education">Education</h4>
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="fs-3">Master's of Computer Science</h5>
-                                        </div>
-                                        <div class="pt-1">Aug 2022 - May 2024</div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2">Illinois Institute of Technology, Chicago,
-                                        USA
-                                    </h6>
-                                    <h6 class="card-subtitle mb-2">GPA: 3.7</h6>
-                                    <div class="row mt-2">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary">Senior TechNews Writer</span>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary"> TechNews Photographer</span>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary"> Library Student Advisor</span>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6 mb-3">
-                                                <span class="badge bg-secondary"> Association for Computing Machinery
-                                                    Member</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="card-text">
-                                    <div class="mt-1">
-                                        <dl class="row">
-                                            <dt class="h5 col-sm-4 pt-2">Coursework</dt>
-                                            <dd class="col-sm-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Software Engineering</li>
-                                                    <li class="list-group-item">Enterprise Web Applications</li>
-                                                    <li class="list-group-item">Design and Analysis of Algorithms</li>
-                                                    <li class="list-group-item">Computer Networks</li>
-                                                    <li class="list-group-item">Machine Learning</li>
-                                                </ul>
-                                            </dd>
-                                            <dd class="col-sm-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Big Data</li>
-                                                    <li class="list-group-item">Mobile Application Development</li>
-                                                    <li class="list-group-item">Software Testing and Analysis</li>
-                                                    <li class="list-group-item">Advanced Database Organization</li>
-                                                    <li class="list-group-item">Software Project Management</li>
-                                                </ul>
-                                            </dd>
 
-                                        </dl>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container py-5">
-            <h4 class="display-6" id="experience">Experience</h4>
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="fs-3">Full Stack Developer</h5>
-                                        </div>
-                                        <div>Sept 2024 - Present</div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2">Afficiency, New York, USA</h6>
-                                    <p class="card-text">
-                                    <div class="mt-1">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0">Designed and developed responsive user
-                                                interfaces with the <strong>React</strong> framework, building a
-                                                scalable front-end architecture that supports <strong>10,000+
-                                                    users</strong> across web and mobile platforms.</li>
-                                            <li class="list-group-item border-0">Implemented and maintained
-                                                microservices using <strong>Flask / Spring Boot</strong>, integrating
-                                                <strong>Redis</strong> for caching and <strong>MySQL</strong> for
-                                                relational data management, improving system scalability and
-                                                performance.
-                                            </li>
-                                            <li class="list-group-item border-0">Delivered enterprise applications for
-                                                <strong>three major life insurance carriers</strong>, resolving
-                                                <strong>50+ high-priority production issues</strong> via
-                                                <strong>HubSpot</strong>, resulting in improved UI/UX and more efficient
-                                                backend workflows.
-                                            </li>
-                                            <li class="list-group-item border-0">Utilized <strong>GitLab</strong> for
-                                                version control, <strong>CI/CD</strong>, and code reviews, streamlining
-                                                the deployment pipeline, ensuring reliable releases, and fostering team
-                                                collaboration.</li>
-                                        </ul>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <script>
+      let currentView = 'main';
+      let viewHistory = ['main'];
+      let historyIndex = 0;
 
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="fs-3">Student Consultant, Software Engineering Internship</h5>
-                                        </div>
-                                        <div>Feb 2024 - Apr 2024</div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2">Open Avenues Career Pathways, Chicago, USA</h6>
-                                    <p class="card-text">
-                                    <div class="mt-1">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0">Designed and developed <strong>Campus
-                                                    Cooks</strong> mobile app using Flutter with Koodos Labs, enabling
-                                                students to prepare recipes with a single click of selected ingredients.
-                                            </li>
-                                            <li class="list-group-item border-0">Integrated <strong>Firebase</strong>
-                                                backend for real-time data storage and user authentication, ensuring
-                                                smooth app performance and secure access.</li>
-                                            <li class="list-group-item border-0">Elevated UI/UX design expertise through
-                                                <strong>Figma</strong>, creating visually appealing and user-friendly
-                                                interfaces aligned with modern design principles.
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      // Mobile sidebar functionality
+      const menuBtn = document.getElementById('menu-btn');
+      const sidebar = document.getElementById('sidebar');
+      const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="fs-3">Software Engineer Internship</h5>
-                                        </div>
-                                        <div>Oct 2023 - Dec 2023</div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2">Hexaware Technologies, Chicago, USA</h6>
-                                    <p class="card-text">
-                                    <div class="mt-1">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0">Gained skills in building responsive
-                                                and user-friendly <strong>single-page applications (SPAs)</strong> by
-                                                leveraging the modular architecture of the <strong>Angular</strong>
-                                                framework.</li>
-                                            <li class="list-group-item border-0">Streamlined data management by
-                                                seamlessly combining <strong>Hibernate ORM</strong> with <strong>Spring
-                                                    Boot</strong> applications, enabling efficient data access and
-                                                manipulation.</li>
-                                        </ul>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      function toggleSidebar() {
+        sidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('show');
+      }
 
-            <div class="row pt-3">
-                <div class="shadow bg-body rounded">
-                    <div class="card" style="border: none;">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h5 class="fs-3">Software Engineer</h5>
-                                        </div>
-                                        <div>Feb 2021 - Jun 2022</div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2">Ernst and Young, Chennai, India</h6>
-                                    <p class="card-text">
-                                    <div class="mt-1">
-                                        <ul class="list-group">
-                                            <li class="list-group-item border-0">Built scalable microservice
-                                                applications using <strong>Spring Boot</strong>, and integrated multiple
-                                                databases (<strong>MySQL, PostgreSQL</strong>, etc.) to effectively
-                                                handle diverse data requirements.</li>
-                                            <li class="list-group-item border-0">Deployed <strong>REST APIs</strong>
-                                                seamlessly across <strong>8 internal microservices</strong>, fostering
-                                                efficient data flow between services and ensuring a well-integrated
-                                                system.</li>
-                                            <li class="list-group-item border-0">Utilized <strong>Git</strong> for
-                                                version control to collaborate with the development team, manage code
-                                                changes, and facilitate conflict resolution during development cycles.
-                                            </li>
-                                            <li class="list-group-item border-0">Acquired expertise in
-                                                <strong>MySQL</strong> by designing optimized database schemas and
-                                                crafting SQL queries to manage complex data structures.
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container py-5">
-            <h4 class="display-6" id="skills">Skills</h4>
-            <div class="row pt-3 g-4">
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('show');
+      }
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">Programming Languages</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code me-1"></i> C</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-coffee me-1"></i>
-                                        Java</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-python me-1"></i>
-                                        Python</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-chart-line me-1"></i>
-                                        R</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-feather me-1"></i>
-                                        Dart</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-apple me-1"></i>
-                                        Swift</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      function toggleResumePreview() {
+        const preview = document.getElementById("resume-preview");
+        preview.style.display = (preview.style.display === "none" || preview.style.display === "")
+          ? "block"
+          : "none";
+      }
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">Database</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
-                                        MySQL</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
-                                        PostgreSQL</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
-                                        SQLite</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-leaf me-1"></i>
-                                        MongoDB</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-fire me-1"></i>
-                                        Firebase</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-memory me-1"></i>
-                                        Redis</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">Front End</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code me-1"></i> HTML</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-paint-brush me-1"></i>
-                                        CSS</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-bold me-1"></i>
-                                        Bootstrap</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-react me-1"></i>
-                                        React</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-angular me-1"></i>
-                                        Angular</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-js me-1"></i>
-                                        JavaScript</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code-branch me-1"></i>
-                                        TypeScript</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      menuBtn.addEventListener('click', toggleSidebar);
+      sidebarOverlay.addEventListener('click', closeSidebar);
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">Back End</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-leaf me-1"></i> Spring
-                                        Boot</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-node me-1"></i>
-                                        Node.js</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-flask me-1"></i>
-                                        Flask</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code me-1"></i> PHP</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">Mobile</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-mobile-alt me-1"></i>
-                                        Flutter</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fab fa-android me-1"></i> Android
-                                        Studio</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">AI & Machine Learning</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-brain me-1"></i> Generative
-                                        AI</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-robot me-1"></i>
-                                        LLMs</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-database me-1"></i>
-                                        RAG</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-language me-1"></i>
-                                        NLP</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-cube me-1"></i>
-                                        Ollama</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-key me-1"></i> OpenAI
-                                        APIs</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-face-smile me-1"></i>
-                                        Hugging Face</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="shadow bg-body rounded h-100">
-                        <div class="card" style="border: none;">
-                            <div class="card-body">
-                                <h5 class="fs-3">Others</h5>
-                                <div class="d-flex flex-column gap-2 align-items-start">
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-code-branch me-1"></i>
-                                        Git</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-box me-1"></i>
-                                        Docker</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-cloud me-1"></i> AWS</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-cloud me-1"></i>
-                                        Azure</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-pencil-ruler me-1"></i>
-                                        Figma</span>
-                                    <span class="badge rounded-pill bg-dark"><i class="fa fa-stream me-1"></i>
-                                        Streamlit</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container py-5">
-            <h4 class="display-6" id="projects">Projects</h4>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">AI-Powered Log Summarizer & Teams Alerts</h5>
-                                    <p class="card-text">Python, Ollama, LLMs, Teams API</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Integrated AI log summarization with Teams for real-time anomaly detection and
-                                    faster incident response.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Encryption & Decryption Module</h5>
-                                    <p class="card-text">React, Flask, AES-CBC</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Implemented AES-CBC encryption/decryption in React and Flask for secure end-to-end
-                                    data handling.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">JSON Explorer Web App</h5>
-                                    <p class="card-text">React, React Flow, Netlify</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Built and deployed an interactive JSON visualization and editing tool hosted on
-                                    Netlify.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="https://jsonexplorer.netlify.app/" target="_blank"
-                                        rel="noopener">
-                                        Live Demo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Asana Task Automation</h5>
-                                    <p class="card-text">Asana API, Flask, Redis, MySQL</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Automated daily ticket creation and SQL syncing between Asana and backend
-                                    dashboards.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Repo Vision</h5>
-                                    <p class="card-text">Python, Flask, React, Google Cloud</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Visualized GitHub repo data and forecasts using microservices with Elasticsearch.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/Repo-Vision"
-                                        target="_blank" rel="noopener">
-                                        See Github Repo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">YouTube Translator</h5>
-                                    <p class="card-text">Python, Streamlit, Whisper</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Translated YouTube videos with Whisper, OpenAI, gTTS, and MoviePy.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/YouTube-Translator"
-                                        target="_blank" rel="noopener">
-                                        See Github Repo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wordle Clone</h5>
-                                    <p class="card-text">Flutter</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Developed a cross-platform mobile Wordle clone with Flutter.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/Wordle-Clone"
-                                        target="_blank" rel="noopener">
-                                        See Github Repo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Battleships</h5>
-                                    <p class="card-text">Flutter, Flask, MySQL</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Multiplayer Battleships game with APIs for authentication and gameplay.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary"
-                                        href="https://github.com/saiprasaad/Battleship-game-using-Flutter"
-                                        target="_blank" rel="noopener">
-                                        See Github Repo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Chicago Streets Harmony</h5>
-                                    <p class="card-text">Flutter, Spring Boot, Geo-location</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Geolocation-based app to improve community engagement in Chicago.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary"
-                                        href="https://github.com/saiprasaad/Chicago-Streets-Harmony" target="_blank"
-                                        rel="noopener">
-                                        See Github Repo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <div class="card-body">
-                                    <h5 class="card-title">Campus Cooks</h5>
-                                    <p class="card-text">Flutter, Firebase</p>
-                                </div>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="p-3 text-justify">
-                                    Suggested recipes for students based on available ingredients.
-                                </p>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="https://github.com/saiprasaad/Campus-Cooks"
-                                        target="_blank" rel="noopener">
-                                        See Github Repo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container py-5">
-            <h4 class="display-6" id="accomplishments">Accomplishments</h4>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Best Performer of the Month at Afficiency (December 2024)</li>
-                <li class="list-group-item">Judge at HackMHS X hackathon</li>
-                <li class="list-group-item">Winner of ACM Scarlet Hacks</li>
-                <li class="list-group-item">Winner of Drone Golf competition with the Robolink Codrone</li>
-                <li class="list-group-item">Winner of Leetcode Challenge organized by ACM</li>
-            </ul>
-        </div>
-    </div>
-    <div class="container py-5" style="height: auto;">
-        <h4 class="display-6" id="certifications">Certifications</h4>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Microsoft Certified: Azure AI Fundamentals</li>
-            <li class="list-group-item">Oracle Cloud Infrastructure Foundations Certified Associate</li>
-            <li class="list-group-item">CS50’s Introduction to Computer Science by Harvard University - Edx</li>
-            <li class="list-group-item">Web Development and Coding Specialization by University of Michigan - Coursera
-            </li>
-            <li class="list-group-item">Introduction to Generative AI by Google Cloud - Coursera</li>
-            <li class="list-group-item">Hackerrank Certification in C, Java, JavaScript, React, MySQL</li>
-            <li class="list-group-item">Postman Student Expert Badge - Postman</li>
-        </ul>
-    </div>
-    <footer id="sticky-footer" class="flex-shrink-0 py-4">
-        <div class="container text-center">
-            <small>&copy; 2024 Saiprasaad Kalyanaraman</small>
-        </div>
-    </footer>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script>$(document).ready(function () {
-            $("#moon-icon").click(function () {
-                console.log("Hello");
-                $("body").toggleClass("dark-mode");
-                $(".flip-card-front").toggleClass("dark");
-                $(".flip-card-back").toggleClass("dark");
-                $("button").toggleClass("btn btn-light btn btn-dark");
-                $(".flip-card").toggleClass("dark");
-                $(".container").toggleClass("dark");
-                $(".card").toggleClass("dark");
-                $(".typewriter").find("p").toggleClass("dark");
-                $(".row").toggleClass("dark");
-                $(".list-group-item").toggleClass("dark");
-                $(".anchor-tag").toggleClass("dark");
-                $(".navbar").toggleClass("dark");
-                $(".active").toggleClass("dark");
-                $(".sticky-footer").toggleClass("dark");
-                $(this).toggleClass("fa-moon-o fa-sun");
-                if ($("body").hasClass("dark")) {
-                    $(".navbar-nav li > a").css("color", "#fff");
-                    $(".navbar-nav li > a:after").css("background", "#fff");
-                }
-            });
+      // Close sidebar when clicking on sidebar items (mobile only)
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.addEventListener('click', () => {
+          if (window.innerWidth < 768) {
+            closeSidebar();
+          }
         });
+      });
+
+      function showView(viewName) {
+        document.querySelectorAll('.icon-view, .detail-view').forEach(v => {
+          v.style.display = 'none';
+          v.classList.remove('active');
+        });
+
+        if (viewName === 'main') {
+          document.getElementById('main-view').style.display = 'grid';
+          document.getElementById('current-path').textContent = 'Portfolio';
+        } else {
+          const dv = document.getElementById(viewName + '-view');
+          if (dv) {
+            dv.style.display = 'block';
+            dv.classList.add('active');
+            document.getElementById('current-path').textContent = `Portfolio > ${viewName[0].toUpperCase() + viewName.slice(1)}`;
+          }
+        }
+
+        document.querySelectorAll('.sidebar-item').forEach(i => {
+          i.classList.remove('active');
+          if (i.dataset.view === viewName || (viewName === 'main' && !i.dataset.view))
+            i.classList.add('active');
+        });
+
+        if (viewName !== currentView) {
+          viewHistory = viewHistory.slice(0, historyIndex + 1);
+          viewHistory.push(viewName);
+          historyIndex = viewHistory.length - 1;
+          updateNavButtons();
+        }
+        currentView = viewName;
+
+        // Close sidebar after navigation on mobile
+        if (window.innerWidth < 768) {
+          closeSidebar();
+        }
+      }
+
+      function updateNavButtons() {
+        document.getElementById('back-btn').disabled = historyIndex <= 0;
+        document.getElementById('forward-btn').disabled = historyIndex >= viewHistory.length - 1;
+      }
+
+      function goBack() {
+        if (historyIndex > 0) {
+          historyIndex--;
+          showView(viewHistory[historyIndex]);
+          updateNavButtons();
+        }
+      }
+
+      function goForward() {
+        if (historyIndex < viewHistory.length - 1) {
+          historyIndex++;
+          showView(viewHistory[historyIndex]);
+          updateNavButtons();
+        }
+      }
+
+      document.getElementById('back-btn').addEventListener('click', goBack);
+      document.getElementById('forward-btn').addEventListener('click', goForward);
+
+      document.querySelectorAll('.file-item, .sidebar-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const v = item.dataset.view || 'main';
+          showView(v);
+        });
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', e => {
+        if ((e.metaKey || e.ctrlKey) && e.key === '[') {
+          e.preventDefault();
+          goBack();
+        } else if ((e.metaKey || e.ctrlKey) && e.key === ']') {
+          e.preventDefault();
+          goForward();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          closeSidebar();
+        }
+      });
+
+      // Initialize
+      showView('main');
     </script>
 </body>
 
