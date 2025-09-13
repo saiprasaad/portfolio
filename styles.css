@@ -229,7 +229,7 @@
     }
 
     .menu-button {
-      position: fixed;
+      position: absolute;
       top: 48px;
       right: 16px;
       width: 44px;
@@ -530,6 +530,7 @@
     }
 
     .detail-content h3 {
+      margin-top: 10px;
       font-size: 18px;
       color: #222;
     }
