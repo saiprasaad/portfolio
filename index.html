@@ -55,7 +55,7 @@
     <button class="menu-button" id="menu-btn">☰</button>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <div class="main-content">
+    <div class="main-content" style="position: relative;">
       <div class="sidebar" id="sidebar">
         <div class="sidebar-header">Favorites</div>
         <div class="sidebar-item active" data-view="main"><span class="sidebar-icon"
@@ -501,6 +501,11 @@
 
         </div>
       </div>
+
+      <!-- Ask Folio Toggle Button (inside Finder) -->
+      <button class="gemini-toggle-btn" id="gemini-toggle-btn" onclick="toggleGeminiChat()">
+        ✨ <span class="gemini-toggle-label">Ask Folio</span>
+      </button>
     </div>
 
     <!-- Floating Terminal Window -->
@@ -556,6 +561,30 @@
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container"></div>
+
+    <!-- Gemini AI Chatbot Widget -->
+    <div class="gemini-chat-widget" id="gemini-chat-widget">
+      <div class="gemini-chat-header">
+        <div class="gemini-header-title">
+          <span class="file-icon">✨</span> Folio
+        </div>
+        <button class="gemini-close-btn" onclick="toggleGeminiChat()">✕</button>
+      </div>
+      <div class="gemini-chat-body" id="gemini-chat-body">
+        <div class="gemini-message ai-message">
+          Hey there! I'm <strong>Folio</strong> — your personal guide to Saiprasaad's portfolio. Ask me anything!
+        </div>
+      </div>
+      <div class="gemini-chat-input-area">
+        <input type="text" id="gemini-chat-input" placeholder="Ask me anything..." autocomplete="off">
+        <button class="gemini-send-btn" id="gemini-send-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
 
     <script src="main.js"></script>
 
