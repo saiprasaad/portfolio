@@ -44,6 +44,12 @@
       <button class="nav-button" id="back-btn" disabled>◀</button>
       <button class="nav-button" id="forward-btn" disabled>▶</button>
       <div class="path-bar"><span id="current-path">Portfolio</span></div>
+      <button class="action-button" id="search-toggle-btn" title="Spotlight Search (Cmd/Ctrl + Space)">
+        <span style="font-size: 14px; margin-right: 4px;">🔍</span> <span class="action-button-label">Spotlight Search</span>
+      </button>
+      <button class="action-button" id="terminal-toggle-btn" title="Open Terminal (Cmd/Ctrl + \`)">
+        <span style="font-size: 14px; margin-right: 4px;">⌨️</span> <span class="action-button-label">New Terminal</span>
+      </button>
     </div>
 
     <button class="menu-button" id="menu-btn">☰</button>
@@ -482,16 +488,11 @@
             <p class="resume-intro">You can view my resume below:</p>
 
             <div class="resume-actions">
-              <button class="resume-btn preview" onclick="toggleResumePreview()">👁️ Preview</button>
+              <button class="resume-btn preview" onclick="toggleResumePreview()">👁️ Quick Look</button>
               <a href="https://drive.google.com/file/d/1m_iyqNUXY4m9T7eEBnZUM8GZTGVFlV5R/view?usp=sharing"
                 target="_blank" rel="noopener" class="resume-btn download">
-                📄 Open Resume
+                📄 Open in Drive
               </a>
-            </div>
-
-            <div id="resume-preview" class="resume-preview">
-              <iframe src="https://drive.google.com/file/d/1m_iyqNUXY4m9T7eEBnZUM8GZTGVFlV5R/preview" width="100%"
-                height="100%" style="border:none;"></iframe>
             </div>
           </div>
 
@@ -501,6 +502,60 @@
         </div>
       </div>
     </div>
+
+    <!-- Floating Terminal Window -->
+    <div class="floating-terminal" id="floating-terminal">
+      <div class="terminal-header" id="terminal-drag-handle">
+        <div class="traffic-lights" style="display: flex;">
+          <div class="traffic-light close" id="terminal-close"></div>
+          <div class="traffic-light minimize"></div>
+          <div class="traffic-light maximize"></div>
+        </div>
+        <div class="terminal-title">saiprasaad@portfolio: ~</div>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-output" id="terminal-output">
+          <div>Welcome to Saiprasaad's Portfolio Terminal!</div>
+          <div>Type <span class="terminal-cmd">help</span> to see a list of available commands.</div>
+          <br>
+        </div>
+        <div class="terminal-input-line">
+          <span class="terminal-prompt">saiprasaad@portfolio:~$</span>
+          <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spotlight Search Overlay -->
+    <div class="spotlight-overlay" id="spotlight-overlay">
+      <div class="spotlight-container" id="spotlight-container">
+        <div class="spotlight-search-bar">
+          <span class="spotlight-icon">🔍</span>
+          <input type="text" id="spotlight-input" placeholder="Spotlight Search" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="spotlight-results" id="spotlight-results">
+            <!-- Results will be injected here dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- macOS Quick Look Resume Overlay -->
+    <div class="quick-look-overlay" id="quick-look-overlay">
+      <div class="quick-look-container">
+        <div class="quick-look-header">
+          <div class="quick-look-title">
+            <span class="file-icon">📄</span> saiprasaad_resume.pdf
+          </div>
+          <button class="quick-look-done" onclick="toggleResumePreview()">Done</button>
+        </div>
+        <div class="quick-look-body">
+          <iframe id="resume-iframe" src="" width="100%" height="100%" style="border:none;"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
 
     <script src="main.js"></script>
 

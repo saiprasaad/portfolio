@@ -107,7 +107,7 @@
       border-bottom: 1px solid #c8c8c8;
       display: flex;
       align-items: center;
-      padding: 0 16px;
+      padding: 0 16px 0 60px; /* 60px left padding clears the menu button on mobile */
       gap: 12px;
     }
 
@@ -156,12 +156,14 @@
     }
 
     .path-bar {
-      flex: 1;
+      flex: 1 1 auto;
+      min-width: 0; /* fixes flexbox overflow issue */
       font-size: 14px;
       color: #666;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-right: auto;
     }
 
     @media (min-width: 768px) {
@@ -169,6 +171,58 @@
         margin-left: 12px;
         font-size: 12px;
       }
+    }
+
+    .action-button {
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+      border: 1px solid #c8c8c8;
+      border-radius: 6px;
+      padding: 4px 6px;
+      font-size: 12px;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+      touch-action: manipulation;
+      flex-shrink: 0;
+      white-space: nowrap;
+      min-width: 32px;
+      height: 32px;
+    }
+
+    .action-button-label {
+      display: none; /* Hide labels on mobile implicitly */
+    }
+
+    /* Target the icon span directly to remove margin on mobile */
+    .action-button span:first-child {
+      margin-right: 0 !important;
+    }
+
+    @media (min-width: 768px) {
+      .action-button {
+        padding: 4px 10px;
+        height: auto;
+        min-width: auto;
+      }
+      .action-button-label {
+        display: inline; /* Show text labels on wider screens */
+      }
+      .action-button span:first-child {
+        margin-right: 4px !important;
+      }
+    }
+
+    .action-button:hover {
+      background: linear-gradient(to bottom, #f0f0f0, #e4e4e4);
+    }
+
+    .action-button:active {
+      background: linear-gradient(to bottom, #e4e4e4, #d8d8d8);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .main-content {
@@ -231,7 +285,7 @@
     .menu-button {
       position: absolute;
       top: 48px;
-      right: 16px;
+      left: 16px;
       width: 44px;
       height: 40px;
       background: linear-gradient(to bottom, #f7f7f7, #e8e8e8);
@@ -730,13 +784,90 @@
       border: none;
     }
 
-    .resume-preview {
+    /* macOS Quick Look Overlay Styles */
+    .quick-look-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 4000; /* Above Spotlight and Terminal */
       display: none;
-      height: 600px;
-      border: 1px solid #ddd;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .quick-look-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .quick-look-container {
+      width: 95%;
+      height: 90vh;
+      max-width: 1000px;
+      background: #1e1e1e; /* Dark theme to match macOS quick look */
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quick-look-overlay.active .quick-look-container {
+      transform: scale(1);
+    }
+
+    .quick-look-header {
+      background: rgba(40, 40, 40, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .quick-look-title {
+      color: #e0e0e0;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-look-done {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .quick-look-done:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .quick-look-done:active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .quick-look-body {
+      flex: 1;
+      background: #ffffff; /* White background behind the PDF */
     }
 
     .profile-pic {
@@ -750,4 +881,342 @@
 
     .hero p {
       text-align: justify;
+    }
+
+    /* Floating Terminal Styles */
+    .floating-terminal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      max-width: 700px;
+      height: 60vh;
+      max-height: 450px;
+      background: rgba(30, 30, 30, 0.85); /* Mac Terminal translucent dark bg */
+      border-radius: 10px;
+      overflow: hidden;
+      color: #f1f1f1; /* default Mac terminal text color */
+      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+      font-size: 13px; /* Slightly smaller, crisper text */
+      font-weight: 400;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15); /* Subtler border */
+      display: none;
+      flex-direction: column;
+      z-index: 2000;
+      backdrop-filter: blur(20px); /* Stronger blur for Glassmorphism */
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    @media (min-width: 768px) {
+      .floating-terminal {
+        width: 90%;
+        height: 450px;
+      }
+    }
+
+    .floating-terminal.active {
+      display: flex;
+    }
+
+    .terminal-header {
+      background: linear-gradient(to bottom, #4d4d4d, #3b3b3b); /* More authentic Mac dark header */
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #1a1a1a;
+      cursor: grab;
+      position: relative;
+    }
+    
+    .terminal-header:active {
+      cursor: grabbing;
+    }
+
+    .terminal-header .traffic-lights {
+      position: absolute;
+      left: 12px;
+      display: flex;
+    }
+
+    .terminal-header .traffic-light {
+      cursor: pointer;
+    }
+    
+    .terminal-title {
+      color: #d1d1d1;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      text-align: center;
+      width: 100%;
+      pointer-events: none;
+      letter-spacing: 0.2px;
+    }
+
+    .terminal-body {
+      padding: 6px 10px 16px 10px; /* Tighter padding at top */
+      flex: 1;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #555 transparent;
+    }
+
+    .terminal-body::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .terminal-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .terminal-body::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      border: 2px solid rgba(30, 30, 30, 0.85); /* Match bg to look inset */
+    }
+
+    .terminal-output {
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .terminal-input-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .terminal-prompt {
+      color: #33cc33; /* Mac Terminal Green prompt */
+      margin-right: 8px;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    #terminal-input {
+      background: transparent;
+      border: none;
+      color: #f1f1f1;
+      font-family: inherit;
+      font-size: inherit;
+      flex: 1;
+      outline: none;
+      box-shadow: none;
+      caret-color: rgba(255, 255, 255, 0.7); /* Block cursor aesthetic */
+    }
+
+    .terminal-cmd {
+      color: #e5b567; /* Mac Terminal Yellowish/Orange */
+      font-weight: bold;
+    }
+    
+    .terminal-error {
+      color: #ff5555;
+    }
+
+    .terminal-link {
+       color: #68b6f3; /* Mac Terminal Blue link */
+       text-decoration: underline;
+    }
+
+    /* Spotlight Search Styles */
+    .spotlight-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 3000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 20vh;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .spotlight-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .spotlight-container {
+      width: 95%;
+      max-width: 650px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+      overflow: hidden;
+      transform: translateY(-20px);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .spotlight-overlay.active .spotlight-container {
+      transform: translateY(0);
+    }
+
+    .spotlight-search-bar {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .spotlight-icon {
+      font-size: 20px;
+      color: #666;
+      margin-right: 12px;
+      opacity: 0.7;
+    }
+
+    #spotlight-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      font-weight: 300;
+      color: #333;
+      outline: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    #spotlight-input::placeholder {
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    .spotlight-results {
+      max-height: 50vh;
+      overflow-y: auto;
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .spotlight-container {
+        width: 90%;
+        border-radius: 14px;
+      }
+      .spotlight-search-bar {
+        padding: 16px 20px;
+      }
+      .spotlight-icon {
+        font-size: 24px;
+        margin-right: 14px;
+      }
+      #spotlight-input {
+        font-size: 24px;
+      }
+      .spotlight-results {
+        max-height: 400px;
+      }
+    }
+
+    .spotlight-results.has-results {
+      display: block;
+    }
+
+    .spotlight-item {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      border-left: 4px solid transparent;
+    }
+
+    .spotlight-item:hover, .spotlight-item.selected {
+      background: #007aff;
+      color: white;
+    }
+
+    .spotlight-item-icon {
+      font-size: 20px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .spotlight-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spotlight-item-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .spotlight-item:hover .spotlight-item-title,
+    .spotlight-item.selected .spotlight-item-title {
+      color: white;
+    }
+
+    .spotlight-item-category {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .spotlight-item:hover .spotlight-item-category,
+    .spotlight-item.selected .spotlight-item-category {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Toast Notification Styles */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 5000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none; /* Let clicks pass through the container */
+    }
+
+    /* Hide hints on mobile resolution */
+    @media (max-width: 767px) {
+      .toast-container {
+        display: none;
+      }
+    }
+
+    .toast {
+      background: rgba(30, 30, 30, 0.85); /* macOS dark notification style */
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto; /* Re-enable clicks on the toast itself */
+      transform: translateX(120%);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      font-size: 18px;
     }
