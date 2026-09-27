@@ -4,6 +4,7 @@
 
 import { createRequire } from 'node:module';
 import { startServer } from '../scripts/serve.mjs';
+import { accomplishments, certifications } from '../js/content.js';
 
 const require = createRequire(import.meta.url);
 let playwright;
@@ -206,6 +207,11 @@ console.log('Deep links and simple page');
   const t = await page({ hash: 'timeline' });
   check('#timeline opens the career timeline', await count(t.p, '.tm') === 1 && (await t.p.locator('.tm-head h2').textContent()) === 'Timeline');
   await t.context.close();
+  const a = await page({ hash: 'achievements' });
+  check('#achievements shows a medal for each award and a seal for each certification',
+    await count(a.p, '.badge-card .badge-svg') === accomplishments.length + certifications.length
+    && await count(a.p, '.badge-card .badge-svg circle[stroke-dasharray]') === certifications.length);
+  await a.context.close();
   const s = await page({ hash: 'simple' });
   check('#simple shows the simple page', await s.p.evaluate(() => document.body.classList.contains('is-simple')));
   check('simple page lists every project', await count(s.p, '.simple-page .sp-project') === 10);

@@ -4,6 +4,7 @@
 import { h, fromHtml, escapeHtml } from './dom.js';
 import { iconSvg } from './icons.js';
 import { coverHtml } from './covers.js';
+import { medalSvg, sealSvg } from './badges.js';
 import {
   profile, experience, education, projects, skills, skillCategories, accomplishments, certifications,
   aboutParagraphs, experiencePhrase, formatRange, formatDuration, roleMonths, projectsUsing, listedSkillIds,
@@ -234,23 +235,22 @@ export function renderEducation() {
 
 // ---------- Achievements ----------
 
-export function badge({ iconName, tone, title, sub, url }) {
+export function badge({ art, title, sub, url }) {
   return h('li', { class: 'badge-card' },
-    h('span', { class: `badge-art tone-${tone}`, 'aria-hidden': 'true' }, icon(iconName, 30)),
-    h('strong', {}, title),
-    h('span', {}, sub),
-    url ? h('a', { class: 'pill pill--accent', href: url, target: '_blank', rel: 'noopener' }, icon('check', 12), 'Verify') : null,
+    h('span', { class: 'badge-art', 'aria-hidden': 'true', html: art }),
+    h('span', { class: 'badge-text' }, h('strong', {}, title), h('span', { class: 'badge-sub' }, sub)),
+    url ? h('a', { class: 'pill pill--accent', href: url, target: '_blank', rel: 'noopener', 'aria-label': `Verify ${title}` }, icon('check', 12), 'Verify') : null,
   );
 }
 
 export function renderAchievements(filter = 'all') {
   const awards = h('section', { class: 'doc-section', 'aria-label': 'Awards' },
     kicker(`Awards · ${accomplishments.length}`),
-    h('ul', { class: 'badges' }, accomplishments.map((a) => badge({ iconName: a.icon, tone: a.tone, title: a.title, sub: a.org }))),
+    h('ul', { class: 'badges' }, accomplishments.map((a) => badge({ art: medalSvg({ tone: a.tone, icon: a.icon }), title: a.title, sub: a.org }))),
   );
   const certs = h('section', { class: 'doc-section', 'aria-label': 'Certifications' },
     kicker(`Certifications · ${certifications.length}`),
-    h('ul', { class: 'badges' }, certifications.map((c) => badge({ iconName: c.icon, tone: c.tone, title: c.title, sub: c.issuer, url: c.url }))),
+    h('ul', { class: 'badges' }, certifications.map((c) => badge({ art: sealSvg({ tone: c.tone, icon: c.icon }), title: c.title, sub: c.issuer, url: c.url }))),
   );
   return h('div', { class: 'doc doc-stack' }, filter !== 'certs' ? awards : null, filter !== 'awards' ? certs : null);
 }
