@@ -1,641 +1,461 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Portfolio of Saiprasaad Kalyanaraman —Full-Stack Developer specializing in React, Python, and AI, with a focus on building innovative projects.">
-  <title>Saiprasaad Kalyanaraman | Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.logrocket.io/LogRocket.min.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Saiprasaad Kalyanaraman · Full-Stack Software Engineer</title>
+  <meta name="description" content="Saiprasaad Kalyanaraman is a full-stack software engineer in New York who builds web, mobile and AI products with React, Flask, Spring Boot and Flutter. Explore his projects, experience and resume.">
+  <link rel="canonical" href="https://www.saiprasaad.com/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1c2340">
+  <meta name="author" content="Saiprasaad Kalyanaraman">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Saiprasaad Kalyanaraman">
+  <meta property="og:url" content="https://www.saiprasaad.com/">
+  <meta property="og:title" content="Saiprasaad Kalyanaraman · Full-Stack Software Engineer">
+  <meta property="og:description" content="A portfolio you can explore like a desktop: projects, experience, a Fit Check for job descriptions, and a terminal.">
+  <meta property="og:image" content="https://www.saiprasaad.com/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Saiprasaad Kalyanaraman's portfolio, shown as a desktop with a window of projects.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Saiprasaad Kalyanaraman · Full-Stack Software Engineer">
+  <meta name="twitter:description" content="Projects, experience and a Fit Check for job descriptions, in a portfolio you can explore like a desktop.">
+  <meta name="twitter:image" content="https://www.saiprasaad.com/images/og.png">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=JetBrains+Mono:wght@400;600&family=Sacramento&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/apps.css">
+  <link rel="stylesheet" href="css/ios.css">
+  <link rel="stylesheet" href="css/simple.css">
+  <link rel="modulepreload" href="js/main.js">
+  <link rel="modulepreload" href="js/content.js">
+
   <script>
-    window.LogRocket && window.LogRocket.init('lgchpu/portfolio-hqfup');
+    // Runs before first paint: theme without a flash, and a fallback to the simple page
+    // if the app scripts never start.
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      root.classList.add('js');
+      try {
+        var s = JSON.parse(localStorage.getItem('saios.settings.v1') || '{}');
+        if (s.theme === 'light' || s.theme === 'dark') root.setAttribute('data-theme', s.theme);
+        if (s.accent && s.accent !== 'blue') root.setAttribute('data-accent', s.accent);
+      } catch (e) {}
+      setTimeout(function () {
+        if (!root.classList.contains('os-ready')) {
+          root.classList.remove('js');
+          root.classList.add('no-js');
+        }
+      }, 5000);
+    })();
   </script>
+  <!-- jsonld:start -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Saiprasaad Kalyanaraman",
-    "url": "https://saiprasaad.com",
-    "jobTitle": "Full-Stack Developer",
+    "alternateName": "Sai",
+    "url": "https://www.saiprasaad.com/",
+    "image": "https://www.saiprasaad.com/images/sai-640.jpg",
+    "jobTitle": "Full-Stack Software Engineer",
+    "description": "I build web, mobile and AI-powered products end to end, from React and Flutter front ends to Flask and Spring Boot services.",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Afficiency"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Illinois Institute of Technology"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "addressCountry": "US"
+    },
+    "email": "mailto:saiprasaad1999@gmail.com",
     "sameAs": [
       "https://github.com/saiprasaad",
-      "https://www.linkedin.com/in/saiprasaad",
+      "https://www.linkedin.com/in/saiprasaad/",
       "https://www.hackerrank.com/profile/saiprasaad1999"
     ],
-    "description": "Full-Stack Developer specializing in React, Python, and AI, with a focus on building innovative projects."
+    "knowsAbout": [
+      "C",
+      "Java",
+      "Python",
+      "Dart",
+      "Swift",
+      "HTML",
+      "CSS",
+      "Bootstrap",
+      "React",
+      "Angular",
+      "JavaScript",
+      "TypeScript",
+      "Spring Boot",
+      "Node.js",
+      "Flask",
+      "PHP",
+      "Flutter",
+      "Android Studio",
+      "MySQL",
+      "PostgreSQL",
+      "SQLite",
+      "MongoDB",
+      "Firebase",
+      "Redis",
+      "Generative AI",
+      "LLMs",
+      "RAG",
+      "NLP",
+      "Ollama",
+      "OpenAI APIs",
+      "Hugging Face",
+      "Git",
+      "Docker",
+      "AWS",
+      "Figma",
+      "Streamlit"
+    ]
   }
-</script>
-
+  </script>
+  <!-- jsonld:end -->
 </head>
-
 <body>
-  <div class="finder-window">
-    <div class="title-bar">
-      <div class="traffic-lights">
-        <div class="traffic-light close"></div>
-        <div class="traffic-light minimize"></div>
-        <div class="traffic-light maximize"></div>
+  <a class="skip-link" href="#simple">Skip to the simple, text-only version</a>
+
+  <svg class="sr-only" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <linearGradient id="fg-back" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color: var(--folder-b)"/>
+        <stop offset="1" style="stop-color: color-mix(in srgb, var(--folder-b) 82%, black)"/>
+      </linearGradient>
+      <linearGradient id="fg-front" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color: var(--folder-a)"/>
+        <stop offset="1" style="stop-color: var(--folder-b)"/>
+      </linearGradient>
+      <linearGradient id="fg-glyph" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color: var(--folder-glyph)"/>
+        <stop offset="1" style="stop-color: color-mix(in srgb, var(--folder-glyph) 80%, black)"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div id="os" hidden></div>
+
+  <!-- prerender:start -->
+  <div class="simple-page" id="simple" data-prerendered="true">
+    <header class="sp-top">
+      <div class="sp-bar">
+        <a class="sp-brand" href="#simple">Saiprasaad Kalyanaraman</a>
+        <nav class="sp-nav" aria-label="Sections">
+          <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#achievements">Achievements</a><a href="#contact">Contact</a>
+        </nav>
+        <button type="button" class="sp-desktop-btn" data-action="exit-simple" hidden><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M3.5 9h17M9.5 9v11"/></svg>Desktop view</button>
       </div>
-      <div class="window-title">Portfolio — Saiprasaad Kalyanaraman</div>
-    </div>
-    <div class="toolbar">
-      <button class="nav-button" id="back-btn" disabled>◀</button>
-      <button class="nav-button" id="forward-btn" disabled>▶</button>
-      <div class="path-bar"><span id="current-path">Portfolio</span></div>
-      <button class="action-button" id="search-toggle-btn" title="Spotlight Search (Cmd/Ctrl + Space)">
-        <span style="font-size: 14px; margin-right: 4px;">🔍</span> <span class="action-button-label">Spotlight
-          Search</span>
-      </button>
-      <button class="action-button" id="terminal-toggle-btn" title="Open Terminal (Cmd/Ctrl + \`)">
-        <span style="font-size: 14px; margin-right: 4px;">⌨️</span> <span class="action-button-label">New
-          Terminal</span>
-      </button>
-    </div>
+    </header>
+    <main class="sp-main">
+      <section class="sp-hero" aria-labelledby="sp-name">
+        <img class="sp-photo" src="images/sai-320.webp" srcset="images/sai-160.webp 160w, images/sai-320.webp 320w, images/sai-640.webp 640w" sizes="112px" width="112" height="112" alt="Portrait of Saiprasaad Kalyanaraman" decoding="async">
+        <div class="sp-hero-text">
+          <p class="sp-eyebrow">Full-Stack Software Engineer · New York, USA</p>
+          <h1 id="sp-name">Saiprasaad Kalyanaraman</h1>
+          <p class="sp-lead">I build web, mobile and AI-powered products end to end, from React and Flutter front ends to Flask and Spring Boot services.</p>
+          <p class="sp-actions">
+            <a class="sp-btn sp-btn-primary" href="mailto:saiprasaad1999@gmail.com"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>saiprasaad1999@gmail.com</a>
+            <a class="sp-btn" href="https://drive.google.com/file/d/1m_iyqNUXY4m9T7eEBnZUM8GZTGVFlV5R/view?usp=sharing" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8z"/><path d="M14 3v5h5M8.5 12.5h7M8.5 16.5h5"/></svg>Resume (PDF)</a>
+            <a class="sp-btn" href="https://github.com/saiprasaad" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub</a><a class="sp-btn" href="https://www.linkedin.com/in/saiprasaad/" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a class="sp-btn" href="https://www.hackerrank.com/profile/saiprasaad1999" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M12 .9l9.6 5.5v11.2L12 23.1l-9.6-5.5V6.4zM8.2 7.4v9.2h2.1v-3.7h3.4v3.7h2.1V7.4h-2.1v3.6h-3.4V7.4z"/></svg>HackerRank</a>
+          </p>
+        </div>
+      </section>
 
-    <button class="menu-button" id="menu-btn">☰</button>
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+      <section class="sp-section" id="about" aria-labelledby="sp-about">
+        <h2 id="sp-about">About</h2>
+        <p class="sp-prose">I'm a full-stack software engineer with a Master's in Computer Science and almost 3 years of experience building scalable web and mobile applications.</p><p class="sp-prose">At Afficiency, an insurtech startup, I build with React, Angular, Flask, Spring Boot, MySQL and Redis, and I'm exploring AI-powered tools and microservices that make systems faster and workflows simpler.</p><p class="sp-prose">I've won a hackathon, judged another, and I keep learning. I like blending technology and creativity to solve real problems and build experiences people enjoy using.</p>
+        <dl class="sp-facts">
+          <div><dt>Experience</dt><dd>almost 3 years full-time, plus internships</dd></div>
+          <div><dt>Currently</dt><dd>Full Stack Developer, Afficiency</dd></div>
+          <div><dt>Education</dt><dd>Master of Computer Science, Illinois Tech</dd></div>
+          <div><dt>Based in</dt><dd>New York, USA</dd></div>
+        </dl>
+      </section>
 
-    <div class="main-content" style="position: relative;">
-      <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">Favorites</div>
-        <div class="sidebar-item active" data-view="main"><span class="sidebar-icon"
-            style="background:linear-gradient(135deg,#667eea,#764ba2)"></span>Portfolio</div>
-        <div class="sidebar-header" style="margin-top:12px">Quick Access</div>
-        <div class="sidebar-item" data-view="about"><span class="sidebar-icon" style="background:#c9e265"></span>About
-        </div>
-        <div class="sidebar-item" data-view="education"><span class="sidebar-icon education-folder"></span>Education
-        </div>
-        <div class="sidebar-item" data-view="experience"><span class="sidebar-icon experience-folder"></span>Experience
-        </div>
-        <div class="sidebar-item" data-view="skills"><span class="sidebar-icon skills-folder"></span>Skills</div>
-        <div class="sidebar-item" data-view="certifications"><span class="sidebar-icon"
-            style="background:#80ed99"></span>Certifications</div>
-        <div class="sidebar-item" data-view="projects"><span class="sidebar-icon projects-folder"></span>Projects</div>
-        <div class="sidebar-item" data-view="accomplishments"><span class="sidebar-icon"
-            style="background:#ffd166"></span>Accomplishments</div>
-        <div class="sidebar-item" data-view="contact"><span class="sidebar-icon contact-folder"></span>Contact</div>
-        <div class="sidebar-item" data-view="resume"><span class="sidebar-icon resume-file"></span>Resume</div>
+      <section class="sp-section" id="experience" aria-labelledby="sp-experience">
+        <h2 id="sp-experience">Experience</h2>
+        <ol class="sp-roles"><li class="sp-role">
+      <div class="sp-role-head">
+        <h3>Full Stack Developer</h3>
+        <p class="sp-meta"><span>Afficiency</span> · <span>New York, USA</span></p>
+        <p class="sp-meta sp-dates"><time>Sep 2024 – Present</time> · 2 yrs 1 mo · Full-time</p>
       </div>
-
-      <div class="content-area">
-        <div class="icon-view" id="main-view">
-          <div class="file-item" data-view="about">
-            <div class="file-icon education-folder">👋</div>
-            <div class="file-name">About Me</div>
-          </div>
-          <div class="file-item" data-view="contact">
-            <div class="file-icon contact-folder">📞</div>
-            <div class="file-name">Contact</div>
-          </div>
-
-          <div class="file-item" data-view="education">
-            <div class="file-icon education-folder">🎓</div>
-            <div class="file-name">Education</div>
-          </div>
-          <div class="file-item" data-view="experience">
-            <div class="file-icon experience-folder">💼</div>
-            <div class="file-name">Experience</div>
-          </div>
-          <div class="file-item" data-view="skills">
-            <div class="file-icon skills-folder">⚡</div>
-            <div class="file-name">Skills</div>
-          </div>
-          <div class="file-item" data-view="certifications">
-            <div class="file-icon" style="background:#80ed99">🎖️</div>
-            <div class="file-name">Certifications</div>
-          </div>
-          <div class="file-item" data-view="projects">
-            <div class="file-icon projects-folder">📁</div>
-            <div class="file-name">Projects</div>
-          </div>
-          <div class="file-item" data-view="accomplishments">
-            <div class="file-icon" style="background:#ffd166">🏆</div>
-            <div class="file-name">Accomplishments</div>
-          </div>
-
-
-          <div class="file-item" data-view="resume">
-            <div class="file-icon resume-file">📄</div>
-            <div class="file-name">Resume</div>
-          </div>
-        </div>
-
-        <div class="detail-view" id="about-view">
-          <div class="detail-header">
-            <img src="images/Sai.jpg" alt="Saiprasaad Kalyanaraman" class="profile-pic" />
-
-            <div>
-              <div class="detail-title">Hi, I'm Saiprasaad Kalyanaraman</div>
-              <div class="detail-subtitle">Full-Stack Developer @ Afficiency • New York, USA</div>
-            </div>
-          </div>
-
-          <div class="hero">
-            <div class="kicker">About Me</div>
-            <p>I’m a Full-Stack Software Engineer with a Master’s in Computer Science and over two years of experience
-              building scalable web and mobile applications. Currently at Afficiency, an Insurtech startup, I specialize
-              in crafting innovative solutions with React, Angular, Flask, Spring Boot, MySQL, and Redis, while also
-              exploring AI-powered tools and microservices to improve performance and workflows. A hackathon winner and
-              continuous learner, I’m passionate about blending technology and creativity to solve real-world problems
-              and deliver meaningful user experiences.</p>
-          </div>
-        </div>
-
-        <div class="detail-view" id="experience-view">
-          <div class="detail-header">
-            <div class="detail-icon experience-folder">💼</div>
-            <div>
-              <div class="detail-title">Experience</div>
-              <div class="detail-subtitle">Professional journey</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <h3>Full Stack Developer</h3>
-            <p class="meta">Afficiency, New York, USA • Sept 2024 – Present</p>
-            <ul class="list">
-              <li>Designed and developed responsive user interfaces with the React framework, building a scalable
-                front-end architecture that supports 10,000+ users across web and mobile platforms.</li>
-              <li>Implemented and maintained microservices using Flask / Spring Boot, integrating Redis for caching and
-                MySQL for relational data management, improving system scalability and performance.</li>
-              <li>Delivered enterprise applications for three major life insurance carriers, resolving 50+ high-priority
-                production issues via HubSpot, resulting in improved UI/UX and more efficient backend workflows.</li>
-              <li>Utilized GitLab for version control, CI/CD, and code reviews, streamlining the deployment pipeline,
-                ensuring reliable releases, and fostering team collaboration.</li>
-            </ul>
-            <h3>Student Consultant — Software Engineering Internship</h3>
-            <p class="meta">Open Avenues Career Pathways, Chicago • Feb 2024 – Apr 2024</p>
-            <ul class="list">
-              <li>Designed and developed Campus Cooks mobile app using Flutter with Koodos Labs, enabling students to
-                prepare recipes with a single click of selected ingredients.</li>
-              <li>Integrated Firebase backend for real-time data storage and user authentication, ensuring smooth app
-                performance and secure access.</li>
-              <li>Elevated UI/UX design expertise through Figma, creating visually appealing and user-friendly
-                interfaces aligned with modern design principles.</li>
-            </ul>
-            <h3>Software Engineer Internship</h3>
-            <p class="meta">Hexaware Technologies, Chicago • Oct 2023 – Dec 2023</p>
-            <ul class="list">
-              <li>Gained skills in building responsive and user-friendly single-page applications (SPAs) by leveraging
-                the modular architecture of the Angular framework.</li>
-              <li>Streamlined data management by seamlessly combining Hibernate ORM with Spring Boot applications,
-                enabling efficient data access and manipulation.</li>
-            </ul>
-            <h3>Software Engineer</h3>
-            <p class="meta">Ernst & Young, Chennai • Aug 2021 – Jun 2022</p>
-            <ul class="list">
-              <li>Built scalable microservice applications using Spring Boot, and integrated multiple databases (MySQL,
-                PostgreSQL, etc.) to effectively handle diverse data requirements.</li>
-              <li>Deployed REST APIs seamlessly across 8 internal microservices, fostering efficient data flow between
-                services and ensuring a well-integrated system.</li>
-              <li>Utilized Git for version control to collaborate with the development team, manage code changes, and
-                facilitate conflict resolution during development cycles.</li>
-              <li>Acquired expertise in MySQL by designing optimized database schemas and crafting SQL queries to manage
-                complex data structures.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="detail-view" id="education-view">
-          <div class="detail-header">
-            <div class="detail-icon education-folder">🎓</div>
-            <div>
-              <div class="detail-title">Education</div>
-              <div class="detail-subtitle">Degrees & coursework</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <h3>Master of Computer Science</h3>
-            <p class="meta">Illinois Institute of Technology, Chicago • Aug 2022 – May 2024 • GPA: 3.7</p>
-            <p>Activities: Senior TechNews Writer, TechNews Photographer, Library Student Advisor, ACM Member.</p>
-            <p>Coursework: Software Engineering, Enterprise Web Applications, Algorithms, Computer Networks, Machine
-              Learning, Big Data, Mobile App Dev, Software Testing & Analysis, Advanced DB, Software Project Mgmt.</p>
-          </div>
-        </div>
-
-
-
-        <div class="detail-view" id="skills-view">
-          <div class="detail-header">
-            <div class="detail-icon skills-folder">⚡</div>
-            <div>
-              <div class="detail-title">Skills & Technologies</div>
-              <div class="detail-subtitle">Programming Languages • Frontend • Backend • Mobile • Databases • AI &
-                Machine Learning • Others</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <div class="skills-grid">
-
-              <div class="skill-card" data-accent="#f5576c">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">💻</span>
-                  <h3>Programming Languages</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">C</span>
-                  <span class="skill-tag">Java</span>
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">Dart</span>
-                  <span class="skill-tag">Swift</span>
-                </div>
-              </div>
-
-              <div class="skill-card" data-accent="#007aff">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">🎨</span>
-                  <h3>Frontend</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">HTML</span>
-                  <span class="skill-tag">CSS</span>
-                  <span class="skill-tag">Bootstrap</span>
-                  <span class="skill-tag">React</span>
-                  <span class="skill-tag">Angular</span>
-                  <span class="skill-tag">JavaScript</span>
-                  <span class="skill-tag">TypeScript</span>
-                </div>
-              </div>
-
-              <div class="skill-card" data-accent="#43e97b">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">⚙️</span>
-                  <h3>Backend</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Spring Boot</span>
-                  <span class="skill-tag">Node.js</span>
-                  <span class="skill-tag">Flask</span>
-                  <span class="skill-tag">PHP</span>
-                </div>
-              </div>
-
-              <div class="skill-card" data-accent="#a78bfa">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">📱</span>
-                  <h3>Mobile</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Flutter</span>
-                  <span class="skill-tag">Android Studio</span>
-                </div>
-              </div>
-
-              <div class="skill-card" data-accent="#f093fb">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">🗄️</span>
-                  <h3>Databases</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">MySQL</span>
-                  <span class="skill-tag">PostgreSQL</span>
-                  <span class="skill-tag">SQLite</span>
-                  <span class="skill-tag">MongoDB</span>
-                  <span class="skill-tag">Firebase</span>
-                  <span class="skill-tag">Redis</span>
-                </div>
-              </div>
-
-              <div class="skill-card" data-accent="#60a5fa">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">🤖</span>
-                  <h3>AI & Machine Learning</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Generative AI</span>
-                  <span class="skill-tag">LLMs</span>
-                  <span class="skill-tag">RAG</span>
-                  <span class="skill-tag">NLP</span>
-                  <span class="skill-tag">Ollama</span>
-                  <span class="skill-tag">OpenAI APIs</span>
-                  <span class="skill-tag">Hugging Face</span>
-                </div>
-              </div>
-
-              <div class="skill-card" data-accent="#fbbf24">
-                <div class="skill-card-header">
-                  <span class="skill-card-icon">🛠️</span>
-                  <h3>DevOps & Tools</h3>
-                </div>
-                <div class="skill-tags">
-                  <span class="skill-tag">Git</span>
-                  <span class="skill-tag">Docker</span>
-                  <span class="skill-tag">AWS</span>
-                  <span class="skill-tag">Figma</span>
-                  <span class="skill-tag">Streamlit</span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="detail-view" id="projects-view">
-          <div class="detail-header">
-            <div class="detail-icon projects-folder">📁</div>
-            <div>
-              <div class="detail-title">Projects</div>
-              <div class="detail-subtitle">Selected work from web, mobile, AI and data</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <div class="project-grid">
-              <div class="project-card">
-                <h3>AI-Powered Log Summarizer</h3>
-                <p>Integrated AI log summarization with Teams for real-time anomaly detection and faster incident
-                  response.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">Flask</span>
-                  <span class="skill-tag">Ollama</span>
-                  <span class="skill-tag">LLMs</span>
-                  <span class="skill-tag">Teams API</span>
-                </div>
-              </div>
-              <div class="project-card">
-                <h3>Encryption & Decryption Module</h3>
-                <p>Implemented AES-CBC encryption/decryption in React and Flask for secure end-to-end data handling.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">React</span>
-                  <span class="skill-tag">Flask</span>
-                  <span class="skill-tag">AES-CBC</span>
-                </div>
-              </div>
-              <div class="project-card">
-                <h3>JSON Explorer Web App</h3>
-                <p>Built and deployed an interactive JSON visualization and editing tool hosted on Netlify.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">React</span>
-                  <span class="skill-tag">React Flow</span>
-                  <span class="skill-tag">Netlify</span>
-                </div>
-                <p class="metaGithub"><a href="https://jsonexplorer.netlify.app" target="_blank" rel="noopener">Live
-                    Demo</a></p>
-              </div>
-              <div class="project-card">
-                <h3>Asana Task Automation</h3>
-                <p>Automated daily ticket creation and SQL syncing between Asana and backend dashboards.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Asana API</span>
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">Flask</span>
-                  <span class="skill-tag">Redis</span>
-                  <span class="skill-tag">MySQL</span>
-                </div>
-              </div>
-              <div class="project-card">
-                <h3>Repo Vision</h3>
-                <p>Visualized GitHub repo data and forecasts using microservices with Elasticsearch.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">Flask</span>
-                  <span class="skill-tag">React</span>
-                  <span class="skill-tag">Google Cloud</span>
-                </div>
-                <p class="metaGithub"><a href="https://github.com/saiprasaad/Repo-Vision" target="_blank"
-                    rel="noopener">Github Repo</a></p>
-              </div>
-              <div class="project-card">
-                <h3>YouTube Translator</h3>
-                <p>Translated YouTube videos with Whisper, OpenAI, gTTS, and MoviePy.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">Streamlit</span>
-                  <span class="skill-tag">Whisper</span>
-                </div>
-                <p class="metaGithub"><a href="https://github.com/saiprasaad/YouTube-Translator" target="_blank"
-                    rel="noopener">Github Repo</a></p>
-              </div>
-              <div class="project-card">
-                <h3>Wordle Clone</h3>
-                <p>Developed a cross-platform mobile Wordle clone with Flutter.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Flutter</span>
-                </div>
-                <p class="metaGithub"><a href="https://github.com/saiprasaad/Wordle-Clone" target="_blank"
-                    rel="noopener">Github Repo</a></p>
-              </div>
-              <div class="project-card">
-                <h3>Battleships</h3>
-                <p>Multiplayer Battleships game with APIs for authentication and gameplay.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Flutter</span>
-                  <span class="skill-tag">Flask</span>
-                  <span class="skill-tag">MySQL</span>
-                </div>
-                <p class="metaGithub"><a href="https://github.com/saiprasaad/Battleships" target="_blank"
-                    rel="noopener">Github Repo</a></p>
-              </div>
-              <div class="project-card">
-                <h3>Chicago Streets Harmony</h3>
-                <p>Geolocation-based app to improve community engagement in Chicago.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Flutter</span>
-                  <span class="skill-tag">Spring Boot</span>
-                  <span class="skill-tag">Geo-location</span>
-                </div>
-                <p class="metaGithub"><a href="https://github.com/saiprasaad/Chicago-Streets-Harmony" target="_blank"
-                    rel="noopener">Github Repo</a></p>
-              </div>
-              <div class="project-card">
-                <h3>Campus Cooks</h3>
-                <p>Suggested recipes for students based on available ingredients.</p>
-                <div class="skill-tags">
-                  <span class="skill-tag">Flutter</span>
-                  <span class="skill-tag">Firebase</span>
-                </div>
-                <p class="metaGithub"><a href="https://github.com/saiprasaad/Campus-Cooks" target="_blank"
-                    rel="noopener">Github Repo</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-view" id="accomplishments-view">
-          <div class="detail-header">
-            <div class="detail-icon" style="background:#ffd166">🏆</div>
-            <div>
-              <div class="detail-title">Accomplishments</div>
-              <div class="detail-subtitle">Highlights & recognition</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <ul class="list">
-              <li>Best Performer of the Month at Afficiency</li>
-              <li>Winner of ACM Scarlet Hackathon</li>
-              <li>Judge at HackMHS X Hackathon</li>
-              <li>Winner of LeetCode Challenge at ACM</li>
-              <li>Cognizant Student Club's Star Performer</li>
-              <li>Winner of debugging contest held by IEEE Computer Society SBC</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="detail-view" id="certifications-view">
-          <div class="detail-header">
-            <div class="detail-icon" style="background:#80ed99">🎖️</div>
-            <div>
-              <div class="detail-title">Certifications</div>
-              <div class="detail-subtitle">Selected credentials</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <ul class="list">
-              <li>Microsoft Certified: Azure AI Fundamentals</li>
-              <li>Oracle Cloud Infrastructure Foundations Certified Associate</li>
-              <li>CS50's Introduction to Computer Science — Harvard/edX</li>
-              <li>Web Development and Coding Specialization — Univ. of Michigan (Coursera)</li>
-              <li>Introduction to Generative AI — Google Cloud (Coursera)</li>
-              <li>Hackerrank Certifications — C, Java, JavaScript, React, MySQL</li>
-              <li>Postman Student Expert</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="detail-view" id="contact-view">
-          <div class="detail-header">
-            <div class="detail-icon contact-folder">📞</div>
-            <div>
-              <div class="detail-title">Contact</div>
-              <div class="detail-subtitle">Let's connect</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <p><strong>Location:</strong> New York, USA</p>
-            <p><strong>Email:</strong>
-              <a href="mailto:saiprasaad1999@gmail.com">saiprasaad1999@gmail.com</a>
-            </p>
-            <p><strong>GitHub:</strong>
-              <a href="https://github.com/saiprasaad" target="_blank" rel="noopener">
-                github.com/saiprasaad
-              </a>
-            </p>
-            <p><strong>LinkedIn:</strong>
-              <a href="https://www.linkedin.com/in/saiprasaad/" target="_blank" rel="noopener">
-                linkedin.com/in/saiprasaad
-              </a>
-            </p>
-            <p><strong>HackerRank:</strong>
-              <a href="https://www.hackerrank.com/profile/saiprasaad1999" target="_blank" rel="noopener">
-                hackerrank.com/saiprasaad1999
-              </a>
-            </p>
-          </div>
-        </div>
-
-        <div class="detail-view" id="resume-view">
-          <div class="detail-header">
-            <div class="detail-icon resume-file">📄</div>
-            <div>
-              <div class="detail-title">Resume</div>
-              <div class="detail-subtitle">Open or preview directly below</div>
-            </div>
-          </div>
-          <div class="detail-content">
-            <p class="resume-intro">You can view my resume below:</p>
-
-            <div class="resume-actions">
-              <button class="resume-btn preview" onclick="toggleResumePreview()">👁️ Quick Look</button>
-              <a href="https://drive.google.com/file/d/1m_iyqNUXY4m9T7eEBnZUM8GZTGVFlV5R/view?usp=sharing"
-                target="_blank" rel="noopener" class="resume-btn download">
-                📄 Open in Drive
-              </a>
-            </div>
-          </div>
-
-
-
-
-        </div>
+      <ul class="sp-metrics"><li><strong>10,000+</strong> users on web and mobile</li><li><strong>3</strong> major life-insurance carriers</li><li><strong>50+</strong> high-priority production issues resolved</li></ul>
+      <ul class="sp-bullets"><li>Designed and developed responsive user interfaces in React, building a scalable front-end architecture that supports 10,000+ users across web and mobile platforms.</li><li>Implemented and maintained microservices in Flask and Spring Boot, using Redis for caching and MySQL for relational data to improve scalability and performance.</li><li>Delivered enterprise applications for three major life-insurance carriers and resolved 50+ high-priority production issues through HubSpot, improving UI/UX and back-end workflows.</li><li>Used GitLab for version control, CI/CD and code review, streamlining the deployment pipeline and keeping releases reliable.</li></ul>
+      <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/react.png" alt="" width="16" height="16" loading="lazy" decoding="async">React</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><img src="images/springboot.png" alt="" width="16" height="16" loading="lazy" decoding="async">Spring Boot</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Rd</span>Redis</li><li class="sp-chip"><img src="images/mysql.png" alt="" width="16" height="16" loading="lazy" decoding="async">MySQL</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">MS</span>Microservices</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">GL</span>GitLab</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">CI</span>CI/CD</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">HS</span>HubSpot</li></ul>
+    </li><li class="sp-role">
+      <div class="sp-role-head">
+        <h3>Student Consultant, Software Engineering</h3>
+        <p class="sp-meta"><span>Open Avenues Career Pathways</span> · <span>Chicago, USA</span></p>
+        <p class="sp-meta sp-dates"><time>Feb 2024 – Apr 2024</time> · 3 mos · Internship</p>
       </div>
-
-      <!-- Ask Folio Toggle Button (inside Finder) -->
-      <button class="gemini-toggle-btn" id="gemini-toggle-btn" onclick="toggleGeminiChat()">
-        ✨ <span class="gemini-toggle-label">Ask Folio</span>
-      </button>
-    </div>
-
-    <!-- Floating Terminal Window -->
-    <div class="floating-terminal" id="floating-terminal">
-      <div class="terminal-header" id="terminal-drag-handle">
-        <div class="traffic-lights" style="display: flex;">
-          <div class="traffic-light close" id="terminal-close"></div>
-          <div class="traffic-light minimize"></div>
-          <div class="traffic-light maximize"></div>
-        </div>
-        <div class="terminal-title">saiprasaad@portfolio: ~</div>
+      
+      <ul class="sp-bullets"><li>Designed and developed the Campus Cooks mobile app in Flutter with Koodos Labs, letting students prepare recipes from the ingredients they select in a single tap.</li><li>Integrated a Firebase back end for real-time data storage and user authentication.</li><li>Designed interfaces in Figma that follow modern design principles.</li></ul>
+      <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/flutter.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flutter</li><li class="sp-chip"><img src="images/firebase.png" alt="" width="16" height="16" loading="lazy" decoding="async">Firebase</li><li class="sp-chip"><img src="images/figma.png" alt="" width="16" height="16" loading="lazy" decoding="async">Figma</li><li class="sp-chip"><img src="images/dart.png" alt="" width="16" height="16" loading="lazy" decoding="async">Dart</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">UX</span>UI/UX design</li></ul>
+    </li><li class="sp-role">
+      <div class="sp-role-head">
+        <h3>Software Engineer Intern</h3>
+        <p class="sp-meta"><span>Hexaware Technologies</span> · <span>Chicago, USA</span></p>
+        <p class="sp-meta sp-dates"><time>Oct 2023 – Dec 2023</time> · 3 mos · Internship</p>
       </div>
-      <div class="terminal-body" id="terminal-body">
-        <div class="terminal-output" id="terminal-output">
-          <div>Welcome to Saiprasaad's Portfolio Terminal!</div>
-          <div>Type <span class="terminal-cmd">help</span> to see a list of available commands.</div>
-          <br>
-        </div>
-        <div class="terminal-input-line">
-          <span class="terminal-prompt">saiprasaad@portfolio:~$</span>
-          <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
-        </div>
+      
+      <ul class="sp-bullets"><li>Built responsive single-page applications with the modular architecture of Angular.</li><li>Combined Hibernate ORM with Spring Boot services for efficient data access and manipulation.</li></ul>
+      <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/angular.png" alt="" width="16" height="16" loading="lazy" decoding="async">Angular</li><li class="sp-chip"><img src="images/springboot.png" alt="" width="16" height="16" loading="lazy" decoding="async">Spring Boot</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Hb</span>Hibernate</li><li class="sp-chip"><img src="images/typescript.png" alt="" width="16" height="16" loading="lazy" decoding="async">TypeScript</li><li class="sp-chip"><img src="images/java.png" alt="" width="16" height="16" loading="lazy" decoding="async">Java</li></ul>
+    </li><li class="sp-role">
+      <div class="sp-role-head">
+        <h3>Software Engineer</h3>
+        <p class="sp-meta"><span>Ernst &amp; Young</span> · <span>Chennai, India</span></p>
+        <p class="sp-meta sp-dates"><time>Aug 2021 – Jun 2022</time> · 11 mos · Full-time</p>
       </div>
-    </div>
+      <ul class="sp-metrics"><li><strong>8</strong> internal microservices connected through REST APIs</li></ul>
+      <ul class="sp-bullets"><li>Built scalable microservice applications in Spring Boot and integrated multiple databases, including MySQL and PostgreSQL.</li><li>Deployed REST APIs across 8 internal microservices so data flowed cleanly between services.</li><li>Used Git with the team to manage changes and resolve conflicts during development.</li><li>Designed optimized MySQL schemas and wrote SQL for complex data structures.</li></ul>
+      <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/springboot.png" alt="" width="16" height="16" loading="lazy" decoding="async">Spring Boot</li><li class="sp-chip"><img src="images/java.png" alt="" width="16" height="16" loading="lazy" decoding="async">Java</li><li class="sp-chip"><img src="images/mysql.png" alt="" width="16" height="16" loading="lazy" decoding="async">MySQL</li><li class="sp-chip"><img src="images/postgresql.png" alt="" width="16" height="16" loading="lazy" decoding="async">PostgreSQL</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">API</span>REST APIs</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">MS</span>Microservices</li><li class="sp-chip"><img src="images/git.png" alt="" width="16" height="16" loading="lazy" decoding="async">Git</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">SQL</span>SQL</li></ul>
+    </li></ol>
+      </section>
 
-    <!-- Spotlight Search Overlay -->
-    <div class="spotlight-overlay" id="spotlight-overlay">
-      <div class="spotlight-container" id="spotlight-container">
-        <div class="spotlight-search-bar">
-          <span class="spotlight-icon">🔍</span>
-          <input type="text" id="spotlight-input" placeholder="Spotlight Search" autocomplete="off" spellcheck="false">
-        </div>
-        <div class="spotlight-results" id="spotlight-results">
-          <!-- Results will be injected here dynamically -->
-        </div>
+      <section class="sp-section" id="projects" aria-labelledby="sp-projects">
+        <h2 id="sp-projects">Projects</h2>
+        <div class="sp-projects"><article class="sp-project" id="repo-vision">
+      <div class="cover sp-cover" style="--cover-from:#12306e;--cover-to:#2f6fe0" role="img" aria-label="Illustration for Repo Vision"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g stroke="#fff" stroke-opacity=".12"><path d="M24 60H296"/><path d="M24 92H296"/><path d="M24 124H296"/><path d="M24 156H296"/></g>
+    <path d="M190 116 C 215 104, 240 88, 296 60 L296 104 C 250 118, 222 128, 190 134 Z" fill="#fff" fill-opacity=".16"/>
+    <path d="M24 166 C 60 160, 90 158, 120 146 S 170 130, 190 124" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M190 124 C 222 112, 250 96, 296 80" fill="none" stroke="#fff" stroke-width="2.6" stroke-dasharray="6 5" stroke-linecap="round"/>
+    <circle cx="34" cy="164" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="46" cy="158" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="58" cy="166" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="70" cy="156" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="82" cy="150" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="94" cy="157" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="106" cy="145" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="118" cy="149" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="130" cy="138" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="142" cy="142" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="154" cy="128" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="166" cy="131" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="178" cy="118" r="2.3" fill="#fff" fill-opacity=".9"/><circle cx="186" cy="122" r="2.3" fill="#fff" fill-opacity=".9"/>
+    <path d="M190 40V176" stroke="#fff" stroke-opacity=".35" stroke-dasharray="2 4"/>
+    <text x="24" y="36" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="10" font-weight="700" letter-spacing="1.4" fill="#fff" fill-opacity=".8">FORECAST · NEXT 12 MONTHS</text>
+    <g font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" font-weight="600" fill="#fff">
+      <rect x="24" y="178" width="42" height="14" rx="7" fill="#fff" fill-opacity=".18"/><text x="45" y="188" text-anchor="middle">LSTM</text>
+      <rect x="72" y="178" width="50" height="14" rx="7" fill="#fff" fill-opacity=".18"/><text x="97" y="188" text-anchor="middle">Prophet</text>
+      <rect x="128" y="178" width="56" height="14" rx="7" fill="#fff" fill-opacity=".18"/><text x="156" y="188" text-anchor="middle">SARIMAX</text>
+    </g></svg></div>
+      <div class="sp-project-body">
+        <h3>Repo Vision</h3>
+        <p class="sp-meta">Data &amp; ML web app · 2024</p>
+        <p class="sp-tagline">Forecasts GitHub activity for popular open-source repositories with three different models.</p>
+        <p class="sp-facts-line"><span><strong>5</strong> repositories tracked</span><span><strong>3</strong> forecasting models</span><span><strong>3</strong> microservices</span><span><strong>7</strong> activity series</span></p>
+        <p>A dashboard that pulls a year of issues, pull requests, commits, branches, releases and contributions for five well-known repositories, then forecasts what comes next with an LSTM, Prophet and SARIMAX so the three models can be compared side by side.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Pick a repository in the React dashboard</li><li>The Flask service collects a year of activity from the GitHub API</li><li>pandas groups it by day, week and month</li><li>The forecasting service trains an LSTM and fits Prophet and SARIMAX</li><li>Charts are saved to Google Cloud Storage and shown in the dashboard</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Three models, side by side.</strong> An LSTM built with TensorFlow and Keras, Prophet, and a SARIMAX model from statsmodels each forecast the same history.</li><li><strong>Seven activity series.</strong> Issues created and closed, pull requests, commits, branches, releases and contributions.</li><li><strong>Peak-activity insights.</strong> For each model it reports the weekday with the most issues created and closed, and the month with the most issues closed.</li><li><strong>Cross-repository charts.</strong> Highcharts views compare issues, stars and forks across all five repositories, with monthly and weekly issue counts.</li><li><strong>Well-known repositories.</strong> Elasticsearch, Pymilvus, Angular Google Maps, OpenAI Python and the OpenAI Cookbook.</li><li><strong>Containerized services.</strong> The React app, the Flask API and the forecasting service each ship with a Dockerfile for Google Cloud Run.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/python.png" alt="" width="16" height="16" loading="lazy" decoding="async">Python</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><img src="images/react.png" alt="" width="16" height="16" loading="lazy" decoding="async">React</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">TF</span>TensorFlow</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">TS</span>Time-series forecasting</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">GC</span>Google Cloud</li><li class="sp-chip"><img src="images/docker.png" alt="" width="16" height="16" loading="lazy" decoding="async">Docker</li><li class="sp-chip"><img src="images/elasticsearch.png" alt="" width="16" height="16" loading="lazy" decoding="async">Elasticsearch</li></ul>
+        <p class="sp-links"><a href="https://github.com/saiprasaad/Repo-Vision" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
       </div>
-    </div>
-
-    <!-- macOS Quick Look Resume Overlay -->
-    <div class="quick-look-overlay" id="quick-look-overlay">
-      <div class="quick-look-container">
-        <div class="quick-look-header">
-          <div class="quick-look-title">
-            <span class="file-icon">📄</span> saiprasaad_resume.pdf
-          </div>
-          <button class="quick-look-done" onclick="toggleResumePreview()">Done</button>
-        </div>
-        <div class="quick-look-body">
-          <iframe id="resume-iframe" src="" width="100%" height="100%" style="border:none;"></iframe>
-        </div>
+    </article><article class="sp-project" id="ai-log-summarizer">
+      <div class="cover sp-cover" style="--cover-from:#101521;--cover-to:#26324a" role="img" aria-label="Illustration for AI-Powered Log Summarizer"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect x="12" y="75" width="296" height="38" rx="4" fill="#ff5f57" fill-opacity=".12"/><text x="20" y="38" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="9.5" fill="#9fb3c8"><tspan fill="#5d6d80">12:04:01</tspan>  INFO  api     GET /quotes 200 41ms</text><text x="20" y="55" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="9.5" fill="#9fb3c8"><tspan fill="#5d6d80">12:04:02</tspan>  INFO  worker  batch 1182 done</text><text x="20" y="72" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="9.5" fill="#f5c26b"><tspan fill="#5d6d80">12:04:02</tspan>  WARN  db      slow query 2.1s</text><text x="20" y="89" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="9.5" fill="#ff8a80"><tspan fill="#5d6d80">12:04:03</tspan>  ERROR auth    token refresh timeout</text><text x="20" y="106" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="9.5" fill="#ff8a80"><tspan fill="#5d6d80">12:04:03</tspan>  ERROR auth    token refresh timeout</text><text x="20" y="123" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="9.5" fill="#9fb3c8"><tspan fill="#5d6d80">12:04:04</tspan>  INFO  api     GET /policy 200 38ms</text>
+    <g transform="translate(150 132)">
+      <rect width="156" height="56" rx="12" fill="#fff" fill-opacity=".96"/>
+      <path d="M18 16l1.4 3.8 3.8 1.4-3.8 1.4L18 26.4l-1.4-3.8-3.8-1.4 3.8-1.4z" fill="#7c5cff"/>
+      <text x="30" y="24" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="10" font-weight="700" fill="#1d1d1f">Summary</text>
+      <text x="12" y="39" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" fill="#45454a">Auth timeouts spiking since 12:03</text>
+      <text x="12" y="50" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" fill="#6e6e75">Posted to Teams</text>
+    </g></svg></div>
+      <div class="sp-project-body">
+        <h3>AI-Powered Log Summarizer</h3>
+        <p class="sp-meta">AI tool</p>
+        <p class="sp-tagline">Summarizes application logs with an LLM and posts the summary to Microsoft Teams.</p>
+        
+        <p>Turns noisy application logs into short summaries with a language model and sends them to Microsoft Teams, so anomalies surface in real time and incidents get a faster response.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Application logs reach a Python and Flask service</li><li>An LLM served through Ollama summarizes them and flags anomalies</li><li>The summary is posted to Microsoft Teams</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Real-time summaries.</strong> Condenses log activity into a few readable lines instead of pages of raw output.</li><li><strong>Anomaly detection.</strong> Calls out unusual patterns so they are noticed as they happen.</li><li><strong>Local LLM through Ollama.</strong> The model runs through Ollama and is called from the Flask service.</li><li><strong>Alerts in Teams.</strong> Summaries arrive in Microsoft Teams, where the team already works.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/python.png" alt="" width="16" height="16" loading="lazy" decoding="async">Python</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Ol</span>Ollama</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">LM</span>LLMs</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Tm</span>Teams API</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">AI</span>Generative AI</li></ul>
+        
       </div>
-    </div>
+    </article><article class="sp-project" id="youtube-translator">
+      <div class="cover sp-cover" style="--cover-from:#8f1d1d;--cover-to:#e2561b" role="img" aria-label="Illustration for YouTube Translator"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect x="30" y="24" width="260" height="146" rx="12" fill="#000" fill-opacity=".45"/>
+    <rect x="42" y="36" width="58" height="18" rx="9" fill="#fff" fill-opacity=".92"/>
+    <text x="71" y="48.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9.5" font-weight="700" fill="#8f1d1d">EN → ES</text>
+    <circle cx="160" cy="88" r="24" fill="#fff" fill-opacity=".95"/><path d="M153 76v24l20-12z" fill="#d63b1f"/>
+    <rect x="62" y="128" width="196" height="24" rx="6" fill="#000" fill-opacity=".7"/>
+    <text x="160" y="144" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="11" fill="#fff">Hola a todos, bienvenidos al canal</text>
+    <rect x="42" y="160" width="236" height="3" rx="1.5" fill="#fff" fill-opacity=".3"/><rect x="42" y="160" width="92" height="3" rx="1.5" fill="#fff"/></svg></div>
+      <div class="sp-project-body">
+        <h3>YouTube Translator</h3>
+        <p class="sp-meta">AI web app · 2024</p>
+        <p class="sp-tagline">Paste a YouTube link, pick Spanish or German, and get the video back with a translated voice-over.</p>
+        <p class="sp-facts-line"><span><strong>6</strong> pipeline steps</span><span><strong>2</strong> target languages</span></p>
+        <p>A Streamlit app that dubs a YouTube video into another language. It chains speech recognition, machine translation and text-to-speech, then puts the new voice back into the original video and plays it in the browser.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Download the video with pytube</li><li>Extract the audio track with MoviePy</li><li>Transcribe the speech with OpenAI Whisper</li><li>Translate the transcript with the OpenAI API</li><li>Generate the new voice with gTTS</li><li>Merge the translated audio into the video</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>One-click dubbing.</strong> A single Translate button runs the whole pipeline and plays the finished video on the page.</li><li><strong>Whisper transcription.</strong> Runs OpenAI's open-source Whisper model to turn the speech into text.</li><li><strong>LLM translation.</strong> Translates the transcript with the OpenAI API (gpt-3.5-turbo-instruct).</li><li><strong>Progress at every step.</strong> Shows each stage as it runs: downloading, extracting audio, translating, generating speech and rendering.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/python.png" alt="" width="16" height="16" loading="lazy" decoding="async">Python</li><li class="sp-chip"><img src="images/streamlit.png" alt="" width="16" height="16" loading="lazy" decoding="async">Streamlit</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Wh</span>Whisper</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">OA</span>OpenAI APIs</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">TTS</span>gTTS</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">MP</span>MoviePy</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">NL</span>NLP</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">AI</span>Generative AI</li></ul>
+        <p class="sp-links"><a href="https://github.com/saiprasaad/YouTube-Translator" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
+      </div>
+    </article><article class="sp-project" id="json-explorer">
+      <div class="cover sp-cover" style="--cover-from:#2a2470;--cover-to:#5b5bd6" role="img" aria-label="Illustration for JSON Explorer"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M74 100 C 100 100, 92 62, 118 62" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/><path d="M74 100 C 100 100, 92 138, 118 138" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/><path d="M172 62 C 198 62, 188 36, 214 36" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/><path d="M172 62 C 198 62, 188 80, 214 80" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/><path d="M186 138 C 212 138, 188 122, 214 122" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/><path d="M186 138 C 212 138, 188 158, 214 158" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/>
+    <g transform="translate(22 88)"><rect width="52" height="24" rx="7" fill="#fff" fill-opacity="1"/><text x="26" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">{ }</text></g><g transform="translate(118 50)"><rect width="54" height="24" rx="7" fill="#fff" fill-opacity="0.92"/><text x="27" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">user</text></g><g transform="translate(118 126)"><rect width="68" height="24" rx="7" fill="#fff" fill-opacity="0.92"/><text x="34" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">orders[2]</text></g>
+    <g transform="translate(214 24)"><rect width="84" height="24" rx="7" fill="#fff" fill-opacity="0.92"/><text x="42" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">name: &quot;Sai&quot;</text></g><g transform="translate(214 68)"><rect width="84" height="24" rx="7" fill="#fff" fill-opacity="0.92"/><text x="42" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">role: &quot;dev&quot;</text></g><g transform="translate(214 110)"><rect width="60" height="24" rx="7" fill="#fff" fill-opacity="0.92"/><text x="30" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">0: {…}</text></g><g transform="translate(214 146)"><rect width="60" height="24" rx="7" fill="#fff" fill-opacity="0.92"/><text x="30" y="16" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="10" font-weight="600" fill="#3b36a8">1: {…}</text></g></svg></div>
+      <div class="sp-project-body">
+        <h3>JSON Explorer</h3>
+        <p class="sp-meta">Web app · 2025 · Live · updated April 2026</p>
+        <p class="sp-tagline">Turn JSON into an interactive graph you can search, walk through and compare.</p>
+        <p class="sp-facts-line"><span><strong>2</strong> modes: explore and compare</span><span><strong>200</strong> nodes rendered per batch</span></p>
+        <p>A web app for making sense of large JSON documents. It draws JSON as a graph of connected nodes you can pan, zoom, search and click through, pairs it with a full code editor, and adds a side-by-side diff for comparing two files. It is installable, works offline and can be embedded in other pages.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Paste, type or upload JSON in the Monaco editor</li><li>The app parses it into nodes and edges</li><li>React Flow draws the graph with color-coded values</li><li>Click, search or play a walkthrough to explore it</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Graph view.</strong> Objects and arrays become connected nodes, with values color-coded by type.</li><li><strong>Path highlighting.</strong> Click any node to highlight its path from the root and open its full details.</li><li><strong>Search.</strong> Find keys and values, step through the matches and jump the view to each one.</li><li><strong>Walkthrough mode.</strong> Plays through the structure node by node, so large documents are easier to follow.</li><li><strong>JSON Compare.</strong> A Monaco diff editor with added and removed counts, swap, format-both and next/previous change navigation.</li><li><strong>Embeddable and offline.</strong> An embed mode takes JSON from a URL or postMessage, and a Workbox service worker makes it installable and usable offline.</li><li><strong>Fast on big files.</strong> Renders 200 nodes at a time and loads more on request, so large documents stay responsive.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/react.png" alt="" width="16" height="16" loading="lazy" decoding="async">React</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">RF</span>React Flow</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Mo</span>Monaco Editor</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">MUI</span>Material UI</li><li class="sp-chip"><img src="images/javascript.png" alt="" width="16" height="16" loading="lazy" decoding="async">JavaScript</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">PWA</span>PWA</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Nf</span>Netlify</li></ul>
+        <p class="sp-links"><a href="https://jsonexplorer.netlify.app" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18.5 14v4a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2H10"/></svg>Live demo</a><a href="https://github.com/saiprasaad/JsonExplorer" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
+      </div>
+    </article><article class="sp-project" id="campus-cooks">
+      <div class="cover sp-cover" style="--cover-from:#a33a0b;--cover-to:#f08a32" role="img" aria-label="Illustration for Campus Cooks"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M40 46V28H58" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M280 46V28H262" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 154V172H58" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M280 154V172H262" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="160" cy="112" rx="92" ry="44" fill="#fff" fill-opacity=".92"/>
+    <circle cx="118" cy="108" r="17" fill="#e53935"/><path d="M112 94c3 3 9 3 12 0" fill="none" stroke="#2e7d32" stroke-width="3" stroke-linecap="round"/>
+    <path d="M158 96c10-10 26-8 30 4-10 8-24 8-30-4z" fill="#43a047"/><path d="M160 118c10-8 24-6 28 4-9 7-22 7-28-4z" fill="#66bb6a"/>
+    <g fill="#f4c542"><rect x="198" y="100" width="34" height="6" rx="3" transform="rotate(-12 215 103)"/><rect x="200" y="112" width="34" height="6" rx="3" transform="rotate(8 217 115)"/><rect x="194" y="122" width="30" height="6" rx="3" transform="rotate(-4 209 125)"/></g>
+    <rect x="96" y="86" width="44" height="44" rx="8" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="4 3"/><rect x="96" y="70" width="50" height="14" rx="7" fill="#fff"/><text x="103" y="80" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" font-weight="700" fill="#a33a0b">tomato</text><rect x="152" y="86" width="42" height="44" rx="8" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="4 3"/><rect x="152" y="70" width="44" height="14" rx="7" fill="#fff"/><text x="159" y="80" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" font-weight="700" fill="#a33a0b">basil</text><rect x="194" y="92" width="44" height="40" rx="8" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="4 3"/><rect x="194" y="76" width="44" height="14" rx="7" fill="#fff"/><text x="201" y="86" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" font-weight="700" fill="#a33a0b">pasta</text></svg></div>
+      <div class="sp-project-body">
+        <h3>Campus Cooks</h3>
+        <p class="sp-meta">Mobile app · 2024</p>
+        <p class="sp-tagline">Snap a photo of your ingredients and get recipes you can make with them.</p>
+        <p class="sp-facts-line"><span><strong>10</strong> recipes per photo</span><span><strong>2</strong> food APIs</span></p>
+        <p>A Flutter app built with Koodos Labs during the Open Avenues internship. Students photograph the ingredients they have; the app recognizes them with the LogMeal food-recognition API and suggests recipes from Spoonacular that use as many of them as possible, with nutrition facts for each.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Take a photo with the in-app camera</li><li>LogMeal segments the image and names each ingredient</li><li>Spoonacular finds recipes that use the most of them</li><li>Each recipe card shows its nutrition and cooking time</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Camera capture.</strong> A built-in camera screen that switches between the front and rear cameras.</li><li><strong>Ingredient recognition.</strong> Sends the photo to LogMeal's segmentation API and lists every ingredient it finds.</li><li><strong>Recipes from what you have.</strong> Asks Spoonacular for up to 10 recipes, ranked to use the most detected ingredients.</li><li><strong>Nutrition at a glance.</strong> Calories, protein, fiber, sugar and ready-in time for every recipe.</li><li><strong>Firebase and Figma.</strong> Firebase handles data storage and sign-in; the interface was designed in Figma.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/flutter.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flutter</li><li class="sp-chip"><img src="images/dart.png" alt="" width="16" height="16" loading="lazy" decoding="async">Dart</li><li class="sp-chip"><img src="images/firebase.png" alt="" width="16" height="16" loading="lazy" decoding="async">Firebase</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">LM</span>LogMeal API</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Sp</span>Spoonacular API</li><li class="sp-chip"><img src="images/figma.png" alt="" width="16" height="16" loading="lazy" decoding="async">Figma</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">UX</span>UI/UX design</li></ul>
+        <p class="sp-links"><a href="https://github.com/saiprasaad/Campus-Cooks" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
+      </div>
+    </article><article class="sp-project" id="chicago-streets-harmony">
+      <div class="cover sp-cover" style="--cover-from:#dfeee6;--cover-to:#c4e0d1" role="img" aria-label="Illustration for Chicago Streets Harmony"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M20 0V200" stroke="#fff" stroke-width="4"/><path d="M46 0V200" stroke="#fff" stroke-width="2"/><path d="M72 0V200" stroke="#fff" stroke-width="2"/><path d="M98 0V200" stroke="#fff" stroke-width="4"/><path d="M124 0V200" stroke="#fff" stroke-width="2"/><path d="M150 0V200" stroke="#fff" stroke-width="2"/><path d="M176 0V200" stroke="#fff" stroke-width="4"/><path d="M202 0V200" stroke="#fff" stroke-width="2"/><path d="M228 0V200" stroke="#fff" stroke-width="2"/><path d="M0 14H240" stroke="#fff" stroke-width="4"/><path d="M0 38H240" stroke="#fff" stroke-width="2"/><path d="M0 62H240" stroke="#fff" stroke-width="2"/><path d="M0 86H240" stroke="#fff" stroke-width="4"/><path d="M0 110H240" stroke="#fff" stroke-width="2"/><path d="M0 134H240" stroke="#fff" stroke-width="2"/><path d="M0 158H240" stroke="#fff" stroke-width="4"/><path d="M0 182H240" stroke="#fff" stroke-width="2"/>
+    <path d="M232 0 C 222 40, 238 70, 226 104 S 236 160, 224 200 H320 V0 Z" fill="#8cc4e6"/>
+    <path d="M232 0 C 222 40, 238 70, 226 104 S 236 160, 224 200" fill="none" stroke="#fff" stroke-width="3"/>
+    <path d="M229 92 C 200 94, 176 90, 150 96 C 138 99, 126 96, 118 90 C 108 70, 102 44, 96 0" fill="none" stroke="#6fb2de" stroke-width="7" stroke-linecap="round"/>
+    <path d="M150 96 C 142 120, 128 150, 110 200" fill="none" stroke="#6fb2de" stroke-width="7" stroke-linecap="round"/>
+    <text x="274" y="104" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1" fill="#fff" fill-opacity=".95">LAKE</text>
+    <text x="274" y="115" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1" fill="#fff" fill-opacity=".95">MICHIGAN</text>
+    <circle cx="176" cy="132" r="18" fill="#0a7aff" fill-opacity=".14"/><circle cx="176" cy="132" r="6" fill="#0a7aff" stroke="#fff" stroke-width="2.5"/>
+    <g transform="translate(118 36)"><path d="M12 30s-11-9.7-11-18a11 11 0 0 1 22 0c0 8.3-11 18-11 18z" fill="#ff3b30" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="#fff"/></g>
+    <g transform="translate(58 112)"><path d="M10 25S1 17 1 10a9 9 0 0 1 18 0c0 7-9 15-9 15z" fill="#ff9500" stroke="#fff" stroke-width="2"/><circle cx="10" cy="10" r="3.4" fill="#fff"/></g>
+    <rect x="20" y="164" width="116" height="24" rx="12" fill="#fff"/>
+    <text x="78" y="180" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="10" font-weight="700" fill="#1f5134">Parade 0.4 mi away</text></svg></div>
+      <div class="sp-project-body">
+        <h3>Chicago Streets Harmony</h3>
+        <p class="sp-meta">Mobile app · 2024 · Built with Nagarajan Sivakumar</p>
+        <p class="sp-tagline">Find upcoming Chicago parades, or help someone experiencing homelessness get support.</p>
+        
+        <p>A community app for Chicago. It lists upcoming parades along with the marching bands, floats and performers in each, and lets anyone report a person who needs help by sending a photo with their location so city services can respond.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>A Spring Boot REST API serves parade and event data</li><li>The Flutter app lists upcoming parades, the next one first</li><li>Tap a parade to swipe through its units</li><li>Report someone in need with a photo and your GPS location</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Parade guide.</strong> Upcoming parades with dates and descriptions, with the next one highlighted at the top.</li><li><strong>Swipe through units.</strong> A card deck for the marching bands, floats and performers in each parade.</li><li><strong>Homeless helper.</strong> Captures a photo and the GPS location (with its street address) to alert city services.</li><li><strong>Spring Boot back end.</strong> A REST API that serves the event data as JSON to the app.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/flutter.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flutter</li><li class="sp-chip"><img src="images/dart.png" alt="" width="16" height="16" loading="lazy" decoding="async">Dart</li><li class="sp-chip"><img src="images/springboot.png" alt="" width="16" height="16" loading="lazy" decoding="async">Spring Boot</li><li class="sp-chip"><img src="images/java.png" alt="" width="16" height="16" loading="lazy" decoding="async">Java</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Geo</span>Geolocation</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">API</span>REST APIs</li></ul>
+        <p class="sp-links"><a href="https://github.com/saiprasaad/Chicago-Streets-Harmony" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
+      </div>
+    </article><article class="sp-project" id="asana-automation">
+      <div class="cover sp-cover" style="--cover-from:#9f1239;--cover-to:#f0607e" role="img" aria-label="Illustration for Asana Task Automation"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect x="40" y="30" width="240" height="140" rx="14" fill="#fff" fill-opacity=".97"/>
+    <text x="58" y="56" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="700" fill="#1d1d1f">Today</text>
+    <text x="262" y="56" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="9" fill="#8e8e96">auto-created 9:00</text>
+    <g transform="translate(58 70)"><circle cx="9" cy="9" r="8.5" fill="#f0607e" stroke="#f0607e" stroke-width="1.6"/><path d="M5 9.2l2.7 2.7L13 6.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="26" y="5" width="150" height="8" rx="4" fill="#d5d5da"/></g><g transform="translate(58 98)"><circle cx="9" cy="9" r="8.5" fill="#f0607e" stroke="#f0607e" stroke-width="1.6"/><path d="M5 9.2l2.7 2.7L13 6.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="26" y="5" width="118" height="8" rx="4" fill="#d5d5da"/></g><g transform="translate(58 126)"><circle cx="9" cy="9" r="8.5" fill="none" stroke="#c6c6cc" stroke-width="1.6"/><rect x="26" y="5" width="136" height="8" rx="4" fill="#8e8e96"/></g>
+    <g transform="translate(252 142)"><circle r="20" fill="#9f1239"/><path d="M-8 -2a8 8 0 0 1 14-4M8 2a8 8 0 0 1-14 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M6 -10v5h-5M-6 10v-5h5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div>
+      <div class="sp-project-body">
+        <h3>Asana Task Automation</h3>
+        <p class="sp-meta">Automation</p>
+        <p class="sp-tagline">Creates the day's tickets in Asana and keeps them in sync with back-end dashboards.</p>
+        
+        <p>Automates the daily routine of creating tickets in Asana and syncs their data with the SQL behind the back-end dashboards, so the task board and the dashboards stay consistent without manual updates.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>A Python and Flask job creates the day's tickets through the Asana API</li><li>Ticket data is synced with the dashboards' MySQL database</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Daily tickets.</strong> Recurring tickets are created automatically instead of by hand every morning.</li><li><strong>Dashboard sync.</strong> Keeps the MySQL data behind the dashboards in step with Asana.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><span class="sp-mono" aria-hidden="true">As</span>Asana API</li><li class="sp-chip"><img src="images/python.png" alt="" width="16" height="16" loading="lazy" decoding="async">Python</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Rd</span>Redis</li><li class="sp-chip"><img src="images/mysql.png" alt="" width="16" height="16" loading="lazy" decoding="async">MySQL</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">SQL</span>SQL</li></ul>
+        
+      </div>
+    </article><article class="sp-project" id="encryption-module">
+      <div class="cover sp-cover" style="--cover-from:#0d5c56;--cover-to:#18a597" role="img" aria-label="Illustration for Encryption &amp; Decryption Module"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><text x="160" y="50" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="15" letter-spacing="2" fill="#fff" fill-opacity="0.16">3f 9a c1 07 e4 5b 2d 88</text><text x="160" y="86" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="15" letter-spacing="2" fill="#fff" fill-opacity="0.22">a0 1e 7c f3 69 04 bd 52</text><text x="160" y="122" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="15" letter-spacing="2" fill="#fff" fill-opacity="0.28">5e d8 93 2a 0f c6 71 e9</text><text x="160" y="158" text-anchor="middle" font-family="ui-monospace, SF Mono, JetBrains Mono, Menlo, Consolas, monospace" font-size="15" letter-spacing="2" fill="#fff" fill-opacity="0.33999999999999997">b4 37 06 fa 8d 21 cc 4e</text>
+    <circle cx="160" cy="100" r="34" fill="#fff"/>
+    <g transform="translate(145 83)" fill="none" stroke="#0d5c56" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="14" width="24" height="18" rx="4"/><path d="M8 14V9a7 7 0 0 1 14 0v5"/><path d="M15 21v4"/>
+    </g>
+    <rect x="118" y="150" width="84" height="20" rx="10" fill="#000" fill-opacity=".25"/>
+    <text x="160" y="164" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="10" font-weight="700" letter-spacing="1.2" fill="#fff">AES-CBC</text></svg></div>
+      <div class="sp-project-body">
+        <h3>Encryption &amp; Decryption Module</h3>
+        <p class="sp-meta">Security</p>
+        <p class="sp-tagline">AES-CBC encryption shared by a React front end and a Flask back end.</p>
+        
+        <p>Implements AES-CBC encryption and decryption on both sides of an app, in the React front end and in the Flask back end, so sensitive data is protected end to end.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Data is encrypted with AES-CBC in the React app</li><li>Only the ciphertext travels to the Flask service</li><li>The Flask service decrypts it with the same scheme</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>One scheme, two languages.</strong> Matching AES-CBC implementations in JavaScript and Python, so either side can read what the other wrote.</li><li><strong>End-to-end protection.</strong> Sensitive fields stay encrypted between the browser and the server.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/react.png" alt="" width="16" height="16" loading="lazy" decoding="async">React</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">AES</span>AES-CBC encryption</li><li class="sp-chip"><img src="images/javascript.png" alt="" width="16" height="16" loading="lazy" decoding="async">JavaScript</li><li class="sp-chip"><img src="images/python.png" alt="" width="16" height="16" loading="lazy" decoding="async">Python</li></ul>
+        
+      </div>
+    </article><article class="sp-project" id="battleships">
+      <div class="cover sp-cover" style="--cover-from:#0a3b5c;--cover-to:#0a79b8" role="img" aria-label="Illustration for Battleships"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M96 38V166M96 38H224" stroke="#fff" stroke-opacity=".22"/><path d="M112 38V166M96 54H224" stroke="#fff" stroke-opacity=".22"/><path d="M128 38V166M96 70H224" stroke="#fff" stroke-opacity=".22"/><path d="M144 38V166M96 86H224" stroke="#fff" stroke-opacity=".22"/><path d="M160 38V166M96 102H224" stroke="#fff" stroke-opacity=".22"/><path d="M176 38V166M96 118H224" stroke="#fff" stroke-opacity=".22"/><path d="M192 38V166M96 134H224" stroke="#fff" stroke-opacity=".22"/><path d="M208 38V166M96 150H224" stroke="#fff" stroke-opacity=".22"/><path d="M224 38V166M96 166H224" stroke="#fff" stroke-opacity=".22"/><text x="104" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">A</text><text x="120" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">B</text><text x="136" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">C</text><text x="152" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">D</text><text x="168" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">E</text><text x="184" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">F</text><text x="200" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">G</text><text x="216" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">H</text><text x="89" y="49" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">1</text><text x="89" y="65" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">2</text><text x="89" y="81" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">3</text><text x="89" y="97" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">4</text><text x="89" y="113" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">5</text><text x="89" y="129" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">6</text><text x="89" y="145" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">7</text><text x="89" y="161" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="8" font-weight="700" fill="#fff" fill-opacity=".7">8</text><rect x="114" y="56" width="60" height="12" rx="6" fill="#dbe6f0"/><rect x="194" y="72" width="12" height="44" rx="6" fill="#dbe6f0"/><rect x="130" y="120" width="44" height="12" rx="6" fill="#dbe6f0"/><rect x="98" y="88" width="12" height="28" rx="6" fill="#dbe6f0"/><rect x="178" y="152" width="28" height="12" rx="6" fill="#dbe6f0"/>
+    <g transform="translate(136 62)"><circle r="5.5" fill="#ff5a3c"/><path d="M-2.5-2.5l5 5M2.5-2.5l-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(152 62)"><circle r="5.5" fill="#ff5a3c"/><path d="M-2.5-2.5l5 5M2.5-2.5l-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(200 94)"><circle r="5.5" fill="#ff5a3c"/><path d="M-2.5-2.5l5 5M2.5-2.5l-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></g><circle cx="168" cy="94" r="2.2" fill="#fff" fill-opacity=".75"/><circle cx="120" cy="142" r="2.2" fill="#fff" fill-opacity=".75"/><circle cx="216" cy="46" r="2.2" fill="#fff" fill-opacity=".75"/><circle cx="152" cy="158" r="2.2" fill="#fff" fill-opacity=".75"/><circle cx="184" cy="126" r="2.2" fill="#fff" fill-opacity=".75"/></svg></div>
+      <div class="sp-project-body">
+        <h3>Battleships</h3>
+        <p class="sp-meta">Mobile game · 2023</p>
+        <p class="sp-tagline">Multiplayer Battleships in Flutter: place five ships, then play people or one of three AI opponents.</p>
+        <p class="sp-facts-line"><span><strong>5</strong> ships to place</span><span><strong>3</strong> AI opponents</span></p>
+        <p>A Flutter client for a multiplayer Battleships game built on a REST API for authentication and gameplay. Players sign in, start a game against another person or an AI, place five ships and trade shots turn by turn.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Log in or register; the session token is saved on the device</li><li>Start a game against a person or one of three AIs</li><li>Place five ships on the board</li><li>Take turns firing until every ship is sunk</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>Accounts and sessions.</strong> Login and registration, with the session token kept on the device so players stay signed in.</li><li><strong>Three AI opponents.</strong> Random, Perfect and One-ship modes, alongside matchmaking with other players.</li><li><strong>Game list.</strong> Active and finished games with their state (your turn, opponent's turn, matchmaking, won or lost), and swipe to forfeit.</li><li><strong>Clear feedback.</strong> Ships, misses, hits and wrecks are marked on the board, with messages for sunk ships and repeated shots.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/flutter.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flutter</li><li class="sp-chip"><img src="images/dart.png" alt="" width="16" height="16" loading="lazy" decoding="async">Dart</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><img src="images/mysql.png" alt="" width="16" height="16" loading="lazy" decoding="async">MySQL</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">API</span>REST APIs</li></ul>
+        <p class="sp-links"><a href="https://github.com/saiprasaad/Battleships" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
+      </div>
+    </article><article class="sp-project" id="wordle-clone">
+      <div class="cover sp-cover" style="--cover-from:#1b1f24;--cover-to:#353b43" role="img" aria-label="Illustration for Wordle Clone"><svg class="cover-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect x="97" y="24" width="22" height="22" rx="3" fill="#3a3a3c"/><text x="108" y="39.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">C</text><rect x="123" y="24" width="22" height="22" rx="3" fill="#b59f3b"/><text x="134" y="39.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">R</text><rect x="149" y="24" width="22" height="22" rx="3" fill="#b59f3b"/><text x="160" y="39.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">A</text><rect x="175" y="24" width="22" height="22" rx="3" fill="#3a3a3c"/><text x="186" y="39.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">N</text><rect x="201" y="24" width="22" height="22" rx="3" fill="#3a3a3c"/><text x="212" y="39.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">E</text><rect x="97" y="50" width="22" height="22" rx="3" fill="#b59f3b"/><text x="108" y="65.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">S</text><rect x="123" y="50" width="22" height="22" rx="3" fill="#b59f3b"/><text x="134" y="65.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">T</text><rect x="149" y="50" width="22" height="22" rx="3" fill="#538d4e"/><text x="160" y="65.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">R</text><rect x="175" y="50" width="22" height="22" rx="3" fill="#b59f3b"/><text x="186" y="65.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">A</text><rect x="201" y="50" width="22" height="22" rx="3" fill="#3a3a3c"/><text x="212" y="65.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">P</text><rect x="97" y="76" width="22" height="22" rx="3" fill="#538d4e"/><text x="108" y="91.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">D</text><rect x="123" y="76" width="22" height="22" rx="3" fill="#538d4e"/><text x="134" y="91.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">A</text><rect x="149" y="76" width="22" height="22" rx="3" fill="#538d4e"/><text x="160" y="91.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">R</text><rect x="175" y="76" width="22" height="22" rx="3" fill="#538d4e"/><text x="186" y="91.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">T</text><rect x="201" y="76" width="22" height="22" rx="3" fill="#538d4e"/><text x="212" y="91.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif" font-size="12" font-weight="800" fill="#fff">S</text><rect x="97.75" y="102.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="123.75" y="102.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="149.75" y="102.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="175.75" y="102.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="201.75" y="102.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="97.75" y="128.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="123.75" y="128.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="149.75" y="128.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="175.75" y="128.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="201.75" y="128.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="97.75" y="154.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="123.75" y="154.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="149.75" y="154.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="175.75" y="154.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/><rect x="201.75" y="154.75" width="20.5" height="20.5" rx="3" fill="none" stroke="#565758" stroke-width="1.5"/></svg></div>
+      <div class="sp-project-body">
+        <h3>Wordle Clone</h3>
+        <p class="sp-meta">Mobile game · 2024</p>
+        <p class="sp-tagline">Cross-platform Wordle with a new word every game.</p>
+        <p class="sp-facts-line"><span><strong>6</strong> tries per word</span><span><strong>2</strong> word APIs</span></p>
+        <p>A cross-platform Wordle clone written in Flutter. Every game fetches a fresh five-letter word, checks each guess against a dictionary before accepting it, and colors the tiles the way the original does.</p>
+        <h4 class="sp-sub">How it works</h4><ol class="sp-flow"><li>Fetch a random five-letter word from the Wordnik API</li><li>Type a guess on the on-screen keyboard</li><li>Check it against a dictionary API</li><li>Color the tiles and move to the next row</li></ol>
+        <h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features"><li><strong>A new word every game.</strong> Random five-letter words from the Wordnik API, fetched again until a valid one comes back.</li><li><strong>Real-word checks.</strong> Every guess is looked up in a dictionary API; made-up words are rejected.</li><li><strong>Classic scoring.</strong> Six tries, with green for a letter in the right spot and yellow for a letter in the wrong spot.</li><li><strong>Win and reveal.</strong> A custom keyboard sized to the screen, plus dialogs for a win or for revealing the word after the last try.</li></ul>
+        <ul class="sp-chips" aria-label="Technologies"><li class="sp-chip"><img src="images/flutter.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flutter</li><li class="sp-chip"><img src="images/dart.png" alt="" width="16" height="16" loading="lazy" decoding="async">Dart</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">API</span>REST APIs</li></ul>
+        <p class="sp-links"><a href="https://github.com/saiprasaad/Wordle-Clone" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub repo</a></p>
+      </div>
+    </article></div>
+      </section>
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="toast-container"></div>
+      <section class="sp-section" id="skills" aria-labelledby="sp-skills">
+        <h2 id="sp-skills">Skills</h2>
+        <dl class="sp-skills"><div><dt>Programming languages</dt><dd><ul class="sp-chips"><li class="sp-chip"><img src="images/c.png" alt="" width="16" height="16" loading="lazy" decoding="async">C</li><li class="sp-chip"><img src="images/java.png" alt="" width="16" height="16" loading="lazy" decoding="async">Java</li><li class="sp-chip"><img src="images/python.png" alt="" width="16" height="16" loading="lazy" decoding="async">Python</li><li class="sp-chip"><img src="images/dart.png" alt="" width="16" height="16" loading="lazy" decoding="async">Dart</li><li class="sp-chip"><img src="images/swift.png" alt="" width="16" height="16" loading="lazy" decoding="async">Swift</li></ul></dd></div><div><dt>Frontend</dt><dd><ul class="sp-chips"><li class="sp-chip"><img src="images/html.png" alt="" width="16" height="16" loading="lazy" decoding="async">HTML</li><li class="sp-chip"><img src="images/css.png" alt="" width="16" height="16" loading="lazy" decoding="async">CSS</li><li class="sp-chip"><img src="images/bootstrap.png" alt="" width="16" height="16" loading="lazy" decoding="async">Bootstrap</li><li class="sp-chip"><img src="images/react.png" alt="" width="16" height="16" loading="lazy" decoding="async">React</li><li class="sp-chip"><img src="images/angular.png" alt="" width="16" height="16" loading="lazy" decoding="async">Angular</li><li class="sp-chip"><img src="images/javascript.png" alt="" width="16" height="16" loading="lazy" decoding="async">JavaScript</li><li class="sp-chip"><img src="images/typescript.png" alt="" width="16" height="16" loading="lazy" decoding="async">TypeScript</li></ul></dd></div><div><dt>Backend</dt><dd><ul class="sp-chips"><li class="sp-chip"><img src="images/springboot.png" alt="" width="16" height="16" loading="lazy" decoding="async">Spring Boot</li><li class="sp-chip"><img src="images/nodejs.png" alt="" width="16" height="16" loading="lazy" decoding="async">Node.js</li><li class="sp-chip"><img src="images/flask.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flask</li><li class="sp-chip"><img src="images/php.png" alt="" width="16" height="16" loading="lazy" decoding="async">PHP</li></ul></dd></div><div><dt>Mobile</dt><dd><ul class="sp-chips"><li class="sp-chip"><img src="images/flutter.png" alt="" width="16" height="16" loading="lazy" decoding="async">Flutter</li><li class="sp-chip"><img src="images/androidstudio.png" alt="" width="16" height="16" loading="lazy" decoding="async">Android Studio</li></ul></dd></div><div><dt>Databases</dt><dd><ul class="sp-chips"><li class="sp-chip"><img src="images/mysql.png" alt="" width="16" height="16" loading="lazy" decoding="async">MySQL</li><li class="sp-chip"><img src="images/postgresql.png" alt="" width="16" height="16" loading="lazy" decoding="async">PostgreSQL</li><li class="sp-chip"><img src="images/sqlite.png" alt="" width="16" height="16" loading="lazy" decoding="async">SQLite</li><li class="sp-chip"><img src="images/mongodb.png" alt="" width="16" height="16" loading="lazy" decoding="async">MongoDB</li><li class="sp-chip"><img src="images/firebase.png" alt="" width="16" height="16" loading="lazy" decoding="async">Firebase</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Rd</span>Redis</li></ul></dd></div><div><dt>AI &amp; machine learning</dt><dd><ul class="sp-chips"><li class="sp-chip"><span class="sp-mono" aria-hidden="true">AI</span>Generative AI</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">LM</span>LLMs</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">RG</span>RAG</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">NL</span>NLP</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">Ol</span>Ollama</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">OA</span>OpenAI APIs</li><li class="sp-chip"><span class="sp-mono" aria-hidden="true">HF</span>Hugging Face</li></ul></dd></div><div><dt>DevOps &amp; tools</dt><dd><ul class="sp-chips"><li class="sp-chip"><img src="images/git.png" alt="" width="16" height="16" loading="lazy" decoding="async">Git</li><li class="sp-chip"><img src="images/docker.png" alt="" width="16" height="16" loading="lazy" decoding="async">Docker</li><li class="sp-chip"><img src="images/aws.png" alt="" width="16" height="16" loading="lazy" decoding="async">AWS</li><li class="sp-chip"><img src="images/figma.png" alt="" width="16" height="16" loading="lazy" decoding="async">Figma</li><li class="sp-chip"><img src="images/streamlit.png" alt="" width="16" height="16" loading="lazy" decoding="async">Streamlit</li></ul></dd></div></dl>
+      </section>
 
-    <!-- Gemini AI Chatbot Widget -->
-    <div class="gemini-chat-widget" id="gemini-chat-widget">
-      <div class="gemini-chat-header">
-        <div class="gemini-header-title">
-          <span class="file-icon">✨</span> Folio
+      <section class="sp-section" id="education" aria-labelledby="sp-education">
+        <h2 id="sp-education">Education</h2>
+        <div class="sp-edu">
+          <h3>Master of Computer Science</h3>
+          <p class="sp-meta">Illinois Institute of Technology · Chicago, USA · <time>Aug 2022 – May 2024</time> · GPA 3.7</p>
+          <p><strong>Activities:</strong> Senior TechNews Writer, TechNews Photographer, Library Student Advisor, ACM Member</p>
+          <p><strong>Coursework:</strong> Software Engineering, Enterprise Web Applications, Algorithms, Computer Networks, Machine Learning, Big Data, Mobile App Development, Software Testing &amp; Analysis, Advanced Databases, Software Project Management</p>
         </div>
-        <button class="gemini-close-btn" onclick="toggleGeminiChat()">✕</button>
-      </div>
-      <div class="gemini-chat-body" id="gemini-chat-body">
-        <div class="gemini-message ai-message">
-          Hey there! I'm <strong>Folio</strong> — your personal guide to Saiprasaad's portfolio. Ask me anything!
+      </section>
+
+      <section class="sp-section" id="achievements" aria-labelledby="sp-achievements">
+        <h2 id="sp-achievements">Achievements</h2>
+        <div class="sp-two">
+          <div><h3>Awards</h3><ul class="sp-list"><li><strong>Best Performer of the Month</strong><span>Afficiency</span></li><li><strong>Winner, ACM Scarlet Hackathon</strong><span>ACM</span></li><li><strong>Judge, HackMHS X Hackathon</strong><span>HackMHS</span></li><li><strong>Winner, LeetCode Challenge</strong><span>ACM</span></li><li><strong>Star Performer</strong><span>Cognizant Student Club</span></li><li><strong>Winner, Debugging Contest</strong><span>IEEE Computer Society SBC</span></li></ul></div>
+          <div><h3>Certifications</h3><ul class="sp-list"><li><strong>Azure AI Fundamentals</strong><span>Microsoft</span></li><li><strong>Oracle Cloud Infrastructure Foundations Associate</strong><span>Oracle</span></li><li><strong>CS50's Introduction to Computer Science</strong><span>Harvard / edX</span></li><li><strong>Web Development and Coding Specialization</strong><span>University of Michigan / Coursera</span></li><li><strong>Introduction to Generative AI</strong><span>Google Cloud / Coursera</span></li><li><strong><a href="https://www.hackerrank.com/profile/saiprasaad1999" target="_blank" rel="noopener">Certified in C, Java, JavaScript, React and MySQL</a></strong><span>HackerRank</span></li><li><strong>Postman Student Expert</strong><span>Postman</span></li></ul></div>
         </div>
-      </div>
-      <div class="gemini-chat-input-area">
-        <input type="text" id="gemini-chat-input" placeholder="Ask me anything..." autocomplete="off">
-        <button class="gemini-send-btn" id="gemini-send-btn">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-        </button>
-      </div>
-    </div>
+      </section>
 
-    <script src="main.js"></script>
+      <section class="sp-section" id="contact" aria-labelledby="sp-contact">
+        <h2 id="sp-contact">Contact</h2>
+        <p class="sp-prose">Reach me by email at <a href="mailto:saiprasaad1999@gmail.com">saiprasaad1999@gmail.com</a>, or find me here:</p>
+        <ul class="sp-list sp-contact"><li><strong>GitHub</strong><a href="https://github.com/saiprasaad" target="_blank" rel="noopener">github.com/saiprasaad</a></li><li><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/saiprasaad/" target="_blank" rel="noopener">linkedin.com/in/saiprasaad</a></li><li><strong>HackerRank</strong><a href="https://www.hackerrank.com/profile/saiprasaad1999" target="_blank" rel="noopener">hackerrank.com/saiprasaad1999</a></li></ul>
+      </section>
+    </main>
+    <footer class="sp-footer">
+      <p>© 2026 Saiprasaad Kalyanaraman · New York</p>
+    </footer>
+  </div>
+  <!-- prerender:end -->
 
+  <script type="module" src="js/main.js"></script>
 </body>
-
 </html>
