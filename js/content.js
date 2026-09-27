@@ -125,6 +125,7 @@ export const skills = {
   postman: { label: 'Postman', mono: 'PM', match: ['\\bpostman\\b'] },
   rrweb: { label: 'rrweb', mono: 'rr', match: ['\\brrweb\\b', '\\bsession replay\\b'] },
   reactquery: { label: 'TanStack Query', mono: 'TQ', match: ['\\btanstack\\b', '\\breact[- ]query\\b'] },
+  jest: { label: 'Jest', mono: 'Je', match: ['\\bjest\\b', '\\bunit tests?\\b', '\\btesting library\\b'] },
 };
 
 export const skillCategories = [
@@ -238,7 +239,7 @@ export const education = [
 // Each project: `summary` is the overview, `flow` the steps of how it works (in order),
 // `features` what it does, `facts` a few numbers worth scanning. Everything here comes
 // from the project's code or README. cover.type picks an illustration from js/lib/covers.js;
-// `media` holds real screenshots or outputs.
+// `media` holds real outputs, app screenshots (type 'screenshot') or a video (type 'video').
 export const projects = [
   {
     slug: 'monitorly',
@@ -374,37 +375,46 @@ export const projects = [
   {
     slug: 'json-explorer',
     name: 'JSON Explorer',
-    kind: 'Web app',
+    kind: 'Developer tool',
     year: 2025,
     featured: true,
-    status: 'Live · updated April 2026',
-    tagline: 'Turn JSON into an interactive graph you can search, walk through and compare.',
-    summary: 'A web app for making sense of large JSON documents. It draws JSON as a graph of connected nodes you can pan, zoom, search and click through, pairs it with a full code editor, and adds a side-by-side diff for comparing two files. It is installable, works offline and can be embedded in other pages.',
+    status: 'Live · updated September 2026',
+    tagline: 'See JSON as an interactive graph or a fast tree, then compare, repair and convert it, all in the browser.',
+    summary: 'A browser workbench for making sense of large JSON documents. It draws a document as an interactive graph or a virtualized tree, explains any value with its path, a table view and smart previews, and compares two documents by structure instead of by text. It also repairs, formats, converts and shares JSON, works offline and can be embedded in other pages. Parsing, diffing and converting all happen in the browser.',
     facts: [
-      { value: '2', label: 'modes: explore and compare' },
-      { value: '200', label: 'nodes rendered per batch' },
+      { value: '3', label: 'views: graph, tree and compare' },
+      { value: '4', label: 'formats it converts to, from TypeScript to CSV' },
+      { value: '4', label: 'path styles, from JSONPath to jq' },
+      { value: '130', label: 'automated tests' },
     ],
     flow: [
-      'Paste, type or upload JSON in the Monaco editor',
-      'The app parses it into nodes and edges',
-      'React Flow draws the graph with color-coded values',
-      'Click, search or play a walkthrough to explore it',
+      'Paste, open, drop or fetch JSON into the Monaco editor',
+      'The native JSON parser reads it, and jsonc-parser turns any error into a plain message with its line and column',
+      'The document becomes a graph model with a tidy-tree layout and a flat list of tree rows',
+      'React Flow draws the graph, paging wide arrays 50 items at a time, and a virtualized list draws the tree',
+      'Selecting a value opens its path, a table view, previews and conversions',
     ],
     features: [
-      { title: 'Graph view', text: 'Objects and arrays become connected nodes, with values color-coded by type.' },
-      { title: 'Path highlighting', text: 'Click any node to highlight its path from the root and open its full details.' },
-      { title: 'Search', text: 'Find keys and values, step through the matches and jump the view to each one.' },
-      { title: 'Walkthrough mode', text: 'Plays through the structure node by node, so large documents are easier to follow.' },
-      { title: 'JSON Compare', text: 'A Monaco diff editor with added and removed counts, swap, format-both and next/previous change navigation.' },
-      { title: 'Embeddable and offline', text: 'An embed mode takes JSON from a URL or postMessage, and a Workbox service worker makes it installable and usable offline.' },
-      { title: 'Fast on big files', text: 'Renders 200 nodes at a time and loads more on request, so large documents stay responsive.' },
+      { title: 'Graph view', text: 'A tidy layout that never overlaps, left to right or top down, with a minimap, arrow-key navigation, PNG and SVG export, and a walkthrough that plays through the graph node by node.' },
+      { title: 'Tree view', text: 'A virtualized tree that stays smooth with hundreds of thousands of rows, with previews of collapsed values and full keyboard support.' },
+      { title: 'Made for big files', text: 'Branches collapse automatically, wide arrays load in blocks of 50, and search reaches into collapsed parts and reveals the matches.' },
+      { title: 'Details for any value', text: 'Its path as JSONPath, JavaScript, jq or JSON Pointer, a table view for arrays of records, and previews for links, dates, colors and images.' },
+      { title: 'Exact big numbers', text: 'Integers too large for JavaScript, such as 64-bit IDs, are flagged in the views and shown and copied exactly as written.' },
+      { title: 'Repair and lossless formatting', text: 'Errors with line and column, one-click repair of comments, trailing commas, single quotes and missing brackets, and format, minify and sort that never change a number.' },
+      { title: 'Structural compare', text: 'Next to a Monaco diff, it lists added, removed and changed values by path, ignoring key order and aligning arrays so one inserted item counts as one change.' },
+      { title: 'Convert', text: 'Generates TypeScript interfaces, a JSON Schema, YAML or CSV from the whole document or any value, with a live preview.' },
+      { title: 'Share, embed and offline', text: 'Share links pack the document into the URL, an embed mode takes JSON by postMessage or URL, and it works offline as an installable PWA.' },
     ],
-    stack: ['react', 'reactflow', 'monaco', 'mui', 'javascript', 'pwa', 'netlify'],
+    stack: ['react', 'reactflow', 'monaco', 'mui', 'javascript', 'jest', 'pwa', 'netlify'],
     links: [
       { type: 'demo', label: 'Live demo', url: 'https://jsonexplorer.netlify.app' },
       { type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/JsonExplorer' },
     ],
-    media: [],
+    media: [
+      { type: 'screenshot', src: 'images/projects/json-explorer-graph.webp', alt: 'JSON Explorer graph view: a product catalog in the editor on the left, drawn as connected nodes in the middle, with a details panel showing the selected product’s path, size and value', width: 1000, height: 597, caption: 'Graph view with a product open in the details panel' },
+      { type: 'screenshot', src: 'images/projects/json-explorer-tree.webp', alt: 'JSON Explorer tree view in the light theme: the catalog as an indented tree, with the products array shown as a table of IDs, names, categories, prices and tags', width: 1000, height: 597, caption: 'Tree view with an array of records shown as a table' },
+      { type: 'screenshot', src: 'images/projects/json-explorer-compare.webp', alt: 'JSON Explorer compare view: two versions of the catalog side by side with changed lines highlighted, above a list of structural differences such as the currency changing from USD to EUR', width: 1000, height: 597, caption: 'Compare view with the structural differences listed by path' },
+    ],
     cover: { type: 'graph', from: '#2a2470', to: '#5b5bd6' },
   },
   {

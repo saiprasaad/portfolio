@@ -325,10 +325,10 @@ export function renderProjectDetail(p, actions) {
   const related = relatedProjects(p);
   const features = p.features || [];
   const flow = p.flow || [];
-  // A video leads the page under its own title; screenshots and charts follow the write-up.
+  // A video leads the page under its own title; screenshots and charts follow the write-up at full width.
   const video = p.media.find((m) => m.type === 'video');
   const videoFirst = Boolean(video);
-  const mediaLabel = video ? video.title || 'Video' : 'Output';
+  const mediaLabel = video ? video.title || 'Video' : p.media.every((m) => m.type === 'screenshot') ? 'Screenshots' : 'Output';
   const media = p.media.length ? h('section', { class: 'pd-section', 'aria-label': mediaLabel },
     kicker(mediaLabel),
     h('div', { class: 'pd-media' }, p.media.map((m) => h('figure', {},
@@ -367,7 +367,6 @@ export function renderProjectDetail(p, actions) {
           kicker('Features'),
           h('ul', { class: 'pd-features' }, features.map((x) => h('li', {}, h('strong', {}, x.title), h('span', {}, x.text)))),
         ) : null,
-        videoFirst ? null : media,
       ),
       h('aside', { class: 'pd-side' },
         h('div', { class: 'pd-box' }, h('h3', {}, 'Stack'), chipList(p.stack, { actions })),
@@ -383,5 +382,6 @@ export function renderProjectDetail(p, actions) {
           h('div', { class: 'doc-row' }, related.map((o) => button(o.name, null, () => actions.openProject(o.slug), 'btn')))) : null,
       ),
     ),
+    videoFirst ? null : media,
   );
 }
