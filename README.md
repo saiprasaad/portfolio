@@ -26,6 +26,9 @@ Terminal, Folio and the simple page all read from it, so a change there shows up
   - `facts` (optional): a few `{ value, label }` numbers, like `{ value: '5', label: 'repositories tracked' }`.
   - `status` (optional): for example `Live · updated April 2026`.
   - `cover.type`: picks an illustration from `js/lib/covers.js`. Put real screenshots in `media`.
+- To show a company logo in Experience, put the image in `images/logos/src/` (for example `ey.jpg`),
+  run `npm run assets -- logos`, and set that role's `logo` to `images/logos/ey.webp`. Roles without a
+  logo show their initials.
 - Add a `url` to a certification to show a Verify link.
 - Years of experience are computed from the role dates, so the About text stays current.
 
@@ -44,7 +47,7 @@ npm test             # end-to-end smoke test in headless Chromium
 | Command | What it does |
 | --- | --- |
 | `npm run prerender` | Writes the simple page and JSON-LD profile into `index.html`. CI runs it before every deploy. |
-| `npm run assets` | Regenerates the resized photos, project images and favicons from their sources. |
+| `npm run assets` | Regenerates the resized photos, project images, company logos and favicons from their sources. Pass `photos`, `projects`, `logos` or `favicons` (for example `npm run assets -- logos`) to regenerate one group. |
 
 ## Deploying
 

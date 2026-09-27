@@ -21,7 +21,15 @@ function toneFor(id) {
 }
 
 export const ROLE_TONES = { afficiency: '#4f46e5', 'open-avenues': '#d9480f', hexaware: '#0b7285', ey: '#6d28d9' };
-export const ROLE_MARKS = { afficiency: 'Af', 'open-avenues': 'OA', hexaware: 'Hx', ey: 'EY' };
+const ROLE_MARKS = { afficiency: 'Af', 'open-avenues': 'OA', hexaware: 'Hx', ey: 'EY' };
+
+// The company's logo when the role has one, otherwise its initials on a colored tile.
+export function roleMark(r) {
+  if (r.logo) {
+    return fromHtml(`<span class="role-mark role-mark--logo" aria-hidden="true"><img src="${escapeHtml(r.logo)}" alt="" width="44" height="44" decoding="async"></span>`);
+  }
+  return h('span', { class: 'role-mark', style: { '--role-tone': ROLE_TONES[r.id] }, 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2));
+}
 
 export function photo(size, cls = '') {
   const p = profile.photo;
@@ -158,7 +166,7 @@ export function roleCard(r, actions, now = new Date()) {
   const related = r.project ? projects.find((p) => p.slug === r.project) : null;
   return h('li', { class: `role${r.end ? '' : ' is-current'}`, id: `role-${r.id}`, style: { '--role-tone': ROLE_TONES[r.id] } },
     h('div', { class: 'role-head' },
-      h('span', { class: 'role-mark', 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2)),
+      roleMark(r),
       h('div', {},
         h('h3', {}, r.title),
         h('p', { class: 'role-meta' }, `${r.company} · ${r.location}`),

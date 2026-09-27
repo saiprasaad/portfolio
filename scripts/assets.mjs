@@ -1,8 +1,10 @@
 // Regenerates image assets from their sources with headless Chromium:
-//   node scripts/assets.mjs
-// - images/sai-{160,320,640}.webp and sai-640.jpg from images/Sai.jpg
-// - images/projects/*.webp from the Repo Vision charts in images/projects/src
-// - favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png from favicon.svg
+//   node scripts/assets.mjs [photos|projects|logos|favicons]
+// - photos: images/sai-{160,320,640}.webp and sai-640.jpg from images/Sai.jpg
+// - projects: images/projects/*.webp from the Repo Vision charts in images/projects/src
+// - logos: images/logos/*.webp (128px squares) from the company logos in images/logos/src
+// - favicons: favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png from favicon.svg
+// With no argument it regenerates everything.
 // Needs Playwright (npm install) and a local server; it starts one itself.
 
 import { createServer } from 'node:http';
@@ -20,7 +22,9 @@ try {
 }
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const TYPES = { '.html': 'text/html', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.js': 'text/javascript' };
+const only = process.argv[2];
+const want = (group) => !only || only === group;
+const TYPES = { '.html': 'text/html', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.js': 'text/javascript' };
 
 const server = createServer((req, res) => {
   const pathname = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -89,48 +93,59 @@ async function resize(src, width, { square = false, type = 'image/webp', quality
   }, { src, width, square, type, quality, height });
 }
 
-for (const size of [160, 320, 640]) save(`images/sai-${size}.webp`, await resize(`${base}/images/Sai.jpg`, size, { square: true }));
-save('images/sai-640.jpg', await resize(`${base}/images/Sai.jpg`, 640, { square: true, type: 'image/jpeg', quality: 0.86 }));
+if (want('photos')) {
+  for (const size of [160, 320, 640]) save(`images/sai-${size}.webp`, await resize(`${base}/images/Sai.jpg`, size, { square: true }));
+  save('images/sai-640.jpg', await resize(`${base}/images/Sai.jpg`, 640, { square: true, type: 'image/jpeg', quality: 0.86 }));
+}
 
 const srcDir = join(ROOT, 'images/projects/src');
-if (existsSync(srcDir)) {
+if (want('projects') && existsSync(srcDir)) {
   for (const f of readdirSync(srcDir).filter((x) => x.endsWith('.png'))) {
     save(`images/projects/${f.replace('.png', '.webp')}`, await resize(`${base}/images/projects/src/${f}`, 1000, { quality: 0.9 }));
   }
 }
 
-// Favicons from favicon.svg.
-async function renderSvg(size) {
-  return page.evaluate(async ({ src, size }) => {
-    const img = new Image();
-    img.src = src;
-    await img.decode();
-    const c = document.createElement('canvas');
-    c.width = size;
-    c.height = size;
-    c.getContext('2d').drawImage(img, 0, 0, size, size);
-    return c.toDataURL('image/png');
-  }, { src: `${base}/favicon.svg`, size });
+const logoDir = join(ROOT, 'images/logos/src');
+if (want('logos') && existsSync(logoDir)) {
+  for (const f of readdirSync(logoDir).filter((x) => /\.(png|jpe?g|webp)$/i.test(x))) {
+    save(`images/logos/${f.replace(/\.\w+$/, '.webp')}`, await resize(`${base}/images/logos/src/${f}`, 128, { square: true, quality: 0.9 }));
+  }
 }
-save('apple-touch-icon.png', await renderSvg(180));
-save('icon-192.png', await renderSvg(192));
-save('icon-512.png', await renderSvg(512));
-const png32 = Buffer.from((await renderSvg(32)).split(',')[1], 'base64');
-// An .ico file is a tiny header plus the PNG itself.
-const header = Buffer.alloc(22);
-header.writeUInt16LE(0, 0);
-header.writeUInt16LE(1, 2);
-header.writeUInt16LE(1, 4);
-header.writeUInt8(32, 6);
-header.writeUInt8(32, 7);
-header.writeUInt8(0, 8);
-header.writeUInt8(0, 9);
-header.writeUInt16LE(1, 10);
-header.writeUInt16LE(32, 12);
-header.writeUInt32LE(png32.length, 14);
-header.writeUInt32LE(22, 18);
-writeFileSync(join(ROOT, 'favicon.ico'), Buffer.concat([header, png32]));
-console.log('wrote favicon.ico');
+
+// Favicons from favicon.svg.
+if (want('favicons')) {
+  async function renderSvg(size) {
+    return page.evaluate(async ({ src, size }) => {
+      const img = new Image();
+      img.src = src;
+      await img.decode();
+      const c = document.createElement('canvas');
+      c.width = size;
+      c.height = size;
+      c.getContext('2d').drawImage(img, 0, 0, size, size);
+      return c.toDataURL('image/png');
+    }, { src: `${base}/favicon.svg`, size });
+  }
+  save('apple-touch-icon.png', await renderSvg(180));
+  save('icon-192.png', await renderSvg(192));
+  save('icon-512.png', await renderSvg(512));
+  const png32 = Buffer.from((await renderSvg(32)).split(',')[1], 'base64');
+  // An .ico file is a tiny header plus the PNG itself.
+  const header = Buffer.alloc(22);
+  header.writeUInt16LE(0, 0);
+  header.writeUInt16LE(1, 2);
+  header.writeUInt16LE(1, 4);
+  header.writeUInt8(32, 6);
+  header.writeUInt8(32, 7);
+  header.writeUInt8(0, 8);
+  header.writeUInt8(0, 9);
+  header.writeUInt16LE(1, 10);
+  header.writeUInt16LE(32, 12);
+  header.writeUInt32LE(png32.length, 14);
+  header.writeUInt32LE(22, 18);
+  writeFileSync(join(ROOT, 'favicon.ico'), Buffer.concat([header, png32]));
+  console.log('wrote favicon.ico');
+}
 
 await browser.close();
 server.close();

@@ -2,7 +2,7 @@
 
 import { h, reducedMotion, trapTab } from '../lib/dom.js';
 import { experience, education, formatRange, formatMonth, formatDuration, roleMonths, skillLabel } from '../content.js';
-import { icon, ROLE_TONES, ROLE_MARKS } from '../lib/sections.js';
+import { icon, ROLE_TONES, roleMark } from '../lib/sections.js';
 
 function entries() {
   const edu = education[0];
@@ -20,7 +20,7 @@ function card(entry) {
     const r = entry.data;
     body.append(
       h('div', { class: 'role-head' },
-        h('span', { class: 'role-mark', style: { '--role-tone': ROLE_TONES[r.id] }, 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2)),
+        roleMark(r),
         h('div', {}, h('h3', {}, r.title), h('p', { class: 'role-meta' }, `${r.company} · ${r.location}`)),
         h('div', { class: 'role-when' }, h('time', {}, formatRange(r.start, r.end)), h('span', {}, `${formatDuration(roleMonths(r))} · ${r.type}`)),
       ),
