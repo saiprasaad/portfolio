@@ -325,6 +325,18 @@ export function renderProjectDetail(p, actions) {
   const related = relatedProjects(p);
   const features = p.features || [];
   const flow = p.flow || [];
+  // A demo video leads the page; screenshots and charts follow the write-up.
+  const videoFirst = p.media.some((m) => m.type === 'video');
+  const media = p.media.length ? h('section', { class: 'pd-section', 'aria-label': videoFirst ? 'Demo' : 'Screens and output' },
+    kicker(videoFirst ? 'Demo' : 'Output'),
+    h('div', { class: 'pd-media' }, p.media.map((m) => h('figure', {},
+      m.type === 'video'
+        // Only the poster loads until someone presses play.
+        ? h('video', { controls: true, playsinline: true, preload: 'none', poster: m.poster, width: m.width, height: m.height, 'aria-label': m.alt }, h('source', { src: m.src, type: 'video/mp4' }))
+        : h('img', { src: m.src, alt: m.alt, width: m.width, height: m.height, loading: 'lazy', decoding: 'async' }),
+      m.caption ? h('figcaption', {}, m.caption) : null,
+    ))),
+  ) : null;
   return h('article', { class: 'pd', 'aria-labelledby': `pd-${p.slug}` },
     h('div', { class: 'pd-hero' },
       fromHtml(coverHtml(p)),
@@ -343,6 +355,7 @@ export function renderProjectDetail(p, actions) {
     p.facts?.length ? h('dl', { class: 'pd-facts' }, p.facts.map((x) => h('div', {}, h('dt', {}, x.value), h('dd', {}, x.label)))) : null,
     h('div', { class: 'pd-body' },
       h('div', { class: 'pd-main' },
+        videoFirst ? media : null,
         h('section', { class: 'pd-section', 'aria-label': 'Overview' }, kicker('Overview'), h('p', { class: 'pd-summary' }, p.summary)),
         flow.length ? h('section', { class: 'pd-section', 'aria-label': 'How it works' },
           kicker('How it works'),
@@ -352,13 +365,7 @@ export function renderProjectDetail(p, actions) {
           kicker('Features'),
           h('ul', { class: 'pd-features' }, features.map((x) => h('li', {}, h('strong', {}, x.title), h('span', {}, x.text)))),
         ) : null,
-        p.media.length ? h('section', { class: 'pd-section', 'aria-label': 'Screens and output' },
-          kicker('Output'),
-          h('div', { class: 'pd-media' }, p.media.map((m) => h('figure', {},
-            h('img', { src: m.src, alt: m.alt, width: m.width, height: m.height, loading: 'lazy', decoding: 'async' }),
-            m.caption ? h('figcaption', {}, m.caption) : null,
-          ))),
-        ) : null,
+        videoFirst ? null : media,
       ),
       h('aside', { class: 'pd-side' },
         h('div', { class: 'pd-box' }, h('h3', {}, 'Stack'), chipList(p.stack, { actions })),

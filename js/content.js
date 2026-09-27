@@ -123,6 +123,8 @@ export const skills = {
   azure: { label: 'Azure', logo: 'azure', match: ['\\bazure\\b'] },
   oci: { label: 'Oracle Cloud', mono: 'OCI', match: ['\\boracle cloud\\b', '\\boci\\b'] },
   postman: { label: 'Postman', mono: 'PM', match: ['\\bpostman\\b'] },
+  rrweb: { label: 'rrweb', mono: 'rr', match: ['\\brrweb\\b', '\\bsession replay\\b'] },
+  reactquery: { label: 'TanStack Query', mono: 'TQ', match: ['\\btanstack\\b', '\\breact[- ]query\\b'] },
 };
 
 export const skillCategories = [
@@ -238,6 +240,46 @@ export const education = [
 // from the project's code or README. cover.type picks an illustration from js/lib/covers.js;
 // `media` holds real screenshots or outputs.
 export const projects = [
+  {
+    slug: 'monitorly',
+    name: 'Monitorly',
+    kind: 'Session replay platform',
+    year: 2026,
+    featured: true,
+    status: 'In production',
+    team: 'Solo project',
+    tagline: 'Session replay you can drop into any app: record every session, replay it like a video and get alerted when users hit errors or friction.',
+    summary: 'A self-hosted, rrweb-powered session replay and analytics platform, built solo from the SDK to the dashboard. A three-line SDK records what users do, a Flask and Redis pipeline stores it without slowing the page, and a React dashboard replays each session like a video, live or after the fact. It has recorded around 100,000 sessions so far, and when something goes wrong, a Microsoft Teams alert opens the replay at that exact moment.',
+    facts: [
+      { value: '~100k', label: 'sessions recorded so far' },
+      { value: '3', label: 'lines to add it to any app' },
+      { value: '<10s', label: 'from a click to a replayable session' },
+      { value: '6', label: 'friction signals, like rage clicks and OTP retries' },
+    ],
+    flow: [
+      'A three-line SDK wraps rrweb and records the page, console logs, network calls and device details, with sensitive fields masked',
+      'A Web Worker sends batches every 10 seconds to a Flask ingest service, which queues them on a Redis stream and returns at once',
+      'A Python worker saves the recordings to Azure Blob Storage, indexes them in PostgreSQL and rolls up stats for each session',
+      'Errors and friction signals page the team in Microsoft Teams, with a link that opens the replay at that moment',
+      'The React dashboard replays sessions like a video, or follows one live as it happens',
+    ],
+    features: [
+      { title: 'Drop-in SDK', text: 'Three lines add recording to any web app. It captures page snapshots, console logs, network requests and device details without blocking the page.' },
+      { title: 'Replay like a video', text: 'Play, pause, skip inactivity, change speed from 0.25x to 8x and jump to any moment. Seeking starts from the nearest full snapshot, so jumps land exactly.' },
+      { title: 'Watch sessions live', text: 'A live strip lists the sessions happening right now, and live mode follows one as it happens, smoothed so it plays at a natural pace.' },
+      { title: 'DevTools beside the video', text: 'A timeline of pages visited, plus network and UI event panels that scroll with playback. Clicking any row jumps the replay to that moment.' },
+      { title: 'Alerts in Teams', text: 'Errors and friction such as rage clicks, OTP retries and blocked form submits post to Microsoft Teams with a link to the exact second. Friction alerts are deduplicated, so a retry never pages twice.' },
+      { title: 'Privacy built in', text: 'Sensitive fields such as Social Security numbers, bank details and dates of birth are masked in the recording, and passwords always are.' },
+      { title: 'Fast by design', text: 'The ingest service only queues each batch and returns, and a separate worker does the slow storage work, so recording never slows the app.' },
+      { title: 'Session health scores', text: 'Analytics APIs score every session from its console errors and failed requests, and roll up trends, devices, pages and locations.' },
+    ],
+    stack: ['rrweb', 'javascript', 'react', 'mui', 'reactquery', 'python', 'flask', 'redis', 'postgresql', 'azure', 'teams', 'microservices'],
+    links: [],
+    media: [
+      { type: 'video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly promo: the three-line SDK, the replay player with speed controls and skip inactivity, console, network and event panels, and a share link to a moment in a session', width: 1920, height: 1080, caption: 'A 24-second tour of Monitorly' },
+    ],
+    cover: { type: 'replay', from: '#0b0d1c', to: '#2d2672' },
+  },
   {
     slug: 'repo-vision',
     name: 'Repo Vision',
@@ -550,7 +592,7 @@ export const certifications = [
 // Finder's top-level folders, in the order visitors care about most.
 export const sections = [
   { id: 'about', label: 'About Me', short: 'About', icon: 'user', blurb: 'Who Sai is and what he works on' },
-  { id: 'projects', label: 'Projects', short: 'Projects', icon: 'code', blurb: 'Ten projects across web, mobile, AI and data' },
+  { id: 'projects', label: 'Projects', short: 'Projects', icon: 'code', blurb: `${countWord(projects.length)} projects across web, mobile, AI and data` },
   { id: 'experience', label: 'Experience', short: 'Experience', icon: 'briefcase', blurb: 'Roles at Afficiency, EY and more' },
   { id: 'skills', label: 'Skills', short: 'Skills', icon: 'bolt', blurb: 'Languages, frameworks and tools' },
   { id: 'education', label: 'Education', short: 'Education', icon: 'cap', blurb: 'M.S. Computer Science, Illinois Tech' },
@@ -568,6 +610,13 @@ export const tags = [
 ];
 
 // ---------- Derived facts ----------
+
+// "Eleven" for 11, so copy that counts projects stays right as they're added.
+// The list lives inside the function because `sections` above calls it during module setup.
+export function countWord(n) {
+  const words = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
+  return words[n] || String(n);
+}
 
 const monthIndex = (ym) => {
   const [y, m] = ym.split('-').map(Number);
