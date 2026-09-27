@@ -836,14 +836,19 @@
 .dock {
   display: flex;
   align-items: flex-end;
-  gap: 5px;
-  padding: 7px 8px 8px;
-  border-radius: 26px;
+  gap: 6px;
+  padding: 6px 8px 7px;
+  border-radius: 24px;
   pointer-events: auto;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: inset 0 0.5px 0 var(--glass-shine), inset 0 0 0 0.5px var(--glass-edge), 0 10px 30px rgba(0, 0, 0, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.04)), var(--dock-bg);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 14px 40px rgba(0, 0, 0, 0.3),
+    0 3px 10px rgba(0, 0, 0, 0.16);
 }
 
 .dock-item {
@@ -852,7 +857,6 @@
   width: var(--s);
   height: var(--s);
   flex: none;
-  border-radius: 14px;
   transition: width 0.12s var(--ease), height 0.12s var(--ease);
 }
 
@@ -860,34 +864,26 @@
   transition: width 0.06s linear, height 0.06s linear;
 }
 
-.dock-item .app-icon,
-.dock-item .dock-art {
+.dock-item .app-icon {
   width: 100%;
   height: 100%;
   --size: var(--s);
 }
 
-.dock-item .dock-art {
-  display: grid;
-  place-items: center;
-}
-
-.dock-item .dock-art .folder-icon {
-  width: 100%;
-  height: auto;
+.dock-item:active .app-icon {
+  filter: brightness(0.82) var(--icon-shadow);
 }
 
 .dock-item.is-running::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -6px;
+  bottom: -5px;
   width: 4px;
   height: 4px;
   margin-left: -2px;
   border-radius: 50%;
-  background: var(--text);
-  opacity: 0.72;
+  background: var(--dock-dot);
 }
 
 .dock-item.is-bouncing {
@@ -931,7 +927,7 @@
   width: 1px;
   height: 44px;
   margin: 0 5px;
-  background: var(--hairline-2);
+  background: linear-gradient(180deg, transparent, var(--hairline-2) 18%, var(--hairline-2) 82%, transparent);
 }
 
 /* Projects stack popover */

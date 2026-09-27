@@ -48,15 +48,19 @@ function renderProject(p) {
   const links = p.links.length
     ? `<p class="sp-links">${p.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${linkIcon(l.type)}${esc(l.label)}</a>`).join('')}</p>`
     : '';
-  const built = p.built.length ? `<ul class="sp-bullets">${p.built.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : '';
+  const facts = p.facts?.length ? `<p class="sp-facts-line">${p.facts.map((x) => `<span><strong>${esc(x.value)}</strong> ${esc(x.label)}</span>`).join('')}</p>` : '';
+  const flow = p.flow?.length ? `<h4 class="sp-sub">How it works</h4><ol class="sp-flow">${p.flow.map((step) => `<li>${esc(step)}</li>`).join('')}</ol>` : '';
+  const features = p.features?.length ? `<h4 class="sp-sub">Features</h4><ul class="sp-bullets sp-features">${p.features.map((x) => `<li><strong>${esc(x.title)}.</strong> ${esc(x.text)}</li>`).join('')}</ul>` : '';
   return `<article class="sp-project" id="${esc(p.slug)}">
     ${coverHtml(p, { cls: 'sp-cover' })}
     <div class="sp-project-body">
       <h3>${esc(p.name)}</h3>
-      <p class="sp-meta">${esc(p.kind)}${p.year ? ` · ${p.year}` : ''}${p.team ? ` · ${esc(p.team)}` : ''}</p>
+      <p class="sp-meta">${esc(p.kind)}${p.year ? ` · ${p.year}` : ''}${p.status ? ` · ${esc(p.status)}` : ''}${p.team ? ` · ${esc(p.team)}` : ''}</p>
       <p class="sp-tagline">${esc(p.tagline)}</p>
+      ${facts}
       <p>${esc(p.summary)}</p>
-      ${built}
+      ${flow}
+      ${features}
       <ul class="sp-chips" aria-label="Technologies">${p.stack.slice(0, 8).map(skillChip).join('')}</ul>
       ${links}
     </div>

@@ -107,6 +107,8 @@ export const skills = {
   highcharts: { label: 'Highcharts', mono: 'Hc', match: ['\\bhighcharts\\b'] },
   mui: { label: 'Material UI', mono: 'MUI', match: ['\\bmaterial[- ]ui\\b', '\\bmui\\b'] },
   reactflow: { label: 'React Flow', mono: 'RF', match: ['\\breact flow\\b'] },
+  monaco: { label: 'Monaco Editor', mono: 'Mo', match: ['\\bmonaco\\b'] },
+  pwa: { label: 'PWA', mono: 'PWA', match: ['\\bpwas?\\b', '\\bprogressive web apps?\\b', '\\bservice workers?\\b'] },
   netlify: { label: 'Netlify', mono: 'Nf', match: ['\\bnetlify\\b'] },
   teams: { label: 'Teams API', mono: 'Tm', match: ['\\bmicrosoft teams\\b', '\\bteams api\\b'] },
   asana: { label: 'Asana API', mono: 'As', match: ['\\basana\\b'] },
@@ -114,6 +116,7 @@ export const skills = {
   aes: { label: 'AES-CBC encryption', mono: 'AES', match: ['\\baes\\b', '\\bencryption\\b', '\\bcryptograph'] },
   geolocation: { label: 'Geolocation', mono: 'Geo', match: ['\\bgeo-?location\\b', '\\bgps\\b', '\\bgeospatial\\b'] },
   logmeal: { label: 'LogMeal API', mono: 'LM', match: ['\\blogmeal\\b'] },
+  spoonacular: { label: 'Spoonacular API', mono: 'Sp', match: ['\\bspoonacular\\b'] },
   gtts: { label: 'gTTS', mono: 'TTS', match: ['\\btext[- ]to[- ]speech\\b', '\\btts\\b'] },
   moviepy: { label: 'MoviePy', mono: 'MP', match: ['\\bmoviepy\\b'] },
   uiux: { label: 'UI/UX design', mono: 'UX', match: ['\\bui\\s*/\\s*ux\\b', '\\bux\\b', '\\buser experience\\b'] },
@@ -267,7 +270,10 @@ export const education = [
   },
 ];
 
-// cover.type picks an illustration from js/lib/covers.js. media holds real screenshots or outputs.
+// Each project: `summary` is the overview, `flow` the steps of how it works (in order),
+// `features` what it does, `facts` a few numbers worth scanning. Everything here comes
+// from the project's code or README. cover.type picks an illustration from js/lib/covers.js;
+// `media` holds real screenshots or outputs.
 export const projects = [
   {
     slug: 'repo-vision',
@@ -276,12 +282,27 @@ export const projects = [
     year: 2024,
     featured: true,
     tagline: 'Forecasts GitHub activity for popular open-source repositories with three different models.',
-    summary: 'A React dashboard that pulls a year of GitHub activity for repositories such as Elasticsearch, OpenAI Python and Angular Google Maps, then forecasts it with LSTM, Prophet and SARIMAX so the models can be compared side by side.',
-    built: [
-      'A Flask microservice that collects issues, pull requests, commits, branches, releases and contributors through the GitHub API.',
-      'A forecasting microservice that trains an LSTM in TensorFlow/Keras and compares it with Prophet and SARIMAX from statsmodels.',
-      'Charts rendered with Matplotlib, stored in Google Cloud Storage and shown in a React, Material UI and Highcharts dashboard.',
-      'Every service containerized with Docker for Google Cloud Run, with Elasticsearch for indexing issue data.',
+    summary: 'A dashboard that pulls a year of issues, pull requests, commits, branches, releases and contributions for five well-known repositories, then forecasts what comes next with an LSTM, Prophet and SARIMAX so the three models can be compared side by side.',
+    facts: [
+      { value: '5', label: 'repositories tracked' },
+      { value: '3', label: 'forecasting models' },
+      { value: '3', label: 'microservices' },
+      { value: '7', label: 'activity series' },
+    ],
+    flow: [
+      'Pick a repository in the React dashboard',
+      'The Flask service collects a year of activity from the GitHub API',
+      'pandas groups it by day, week and month',
+      'The forecasting service trains an LSTM and fits Prophet and SARIMAX',
+      'Charts are saved to Google Cloud Storage and shown in the dashboard',
+    ],
+    features: [
+      { title: 'Three models, side by side', text: 'An LSTM built with TensorFlow and Keras, Prophet, and a SARIMAX model from statsmodels each forecast the same history.' },
+      { title: 'Seven activity series', text: 'Issues created and closed, pull requests, commits, branches, releases and contributions.' },
+      { title: 'Peak-activity insights', text: 'For each model it reports the weekday with the most issues created and closed, and the month with the most issues closed.' },
+      { title: 'Cross-repository charts', text: 'Highcharts views compare issues, stars and forks across all five repositories, with monthly and weekly issue counts.' },
+      { title: 'Well-known repositories', text: 'Elasticsearch, Pymilvus, Angular Google Maps, OpenAI Python and the OpenAI Cookbook.' },
+      { title: 'Containerized services', text: 'The React app, the Flask API and the forecasting service each ship with a Dockerfile for Google Cloud Run.' },
     ],
     stack: ['python', 'flask', 'react', 'tensorflow', 'forecasting', 'gcp', 'docker', 'elasticsearch', 'microservices', 'highcharts', 'mui', 'pandas', 'ml'],
     links: [{ type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/Repo-Vision' }],
@@ -298,8 +319,18 @@ export const projects = [
     year: null,
     featured: true,
     tagline: 'Summarizes application logs with an LLM and posts the summary to Microsoft Teams.',
-    summary: 'Integrates AI log summarization with Microsoft Teams, so anomalies surface in real time and incidents get a faster response. Summaries come from an LLM served through Ollama.',
-    built: [],
+    summary: 'Turns noisy application logs into short summaries with a language model and sends them to Microsoft Teams, so anomalies surface in real time and incidents get a faster response.',
+    flow: [
+      'Application logs reach a Python and Flask service',
+      'An LLM served through Ollama summarizes them and flags anomalies',
+      'The summary is posted to Microsoft Teams',
+    ],
+    features: [
+      { title: 'Real-time summaries', text: 'Condenses log activity into a few readable lines instead of pages of raw output.' },
+      { title: 'Anomaly detection', text: 'Calls out unusual patterns so they are noticed as they happen.' },
+      { title: 'Local LLM through Ollama', text: 'The model runs through Ollama and is called from the Flask service.' },
+      { title: 'Alerts in Teams', text: 'Summaries arrive in Microsoft Teams, where the team already works.' },
+    ],
     stack: ['python', 'flask', 'ollama', 'llms', 'teams', 'genai'],
     links: [],
     media: [],
@@ -312,11 +343,24 @@ export const projects = [
     year: 2024,
     featured: true,
     tagline: 'Paste a YouTube link, pick Spanish or German, and get the video back with a translated voice-over.',
-    summary: 'A Streamlit app that chains speech recognition, machine translation and speech synthesis to dub a YouTube video into another language.',
-    built: [
-      'Downloads the video with pytube and extracts the audio track with MoviePy.',
-      'Transcribes speech with OpenAI Whisper, then translates the transcript with the OpenAI API.',
-      'Generates the translated voice-over with gTTS and merges it back into the video with MoviePy.',
+    summary: 'A Streamlit app that dubs a YouTube video into another language. It chains speech recognition, machine translation and text-to-speech, then puts the new voice back into the original video and plays it in the browser.',
+    facts: [
+      { value: '6', label: 'pipeline steps' },
+      { value: '2', label: 'target languages' },
+    ],
+    flow: [
+      'Download the video with pytube',
+      'Extract the audio track with MoviePy',
+      'Transcribe the speech with OpenAI Whisper',
+      'Translate the transcript with the OpenAI API',
+      'Generate the new voice with gTTS',
+      'Merge the translated audio into the video',
+    ],
+    features: [
+      { title: 'One-click dubbing', text: 'A single Translate button runs the whole pipeline and plays the finished video on the page.' },
+      { title: 'Whisper transcription', text: "Runs OpenAI's open-source Whisper model to turn the speech into text." },
+      { title: 'LLM translation', text: 'Translates the transcript with the OpenAI API (gpt-3.5-turbo-instruct).' },
+      { title: 'Progress at every step', text: 'Shows each stage as it runs: downloading, extracting audio, translating, generating speech and rendering.' },
     ],
     stack: ['python', 'streamlit', 'whisper', 'openai', 'gtts', 'moviepy', 'nlp', 'genai'],
     links: [{ type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/YouTube-Translator' }],
@@ -327,13 +371,35 @@ export const projects = [
     slug: 'json-explorer',
     name: 'JSON Explorer',
     kind: 'Web app',
-    year: null,
+    year: 2025,
     featured: true,
-    tagline: 'Paste JSON, explore it as an interactive graph, and edit it in place.',
-    summary: 'An interactive JSON visualization and editing tool built with React Flow and deployed on Netlify.',
-    built: [],
-    stack: ['react', 'reactflow', 'javascript', 'netlify'],
-    links: [{ type: 'demo', label: 'Live demo', url: 'https://jsonexplorer.netlify.app' }],
+    status: 'Live · updated April 2026',
+    tagline: 'Turn JSON into an interactive graph you can search, walk through and compare.',
+    summary: 'A web app for making sense of large JSON documents. It draws JSON as a graph of connected nodes you can pan, zoom, search and click through, pairs it with a full code editor, and adds a side-by-side diff for comparing two files. It is installable, works offline and can be embedded in other pages.',
+    facts: [
+      { value: '2', label: 'modes: explore and compare' },
+      { value: '200', label: 'nodes rendered per batch' },
+    ],
+    flow: [
+      'Paste, type or upload JSON in the Monaco editor',
+      'The app parses it into nodes and edges',
+      'React Flow draws the graph with color-coded values',
+      'Click, search or play a walkthrough to explore it',
+    ],
+    features: [
+      { title: 'Graph view', text: 'Objects and arrays become connected nodes, with values color-coded by type.' },
+      { title: 'Path highlighting', text: 'Click any node to highlight its path from the root and open its full details.' },
+      { title: 'Search', text: 'Find keys and values, step through the matches and jump the view to each one.' },
+      { title: 'Walkthrough mode', text: 'Plays through the structure node by node, so large documents are easier to follow.' },
+      { title: 'JSON Compare', text: 'A Monaco diff editor with added and removed counts, swap, format-both and next/previous change navigation.' },
+      { title: 'Embeddable and offline', text: 'An embed mode takes JSON from a URL or postMessage, and a Workbox service worker makes it installable and usable offline.' },
+      { title: 'Fast on big files', text: 'Renders 200 nodes at a time and loads more on request, so large documents stay responsive.' },
+    ],
+    stack: ['react', 'reactflow', 'monaco', 'mui', 'javascript', 'pwa', 'netlify'],
+    links: [
+      { type: 'demo', label: 'Live demo', url: 'https://jsonexplorer.netlify.app' },
+      { type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/JsonExplorer' },
+    ],
     media: [],
     cover: { type: 'graph', from: '#2a2470', to: '#5b5bd6' },
   },
@@ -343,14 +409,26 @@ export const projects = [
     kind: 'Mobile app',
     year: 2024,
     featured: false,
-    tagline: 'Snap a photo of your ingredients and get recipe ideas.',
-    summary: 'A Flutter app built with Koodos Labs during the Open Avenues internship. Students photograph what they have, the app recognizes the ingredients and suggests recipes they can make.',
-    built: [
-      'Camera capture in Flutter, with ingredients recognized by the LogMeal food-recognition API.',
-      'Recipe suggestions based on the detected ingredients.',
-      'Firebase for real-time data storage and user authentication, and a Figma-designed interface.',
+    tagline: 'Snap a photo of your ingredients and get recipes you can make with them.',
+    summary: 'A Flutter app built with Koodos Labs during the Open Avenues internship. Students photograph the ingredients they have; the app recognizes them with the LogMeal food-recognition API and suggests recipes from Spoonacular that use as many of them as possible, with nutrition facts for each.',
+    facts: [
+      { value: '10', label: 'recipes per photo' },
+      { value: '2', label: 'food APIs' },
     ],
-    stack: ['flutter', 'dart', 'firebase', 'logmeal', 'figma', 'uiux'],
+    flow: [
+      'Take a photo with the in-app camera',
+      'LogMeal segments the image and names each ingredient',
+      'Spoonacular finds recipes that use the most of them',
+      'Each recipe card shows its nutrition and cooking time',
+    ],
+    features: [
+      { title: 'Camera capture', text: 'A built-in camera screen that switches between the front and rear cameras.' },
+      { title: 'Ingredient recognition', text: "Sends the photo to LogMeal's segmentation API and lists every ingredient it finds." },
+      { title: 'Recipes from what you have', text: 'Asks Spoonacular for up to 10 recipes, ranked to use the most detected ingredients.' },
+      { title: 'Nutrition at a glance', text: 'Calories, protein, fiber, sugar and ready-in time for every recipe.' },
+      { title: 'Firebase and Figma', text: 'Firebase handles data storage and sign-in; the interface was designed in Figma.' },
+    ],
+    stack: ['flutter', 'dart', 'firebase', 'logmeal', 'spoonacular', 'figma', 'uiux'],
     links: [
       { type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/Campus-Cooks' },
       { type: 'video', label: 'Demo video', url: 'https://drive.google.com/file/d/1--LbigJaJ-yDcMmW_RtHZHbswS0q7NNn/view?usp=sharing' },
@@ -364,12 +442,19 @@ export const projects = [
     kind: 'Mobile app',
     year: 2024,
     featured: false,
-    tagline: 'Find the nearest parade, or help someone experiencing homelessness get support.',
-    summary: 'A community app for Chicago. The parade locator finds the nearest parade and its details; the helper lets people report someone in need with a photo and GPS location so city services can respond.',
-    built: [
-      'A Spring Boot REST API that serves event and parade data.',
-      'A Flutter app that uses geolocation and geocoding to find the closest parade and share a precise location.',
-      'Photo submission for reporting someone who needs assistance.',
+    tagline: 'Find upcoming Chicago parades, or help someone experiencing homelessness get support.',
+    summary: 'A community app for Chicago. It lists upcoming parades along with the marching bands, floats and performers in each, and lets anyone report a person who needs help by sending a photo with their location so city services can respond.',
+    flow: [
+      'A Spring Boot REST API serves parade and event data',
+      'The Flutter app lists upcoming parades, the next one first',
+      'Tap a parade to swipe through its units',
+      'Report someone in need with a photo and your GPS location',
+    ],
+    features: [
+      { title: 'Parade guide', text: 'Upcoming parades with dates and descriptions, with the next one highlighted at the top.' },
+      { title: 'Swipe through units', text: 'A card deck for the marching bands, floats and performers in each parade.' },
+      { title: 'Homeless helper', text: 'Captures a photo and the GPS location (with its street address) to alert city services.' },
+      { title: 'Spring Boot back end', text: 'A REST API that serves the event data as JSON to the app.' },
     ],
     team: 'Built with Nagarajan Sivakumar',
     stack: ['flutter', 'dart', 'springboot', 'java', 'geolocation', 'rest'],
@@ -383,9 +468,16 @@ export const projects = [
     kind: 'Automation',
     year: null,
     featured: false,
-    tagline: 'Creates the day\'s tickets in Asana and keeps them in sync with back-end dashboards.',
-    summary: 'Automates daily ticket creation and SQL syncing between Asana and back-end dashboards.',
-    built: [],
+    tagline: "Creates the day's tickets in Asana and keeps them in sync with back-end dashboards.",
+    summary: 'Automates the daily routine of creating tickets in Asana and syncs their data with the SQL behind the back-end dashboards, so the task board and the dashboards stay consistent without manual updates.',
+    flow: [
+      "A Python and Flask job creates the day's tickets through the Asana API",
+      "Ticket data is synced with the dashboards' MySQL database",
+    ],
+    features: [
+      { title: 'Daily tickets', text: 'Recurring tickets are created automatically instead of by hand every morning.' },
+      { title: 'Dashboard sync', text: 'Keeps the MySQL data behind the dashboards in step with Asana.' },
+    ],
     stack: ['asana', 'python', 'flask', 'redis', 'mysql', 'sql'],
     links: [],
     media: [],
@@ -398,8 +490,16 @@ export const projects = [
     year: null,
     featured: false,
     tagline: 'AES-CBC encryption shared by a React front end and a Flask back end.',
-    summary: 'Implements AES-CBC encryption and decryption in both React and Flask so data stays protected end to end.',
-    built: [],
+    summary: 'Implements AES-CBC encryption and decryption on both sides of an app, in the React front end and in the Flask back end, so sensitive data is protected end to end.',
+    flow: [
+      'Data is encrypted with AES-CBC in the React app',
+      'Only the ciphertext travels to the Flask service',
+      'The Flask service decrypts it with the same scheme',
+    ],
+    features: [
+      { title: 'One scheme, two languages', text: 'Matching AES-CBC implementations in JavaScript and Python, so either side can read what the other wrote.' },
+      { title: 'End-to-end protection', text: 'Sensitive fields stay encrypted between the browser and the server.' },
+    ],
     stack: ['react', 'flask', 'aes', 'javascript', 'python'],
     links: [],
     media: [],
@@ -411,12 +511,23 @@ export const projects = [
     kind: 'Mobile game',
     year: 2023,
     featured: false,
-    tagline: 'Multiplayer Battleships: place five ships and play people or one of three AI opponents.',
-    summary: 'A Flutter client for a multiplayer Battleships game, with APIs for authentication and gameplay.',
-    built: [
-      'Login with session tokens stored on the device.',
-      'A games list: tap to continue a game, swipe to delete it.',
-      'Ship placement for five ships, then turn-based play against another person or a random, perfect or one-ship AI.',
+    tagline: 'Multiplayer Battleships in Flutter: place five ships, then play people or one of three AI opponents.',
+    summary: 'A Flutter client for a multiplayer Battleships game built on a REST API for authentication and gameplay. Players sign in, start a game against another person or an AI, place five ships and trade shots turn by turn.',
+    facts: [
+      { value: '5', label: 'ships to place' },
+      { value: '3', label: 'AI opponents' },
+    ],
+    flow: [
+      'Log in or register; the session token is saved on the device',
+      'Start a game against a person or one of three AIs',
+      'Place five ships on the board',
+      'Take turns firing until every ship is sunk',
+    ],
+    features: [
+      { title: 'Accounts and sessions', text: 'Login and registration, with the session token kept on the device so players stay signed in.' },
+      { title: 'Three AI opponents', text: 'Random, Perfect and One-ship modes, alongside matchmaking with other players.' },
+      { title: 'Game list', text: "Active and finished games with their state (your turn, opponent's turn, matchmaking, won or lost), and swipe to forfeit." },
+      { title: 'Clear feedback', text: 'Ships, misses, hits and wrecks are marked on the board, with messages for sunk ships and repeated shots.' },
     ],
     stack: ['flutter', 'dart', 'flask', 'mysql', 'rest'],
     links: [{ type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/Battleships' }],
@@ -429,12 +540,23 @@ export const projects = [
     kind: 'Mobile game',
     year: 2024,
     featured: false,
-    tagline: 'Cross-platform Wordle with a fresh word every game.',
-    summary: 'A cross-platform Wordle clone in Flutter. Each game fetches a new five-letter word from the Wordnik API and checks guesses against a dictionary API.',
-    built: [
-      'Random five-letter words from the Wordnik API.',
-      'Guess validation against a dictionary API before a row is accepted.',
-      'A custom on-screen keyboard and tile grid.',
+    tagline: 'Cross-platform Wordle with a new word every game.',
+    summary: 'A cross-platform Wordle clone written in Flutter. Every game fetches a fresh five-letter word, checks each guess against a dictionary before accepting it, and colors the tiles the way the original does.',
+    facts: [
+      { value: '6', label: 'tries per word' },
+      { value: '2', label: 'word APIs' },
+    ],
+    flow: [
+      'Fetch a random five-letter word from the Wordnik API',
+      'Type a guess on the on-screen keyboard',
+      'Check it against a dictionary API',
+      'Color the tiles and move to the next row',
+    ],
+    features: [
+      { title: 'A new word every game', text: 'Random five-letter words from the Wordnik API, fetched again until a valid one comes back.' },
+      { title: 'Real-word checks', text: 'Every guess is looked up in a dictionary API; made-up words are rejected.' },
+      { title: 'Classic scoring', text: 'Six tries, with green for a letter in the right spot and yellow for a letter in the wrong spot.' },
+      { title: 'Win and reveal', text: 'A custom keyboard sized to the screen, plus dialogs for a win or for revealing the word after the last try.' },
     ],
     stack: ['flutter', 'dart', 'rest'],
     links: [{ type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/Wordle-Clone' }],
@@ -604,7 +726,9 @@ export function portfolioContext(date = new Date()) {
   lines.push('PROJECTS:');
   projects.forEach((p) => {
     lines.push(`- ${p.name} (${p.kind}${p.year ? `, ${p.year}` : ''}): ${p.summary}`);
-    p.built.forEach((b) => lines.push(`  * ${b}`));
+    if (p.flow?.length) lines.push(`  How it works: ${p.flow.join(' -> ')}`);
+    (p.features || []).forEach((x) => lines.push(`  * ${x.title}: ${x.text}`));
+    (p.facts || []).forEach((x) => lines.push(`  * ${x.value} ${x.label}`));
     lines.push(`  Stack: ${p.stack.map(skillLabel).join(', ')}`);
     if (p.team) lines.push(`  ${p.team}`);
     p.links.forEach((l) => lines.push(`  ${l.label}: ${l.url}`));

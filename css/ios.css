@@ -146,12 +146,12 @@
 
 .ios-app .app-icon {
   --size: min(62px, 16vw);
-  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.55), 0 6px 14px rgba(0, 0, 0, 0.22);
+  --icon-shadow: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.26));
 }
 
 .ios-app:active .app-icon {
   transform: scale(0.92);
-  filter: brightness(0.85);
+  filter: brightness(0.85) var(--icon-shadow);
 }
 
 .ios-fit strong {
@@ -344,6 +344,16 @@
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.1;
+}
+
+/* Screens use the grouped background, so cards need the raised surface. */
+.ios-screen .pd-facts > div,
+.ios-screen .pd-features li {
+  background: var(--surface);
+}
+
+.ios-screen .pd-step {
+  box-shadow: 0 0 0 4px var(--grouped-bg);
 }
 
 /* The large title already names the screen. */

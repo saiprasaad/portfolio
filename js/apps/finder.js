@@ -320,7 +320,8 @@ export function createFinder(os) {
       },
       h('span', { class: 'fv-art' }, art),
       h('span', { class: 'fv-name' }, item.name),
-      item.project ? h('span', { class: 'fv-sub' }, `${item.kind}${item.project.year ? ` · ${item.project.year}` : ''}`) : h('span', { class: 'fv-sub' }, item.kind === 'Folder' ? '' : item.kind));
+      item.project ? h('span', { class: 'fv-sub' }, `${item.kind}${item.project.year ? ` · ${item.project.year}` : ''}`) : h('span', { class: 'fv-sub' }, item.kind === 'Folder' ? '' : item.kind),
+      item.project ? h('span', { class: 'fv-desc' }, item.project.tagline) : null);
       btn._item = item;
       ul.append(btn);
     });

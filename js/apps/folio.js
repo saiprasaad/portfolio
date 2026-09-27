@@ -194,7 +194,8 @@ export function localAnswer(question) {
   const project = mentionedProject(question);
   if (project) {
     addProject(project);
-    return { text: `**${project.name}** (${project.kind}${project.year ? `, ${project.year}` : ''}): ${project.summary}${project.built.length ? `\n\n${list(project.built)}` : ''}\n\nStack: ${project.stack.map(skillLabel).join(', ')}.`, sources };
+    const feats = (project.features || []).map((x) => `**${x.title}**: ${x.text}`);
+    return { text: `**${project.name}** (${project.kind}${project.year ? `, ${project.year}` : ''}): ${project.summary}${feats.length ? `\n\n${list(feats)}` : ''}\n\nStack: ${project.stack.map(skillLabel).join(', ')}.`, sources };
   }
   const skillIds = mentionedSkills(question);
   if (skillIds.length) {

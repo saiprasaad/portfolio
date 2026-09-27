@@ -18,8 +18,14 @@ Everything the site says lives in [`js/content.js`](js/content.js): profile, exp
 education, skills, projects, awards and certifications. The desktop, phone layout, Spotlight,
 Terminal, Folio and the simple page all read from it, so a change there shows up everywhere.
 
-- Add a project to `projects`. `cover.type` picks an illustration from `js/lib/covers.js`;
-  put real screenshots in `media`.
+- Add a project to `projects`. Each one has:
+  - `tagline`: one line, shown on cards and in search.
+  - `summary`: the overview paragraph.
+  - `flow`: the steps of how it works, in order.
+  - `features`: `{ title, text }` pairs.
+  - `facts` (optional): a few `{ value, label }` numbers, like `{ value: '5', label: 'repositories tracked' }`.
+  - `status` (optional): for example `Live · updated April 2026`.
+  - `cover.type`: picks an illustration from `js/lib/covers.js`. Put real screenshots in `media`.
 - Add a `url` to a certification to show a Verify link.
 - Years of experience are computed from the role dates, so the About text stays current.
 

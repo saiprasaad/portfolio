@@ -674,7 +674,7 @@ export function mountDesktop(root, { enterSimple }) {
     { id: 'mail', label: 'Mail', run: () => go('mail') },
     { id: 'preview', label: 'Resume', run: () => go('resume') },
     { type: 'sep' },
-    { id: 'projects', label: 'Projects', art: folderSvg('code', { size: 54 }), run: (btn) => openStack(btn) },
+    { id: 'projects', label: 'Projects', icon: 'stack', run: (btn) => openStack(btn) },
     { id: 'trash', label: 'Trash', run: () => openTrash() },
   ];
   dockDefs.forEach((d) => {
@@ -683,7 +683,7 @@ export function mountDesktop(root, { enterSimple }) {
       return;
     }
     const btn = h('button', { class: 'dock-item', type: 'button', 'aria-label': d.label, 'data-app': d.id },
-      d.art ? h('span', { class: 'dock-art', html: d.art }) : fromHtml(appIconHtml(d.id, { size: 54 })),
+      fromHtml(appIconHtml(d.icon || d.id, { size: 54 })),
       h('span', { class: 'dock-tip', 'aria-hidden': 'true' }, d.label));
     btn.addEventListener('click', () => d.run(btn));
     btn.addEventListener('contextmenu', (e) => {

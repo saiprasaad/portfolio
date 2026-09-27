@@ -34,7 +34,7 @@ export function buildIndex() {
     id: `project:${p.slug}`, type: 'project', target: p.slug, project: p,
     title: p.name, subtitle: `${p.kind}${p.year ? ` · ${p.year}` : ''}`,
     keywords: [p.kind, ...p.stack.map(skillLabel), p.team || ''],
-    text: [p.tagline, p.summary, ...p.built].join(' '), weight: p.featured ? 30 : 26,
+    text: [p.tagline, p.summary, ...(p.flow || []), ...(p.features || []).map((x) => `${x.title} ${x.text}`)].join(' '), weight: p.featured ? 30 : 26,
   }));
 
   experience.forEach((r) => items.push({

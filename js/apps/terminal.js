@@ -25,9 +25,14 @@ function dir(name, children, extra = {}) {
 
 function projectLines(p) {
   const lines = [[seg(`# ${p.name}`, 't-bold')], [seg(`${p.kind}${p.year ? ` · ${p.year}` : ''}`, 't-dim')], '', p.summary];
-  if (p.built.length) {
-    lines.push('', seg('## What I built', 't-cmd'));
-    p.built.forEach((b) => lines.push(`- ${b}`));
+  if (p.facts?.length) lines.push('', [seg(p.facts.map((x) => `${x.value} ${x.label}`).join(' · '), 't-cyan')]);
+  if (p.flow?.length) {
+    lines.push('', seg('## How it works', 't-cmd'));
+    p.flow.forEach((step, i) => lines.push(`${i + 1}. ${step}`));
+  }
+  if (p.features?.length) {
+    lines.push('', seg('## Features', 't-cmd'));
+    p.features.forEach((x) => lines.push([seg(`- ${x.title}: `, 't-bold'), x.text]));
   }
   lines.push('', [seg('Stack: ', 't-dim'), p.stack.map(skillLabel).join(', ')]);
   if (p.team) lines.push([seg('Team: ', 't-dim'), p.team]);

@@ -34,6 +34,8 @@
   --sidebar-bg: rgba(255, 255, 255, 0.46);
   --toolbar-bg: rgba(255, 255, 255, 0.7);
   --menu-bg: rgba(242, 242, 246, 0.86);
+  --dock-bg: rgba(255, 255, 255, 0.3);
+  --dock-dot: rgba(0, 0, 0, 0.55);
   --scrim: rgba(12, 14, 24, 0.28);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
@@ -103,6 +105,8 @@
     --sidebar-bg: rgba(255, 255, 255, 0.07);
     --toolbar-bg: rgba(30, 30, 34, 0.7);
     --menu-bg: rgba(42, 42, 47, 0.88);
+    --dock-bg: rgba(34, 36, 46, 0.42);
+    --dock-dot: rgba(255, 255, 255, 0.82);
     --scrim: rgba(0, 0, 0, 0.45);
     --shadow-window: 0 0 0 0.5px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 30px 80px rgba(0, 0, 0, 0.55), 0 10px 26px rgba(0, 0, 0, 0.35);
     --shadow-window-idle: 0 0 0 0.5px rgba(0, 0, 0, 0.6), 0 16px 44px rgba(0, 0, 0, 0.4);
@@ -142,6 +146,8 @@
   --sidebar-bg: rgba(255, 255, 255, 0.07);
   --toolbar-bg: rgba(30, 30, 34, 0.7);
   --menu-bg: rgba(42, 42, 47, 0.88);
+  --dock-bg: rgba(34, 36, 46, 0.42);
+  --dock-dot: rgba(255, 255, 255, 0.82);
   --scrim: rgba(0, 0, 0, 0.45);
   --shadow-window: 0 0 0 0.5px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 30px 80px rgba(0, 0, 0, 0.55), 0 10px 26px rgba(0, 0, 0, 0.35);
   --shadow-window-idle: 0 0 0 0.5px rgba(0, 0, 0, 0.6), 0 16px 44px rgba(0, 0, 0, 0.4);
@@ -166,6 +172,7 @@
   --sidebar-bg: var(--surface-2);
   --toolbar-bg: var(--surface);
   --menu-bg: var(--surface-2);
+  --dock-bg: var(--surface-2);
   --glass-blur: none;
 }
 @media (prefers-reduced-transparency: reduce) {
@@ -177,6 +184,7 @@
     --sidebar-bg: var(--surface-2);
     --toolbar-bg: var(--surface);
     --menu-bg: var(--surface-2);
+    --dock-bg: var(--surface-2);
     --glass-blur: none;
   }
 }
@@ -665,68 +673,36 @@ button.chip:active {
 
 /* ---------- App icons (Dock, phone home screen, Spotlight) ---------- */
 
+/* The artwork is an SVG from js/lib/appicons.js; the box only sizes it and adds a shadow
+   that follows the squircle's outline. */
 .app-icon {
   --size: 52px;
+  --icon-shadow: drop-shadow(0 1.5px 2.5px rgba(0, 0, 0, 0.22));
   position: relative;
-  display: grid;
-  place-items: center;
+  display: block;
   width: var(--size);
   height: var(--size);
-  border-radius: calc(var(--size) * 0.235);
-  color: #fff;
   flex: none;
-  overflow: hidden;
-  background: linear-gradient(180deg, #4fb2ff, #0a6cf0);
-  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.55), inset 0 -1px 2px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.14);
+  filter: var(--icon-shadow);
 }
 
-.app-icon::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 46%);
-  pointer-events: none;
+.app-icon .app-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-
-.app-icon .icon {
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18));
-}
-
-.app-icon--finder { background: linear-gradient(180deg, #5ec3ff 0%, #1a86f5 100%); }
-.app-icon--folio { background: radial-gradient(120% 120% at 20% 10%, #ffb3e6 0%, #b06bff 38%, #4f6bff 70%, #1fb6ff 100%); }
-.app-icon--terminal { background: linear-gradient(180deg, #3a3f47 0%, #111418 100%); }
-.app-icon--timemachine { background: linear-gradient(180deg, #43d39a 0%, #0f8a5f 100%); }
-.app-icon--achievements { background: linear-gradient(160deg, #ffcf4d 0%, #ff7a45 45%, #c2379b 100%); }
-.app-icon--mail { background: linear-gradient(180deg, #62d0ff 0%, #1a73f0 100%); }
-.app-icon--preview { background: linear-gradient(180deg, #ffffff 0%, #e6ebf2 100%); color: #2b6fd6; }
-.app-icon--trash { background: linear-gradient(180deg, #eef1f5 0%, #b9c0ca 100%); color: #4b5563; }
-.app-icon--settings { background: linear-gradient(180deg, #a3a9b3 0%, #5d636d 100%); }
-.app-icon--projects { background: linear-gradient(180deg, #7c83ff 0%, #4b3fd6 100%); }
-.app-icon--experience { background: linear-gradient(180deg, #ffb057 0%, #e0661b 100%); }
-.app-icon--skills { background: linear-gradient(180deg, #ff7aa2 0%, #e0335d 100%); }
-.app-icon--education { background: linear-gradient(180deg, #5fe08c 0%, #17a34a 100%); }
-.app-icon--fit { background: linear-gradient(180deg, #3ee0d0 0%, #0b8f8a 100%); }
-.app-icon--notes { background: linear-gradient(180deg, #fff6c7 0%, #ffd75e 100%); color: #7a5b00; }
-.app-icon--about { background: linear-gradient(180deg, #9aa7ff, #5a6cf0); }
 
 .app-icon--photo {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0C96 0 100 4 100 50C100 96 96 100 50 100C4 100 0 96 0 50C0 4 4 0 50 0Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0C96 0 100 4 100 50C100 96 96 100 50 100C4 100 0 96 0 50C0 4 4 0 50 0Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   background: var(--fill-2);
+  filter: none;
 }
 
 .app-icon--photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.app-icon--terminal .app-icon__prompt {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: calc(var(--size) * 0.36);
-  color: #e8e8e8;
-  letter-spacing: -0.04em;
-  transform: translate(-6%, -4%);
 }
 
 /* ---------- Covers ---------- */

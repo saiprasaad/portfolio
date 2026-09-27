@@ -1,6 +1,8 @@
 // Icon markup as strings, so the same icons work in the browser and in the Node prerender.
 // Glyphs are drawn on a 24px grid with a 1.8px stroke.
 
+import { appIconSvg } from './appicons.js';
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 const STROKE = {
@@ -127,34 +129,29 @@ export function textDocSvg({ size = 64 } = {}) {
     + '<g fill="#a7b0bd"><rect x="12" y="20" width="26" height="2" rx="1"/><rect x="12" y="25" width="28" height="2" rx="1"/><rect x="12" y="30" width="22" height="2" rx="1"/><rect x="12" y="38" width="28" height="2" rx="1"/><rect x="12" y="43" width="25" height="2" rx="1"/><rect x="12" y="48" width="18" height="2" rx="1"/></g></svg>';
 }
 
-// App icons: a squircle with a CSS gradient (see .app-icon in base.css) and a white glyph.
+// App names. The artwork itself lives in appicons.js.
 export const APPS = {
-  finder: { label: 'Finder', glyph: 'folder' },
-  folio: { label: 'Folio', glyph: 'sparkle' },
-  terminal: { label: 'Terminal', glyph: 'terminal' },
-  timemachine: { label: 'Time Machine', glyph: 'clock-back' },
-  achievements: { label: 'Achievements', glyph: 'trophy' },
-  mail: { label: 'Mail', glyph: 'mail' },
-  preview: { label: 'Resume', glyph: 'doc' },
-  trash: { label: 'Trash', glyph: 'trash' },
-  settings: { label: 'Settings', glyph: 'sliders' },
-  about: { label: 'About', glyph: 'user' },
-  projects: { label: 'Projects', glyph: 'code' },
-  experience: { label: 'Experience', glyph: 'briefcase' },
-  skills: { label: 'Skills', glyph: 'bolt' },
-  education: { label: 'Education', glyph: 'cap' },
-  fit: { label: 'Fit Check', glyph: 'target' },
-  notes: { label: 'Read Me', glyph: 'doc' },
+  finder: { label: 'Finder' },
+  folio: { label: 'Folio' },
+  terminal: { label: 'Terminal' },
+  timemachine: { label: 'Time Machine' },
+  achievements: { label: 'Achievements' },
+  mail: { label: 'Mail' },
+  preview: { label: 'Resume' },
+  trash: { label: 'Trash' },
+  settings: { label: 'Settings' },
+  about: { label: 'About' },
+  projects: { label: 'Projects' },
+  experience: { label: 'Experience' },
+  skills: { label: 'Skills' },
+  education: { label: 'Education' },
+  fit: { label: 'Fit Check' },
+  notes: { label: 'Read Me' },
 };
 
 export function appIconHtml(id, { size = 52, photo = '' } = {}) {
-  const app = APPS[id] || APPS.finder;
-  const glyphSize = Math.round(size * 0.52);
   if (id === 'about' && photo) {
     return `<span class="app-icon app-icon--photo" style="--size:${size}px" aria-hidden="true"><img src="${esc(photo)}" alt="" width="${size}" height="${size}" loading="lazy" decoding="async"></span>`;
   }
-  if (id === 'terminal') {
-    return `<span class="app-icon app-icon--terminal" style="--size:${size}px" aria-hidden="true"><span class="app-icon__prompt">&gt;_</span></span>`;
-  }
-  return `<span class="app-icon app-icon--${id}" style="--size:${size}px" aria-hidden="true">${iconSvg(app.glyph, { size: glyphSize })}</span>`;
+  return `<span class="app-icon app-icon--${id}" style="--size:${size}px" aria-hidden="true">${appIconSvg(id)}</span>`;
 }
