@@ -21,7 +21,7 @@ import { titleFor } from '../lib/titles.js';
 const GRID = ['about', 'experience', 'skills', 'education', 'achievements', 'fit', 'terminal', 'settings'];
 const DOCK = ['folio', 'projects', 'mail', 'preview'];
 const LABELS = { about: 'About', experience: 'Experience', skills: 'Skills', education: 'Education', achievements: 'Awards', fit: 'Fit Check', terminal: 'Terminal', settings: 'Settings', folio: 'Folio', projects: 'Projects', mail: 'Mail', preview: 'Resume' };
-const TOKEN_TO_APP = { about: 'about', experience: 'experience', skills: 'skills', education: 'education', achievements: 'achievements', contact: 'contact', projects: 'projects', resume: 'preview', folio: 'folio', fit: 'fit', terminal: 'terminal', mail: 'mail', settings: 'settings', 'time-machine': 'experience' };
+const TOKEN_TO_APP = { about: 'about', experience: 'experience', skills: 'skills', education: 'education', achievements: 'achievements', contact: 'contact', projects: 'projects', resume: 'preview', folio: 'folio', fit: 'fit', terminal: 'terminal', mail: 'mail', settings: 'settings', timeline: 'experience' };
 const APP_TO_TOKEN = { preview: 'resume' };
 
 export function mountIOS(root, { enterSimple }) {

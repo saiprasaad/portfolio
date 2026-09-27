@@ -3,8 +3,8 @@
 Saiprasaad Kalyanaraman's portfolio, built as a small operating system called SaiOS:
 
 - **Desktop** (wide screens): a macOS-style desktop with a menu bar, Dock, widgets and windows.
-  Finder holds the portfolio (icon, list and gallery views, Quick Look, tags), plus Terminal,
-  Folio (an AI assistant with a job-description Fit Check), Mail, Resume and Time Machine.
+  Files holds the portfolio (icon, list and gallery views, project previews, tags), plus Terminal,
+  Folio (an AI assistant with a job-description Fit Check), Mail, Resume and Timeline.
 - **Phone**: an iOS-style home screen whose apps show the same content.
 - **Simple page**: everything on one fast, printable page (View → Simple Page, or `#simple`).
   It is also prerendered into `index.html`, so crawlers, link previews and visitors without
@@ -15,7 +15,7 @@ No framework and no build step: plain HTML, CSS and ES modules served by GitHub 
 ## Editing the content
 
 Everything the site says lives in [`js/content.js`](js/content.js): profile, experience,
-education, skills, projects, awards and certifications. The desktop, phone layout, Spotlight,
+education, skills, projects, awards and certifications. The desktop, phone layout, Search,
 Terminal, Folio and the simple page all read from it, so a change there shows up everywhere.
 
 - Add a project to `projects`. Each one has:

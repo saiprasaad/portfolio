@@ -25,7 +25,7 @@ export function createQuickLook(os) {
     body = h('div', { class: 'ql-body scroll' });
     const panel = h('div', { class: 'ql', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'ql-title', tabindex: '-1' },
       h('div', { class: 'ql-head' },
-        h('button', { class: 'btn btn-icon', type: 'button', 'aria-label': 'Close Quick Look', onClick: () => close() }, icon('x', 15)),
+        h('button', { class: 'btn btn-icon', type: 'button', 'aria-label': 'Close preview', onClick: () => close() }, icon('x', 15)),
         h('div', { class: 'ql-title' }, icon('eye', 16), titleText, countEl),
         linkSlot,
         h('button', { class: 'btn', type: 'button', onClick: () => { const slug = current; close(); os.getInfo(slug); } }, icon('info', 15), 'Get Info'),

@@ -5,7 +5,7 @@ import { profile, sections, getProject } from '../content.js';
 const TITLES = {
   '': 'Saiprasaad Kalyanaraman · Full-Stack Software Engineer',
   resume: 'Resume', folio: 'Folio', fit: 'Fit Check', terminal: 'Terminal', mail: 'Mail',
-  'time-machine': 'Time Machine', settings: 'Settings', simple: 'Simple page',
+  timeline: 'Timeline', settings: 'Settings', simple: 'Simple page',
 };
 
 export function titleFor(token = '') {

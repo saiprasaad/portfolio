@@ -117,7 +117,7 @@ export function mountDesktop(root, { enterSimple }) {
     }
     if (fromHistory) {
       if (quickLook.isOpen && quickLook.current !== token) quickLook.close({ fromHistory: true });
-      if (timeMachine.isOpen && token !== 'time-machine') timeMachine.close({ fromHistory: true });
+      if (timeMachine.isOpen && token !== 'timeline') timeMachine.close({ fromHistory: true });
     }
     const project = getProject(token);
     if (project) {
@@ -139,7 +139,7 @@ export function mountDesktop(root, { enterSimple }) {
         case 'fit': openFolio({ tab: 'fit' }); break;
         case 'terminal': openTerminal(); break;
         case 'mail': openMail(); break;
-        case 'time-machine': timeMachine.open(); break;
+        case 'timeline': timeMachine.open(); break;
         default:
           if (!alreadyThere) finder.open('root', { record: false });
           token = '';
@@ -198,7 +198,7 @@ export function mountDesktop(root, { enterSimple }) {
         setTheme: (v) => settings.set('theme', v),
         setWallpaper: (v) => settings.set('wallpaper', v),
         enterSimple,
-        openTimeMachine: () => go('time-machine'),
+        openTimeMachine: () => go('timeline'),
       });
       bounce('terminal');
       win = wm.create({ app: 'terminal', title: 'sai — zsh — 80×24', label: 'Terminal', body: view.el, width: 740, height: 460, minWidth: 420, minHeight: 240, onClose: () => { delete singletons.terminal; released('terminal'); } });
@@ -274,9 +274,9 @@ export function mountDesktop(root, { enterSimple }) {
       h('p', {}, `This is ${profile.nickname}'s portfolio, built as a small operating system. Everything is also on one simple page if you prefer.`),
       h('h3', {}, 'Good places to start'),
       h('ul', {},
-        h('li', {}, 'Projects in Finder, with Quick Look previews'),
+        h('li', {}, 'Projects in Files, with a preview of each'),
         h('li', {}, 'Fit Check in Folio: paste a job description to compare it with his experience'),
-        h('li', {}, 'Time Machine in the Dock for his career history'),
+        h('li', {}, 'Timeline in the Dock for his career history'),
         h('li', {}, 'Terminal, if you like typing: try neofetch or git log'),
       ),
       h('h3', {}, 'Keyboard shortcuts'),
@@ -284,10 +284,10 @@ export function mountDesktop(root, { enterSimple }) {
         k(IS_MAC ? '⌘' : 'Ctrl', 'K'), h('dd', {}, 'Search everything'),
         k('/'), h('dd', {}, 'Search everything'),
         k('Ctrl', '`'), h('dd', {}, 'Open Terminal'),
-        k('Space'), h('dd', {}, 'Quick Look the selected project'),
-        k('←', '→'), h('dd', {}, 'Previous or next project in Quick Look'),
+        k('Space'), h('dd', {}, 'Preview the selected project'),
+        k('←', '→'), h('dd', {}, 'Previous or next project in a preview'),
         k('?'), h('dd', {}, 'Show this window'),
-        k('esc'), h('dd', {}, 'Close menus, Spotlight and Quick Look'),
+        k('esc'), h('dd', {}, 'Close menus, search and previews'),
       ),
       h('h3', {}, 'Prefer something simpler?'),
       h('p', {}, h('button', { class: 'btn', type: 'button', onClick: () => enterSimple() }, icon('layout', 15), 'Open the simple page')),
@@ -336,7 +336,7 @@ export function mountDesktop(root, { enterSimple }) {
         h('dt', {}, 'Links:'), h('dd', {}, p.links.length ? p.links.map((l, i) => [i ? ', ' : '', h('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.label)]) : 'Private work'),
       ),
       h('div', { class: 'fit-group' }, h('h5', {}, 'Tags'), chipList(p.stack, { actions: os.actions })),
-      h('button', { class: 'btn btn-primary', type: 'button', onClick: () => go(p.slug) }, icon('eye', 14), 'Quick Look'),
+      h('button', { class: 'btn btn-primary', type: 'button', onClick: () => go(p.slug) }, icon('eye', 14), 'Preview'),
     );
     wm.create({ app: 'info', title: `${p.name} Info`, body, width: 320, height: 540, minWidth: 280, minHeight: 320, zoomable: false, titlebar: false });
   }
@@ -394,7 +394,7 @@ export function mountDesktop(root, { enterSimple }) {
     openFit: () => go('fit'),
     openFolio: os.openFolio,
     openTerminal: () => go('terminal'),
-    openTimeMachine: () => go('time-machine'),
+    openTimeMachine: () => go('timeline'),
     copy,
     hud,
   };
@@ -481,7 +481,7 @@ export function mountDesktop(root, { enterSimple }) {
 
   function focusedApp() {
     const w = wm.focused;
-    if (!w) return 'Finder';
+    if (!w) return 'Files';
     return w.opts.label || APPS[w.app]?.label || w.title;
   }
 
@@ -513,7 +513,7 @@ export function mountDesktop(root, { enterSimple }) {
   function fileMenu() {
     const w = wm.focused;
     return [
-      { label: 'New Finder Window', action: () => go('') },
+      { label: 'New Window', action: () => go('') },
       { label: 'New Terminal Window', shortcut: 'Ctrl+`', action: () => go('terminal') },
       { label: 'New Message', action: () => go('mail') },
       { type: 'separator' },
@@ -556,7 +556,7 @@ export function mountDesktop(root, { enterSimple }) {
       { label: 'Portfolio', action: () => go('') },
       ...sections.map((s) => ({ label: s.label, action: () => go(s.id) })),
       { type: 'separator' },
-      { label: 'Time Machine', action: () => go('time-machine') },
+      { label: 'Timeline', action: () => go('timeline') },
     ];
   }
 
@@ -667,10 +667,10 @@ export function mountDesktop(root, { enterSimple }) {
 
   const dock = h('div', { class: 'dock', role: 'toolbar', 'aria-label': 'Applications' });
   const dockDefs = [
-    { id: 'finder', label: 'Finder', run: () => { const w = finder.win; if (!w) go(''); else if (w.state === 'minimized') wm.restore(w); else wm.focus(w); } },
+    { id: 'finder', label: 'Files', run: () => { const w = finder.win; if (!w) go(''); else if (w.state === 'minimized') wm.restore(w); else wm.focus(w); } },
     { id: 'folio', label: 'Folio', run: () => go('folio') },
     { id: 'terminal', label: 'Terminal', run: () => go('terminal') },
-    { id: 'timemachine', label: 'Time Machine', run: () => go('time-machine') },
+    { id: 'timemachine', label: 'Timeline', run: () => go('timeline') },
     { id: 'mail', label: 'Mail', run: () => go('mail') },
     { id: 'preview', label: 'Resume', run: () => go('resume') },
     { type: 'sep' },
@@ -746,7 +746,7 @@ export function mountDesktop(root, { enterSimple }) {
         h('div', { class: 'stack-grid' }, projects.map((p) => h('button', {
           class: 'stack-item', type: 'button', onClick: () => { pop.close(); os.openProject(p.slug); },
         }, fromHtml(coverHtml(p)), p.name))),
-        h('div', { class: 'stack-foot' }, h('button', { class: 'btn', type: 'button', onClick: () => { pop.close(); go('projects'); } }, icon('folder', 14), 'Open in Finder')),
+        h('div', { class: 'stack-foot' }, h('button', { class: 'btn', type: 'button', onClick: () => { pop.close(); go('projects'); } }, icon('folder', 14), 'Open in Files')),
       ],
     });
   }

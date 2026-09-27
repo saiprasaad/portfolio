@@ -36,7 +36,7 @@ function projectLines(p) {
   lines.push('', [seg('Stack: ', 't-dim'), p.stack.map(skillLabel).join(', ')]);
   if (p.team) lines.push([seg('Team: ', 't-dim'), p.team]);
   p.links.forEach((l) => lines.push([seg(`${l.label}: `, 't-dim'), link(l.url, l.url)]));
-  lines.push('', [seg('Tip: ', 't-dim'), seg(`open ${p.slug}.md`, 't-cmd'), seg(' shows it in Quick Look.', 't-dim')]);
+  lines.push('', [seg('Tip: ', 't-dim'), seg(`open ${p.slug}.md`, 't-cmd'), seg(' shows the full project page.', 't-dim')]);
   return lines;
 }
 
@@ -52,7 +52,7 @@ function buildFs() {
   return dir('~', [
     file('README.md', () => [
       [seg(`Welcome to ${site.osName}.`, 't-bold')],
-      'Everything in this home folder mirrors the Finder window.',
+      'Everything in this home folder mirrors the Files window.',
       '',
       [seg('ls', 't-cmd'), '            list what is here'],
       [seg('cd projects', 't-cmd'), '   move into a folder'],
@@ -148,7 +148,7 @@ const COMMANDS = {
   exit: 'Close the terminal',
 };
 
-const HIDDEN_COMMANDS = ['whoami', 'date', 'echo', 'uname', 'uptime', 'man', 'sudo', 'rm', 'vim', 'nano', 'emacs', 'hello', 'simple', 'timemachine', 'git', 'cls'];
+const HIDDEN_COMMANDS = ['whoami', 'date', 'echo', 'uname', 'uptime', 'man', 'sudo', 'rm', 'vim', 'nano', 'emacs', 'hello', 'simple', 'timeline', 'git', 'cls'];
 
 // ---------- View ----------
 
@@ -250,7 +250,7 @@ export function createTerminalView(actions, { touch = false } = {}) {
     }
     if (target === '.' && !cwd.length) {
       actions.openSection('root');
-      return print([seg('Opened Finder.', 't-dim')]);
+      return print([seg('Opened Files.', 't-dim')]);
     }
     const { node } = resolve(target);
     const fallback = node || resolve(`${target}.md`).node;
@@ -488,7 +488,7 @@ export function createTerminalView(actions, { touch = false } = {}) {
     simple() {
       actions.enterSimple?.();
     },
-    timemachine() {
+    timeline() {
       actions.openTimeMachine?.();
     },
   };

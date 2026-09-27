@@ -131,15 +131,15 @@ export function createTimeMachine(os) {
       status.textContent = `${e.kind === 'role' ? `${e.data.title}, ${e.data.company}` : `${e.data.degree}, ${e.data.school}`} · ${formatRange(e.start, e.end)}`;
     }
 
-    const panel = h('div', { class: 'tm', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Time Machine: career history', tabindex: '-1' },
+    const panel = h('div', { class: 'tm', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Timeline: career history', tabindex: '-1' },
       canvas,
-      h('div', { class: 'tm-head' }, h('h2', {}, 'Time Machine'), status),
+      h('div', { class: 'tm-head' }, h('h2', {}, 'Timeline'), status),
       stage,
       h('div', { class: 'tm-arrows' }, olderBtn, newerBtn),
       h('nav', { class: 'tm-timeline', 'aria-label': 'Timeline' }, ticks),
       h('div', { class: 'tm-bottom' },
         h('button', { class: 'btn', type: 'button', onClick: () => close() }, 'Close'),
-        h('button', { class: 'btn', type: 'button', onClick: () => { const e = list[at]; close(); os.openSection(e.kind === 'role' ? 'experience' : 'education', { focus: e.kind === 'role' ? `role-${e.id}` : null }); } }, 'Show in Finder'),
+        h('button', { class: 'btn', type: 'button', onClick: () => { const e = list[at]; close(); os.openSection(e.kind === 'role' ? 'experience' : 'education', { focus: e.kind === 'role' ? `role-${e.id}` : null }); } }, 'Show in Files'),
       ),
     );
     let wheelLock = 0;
@@ -168,7 +168,7 @@ export function createTimeMachine(os) {
     stopStars?.();
     layer.remove();
     layer = null;
-    if (!fromHistory) os.leave('time-machine');
+    if (!fromHistory) os.leave('timeline');
     if (returnFocus?.isConnected) returnFocus.focus({ preventScroll: true });
   }
 

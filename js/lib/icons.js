@@ -131,10 +131,10 @@ export function textDocSvg({ size = 64 } = {}) {
 
 // App names. The artwork itself lives in appicons.js.
 export const APPS = {
-  finder: { label: 'Finder' },
+  finder: { label: 'Files' },
   folio: { label: 'Folio' },
   terminal: { label: 'Terminal' },
-  timemachine: { label: 'Time Machine' },
+  timemachine: { label: 'Timeline' },
   achievements: { label: 'Achievements' },
   mail: { label: 'Mail' },
   preview: { label: 'Resume' },

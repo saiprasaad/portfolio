@@ -147,7 +147,7 @@ export function renderExperience(actions) {
         h('h2', { class: 'doc-title' }, 'Experience'),
         h('p', { class: 'doc-prose', style: 'margin-top:4px' }, `${capitalize(experiencePhrase(now))} full-time, plus two internships.`),
       ),
-      actions.openTimeMachine ? button('Browse in Time Machine', 'clock-back', () => actions.openTimeMachine()) : null,
+      actions.openTimeMachine ? button('Open Timeline', 'clock-back', () => actions.openTimeMachine()) : null,
     ),
     h('ol', { class: 'timeline' }, experience.map((r) => roleCard(r, actions, now))),
   );

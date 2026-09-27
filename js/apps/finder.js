@@ -88,7 +88,7 @@ export function createFinder(os) {
     const height = Math.min(660, a.bottom - a.top - 36);
     const x = withWidgets ? 364 : (a.right - width) / 2;
     win = os.wm.create({
-      app: 'finder', title: 'Portfolio', label: 'Finder', titlebar: false, body: root,
+      app: 'finder', title: 'Portfolio', label: 'Files', titlebar: false, body: root,
       width, height, minWidth: 460, minHeight: 320, x, y: a.top + 22,
       onClose: () => { win = null; },
       onResize: (b) => {
@@ -103,7 +103,7 @@ export function createFinder(os) {
       class: 'fs-item', type: 'button', 'data-loc': loc,
       onClick: () => (loc === 'resume' ? os.go('resume') : navigate(loc)), ...extra,
     }, icon(iconName, 16), label);
-    return h('nav', { class: 'finder-sidebar', 'aria-label': 'Finder sidebar' },
+    return h('nav', { class: 'finder-sidebar', 'aria-label': 'Sidebar' },
       h('div', { class: 'fs-label' }, 'Favorites'),
       item('root', 'Portfolio', 'folder'),
       sections.map((s) => item(s.id, s.label, s.icon)),
@@ -367,7 +367,7 @@ export function createFinder(os) {
     state.sel = selItem.key;
     const p = selItem.project;
     const stage = h('div', { class: 'fvg-stage' }, h('button', {
-      type: 'button', 'aria-label': `Quick Look ${p.name}`, style: 'display:contents', onClick: () => selItem.activate(),
+      type: 'button', 'aria-label': `Preview ${p.name}`, style: 'display:contents', onClick: () => selItem.activate(),
     }, fromHtml(coverHtml(p))));
     const info = h('aside', { class: 'fvg-info', 'aria-label': 'Details' },
       h('h3', {}, p.name),
@@ -375,7 +375,7 @@ export function createFinder(os) {
       h('p', {}, p.tagline),
       chipList(p.stack.slice(0, 6), { actions: actions() }),
       h('div', { class: 'doc-row' },
-        h('button', { class: 'btn btn-primary', type: 'button', onClick: () => selItem.activate() }, icon('eye', 14), 'Quick Look'),
+        h('button', { class: 'btn btn-primary', type: 'button', onClick: () => selItem.activate() }, icon('eye', 14), 'Preview'),
         projectLinks(p).slice(0, 1)),
     );
     const strip = h('div', { class: 'fvg-strip', role: 'listbox', 'aria-label': 'Projects', 'aria-orientation': 'horizontal' },
@@ -476,7 +476,7 @@ export function createFinder(os) {
   function itemMenu(item) {
     const p = item.project;
     const base = [
-      { label: p ? 'Quick Look' : 'Open', shortcut: p ? 'Space' : '', action: () => item.activate() },
+      { label: p ? 'Preview' : 'Open', shortcut: p ? 'Space' : '', action: () => item.activate() },
     ];
     if (p) {
       base.push({ label: 'Get Info', action: () => os.getInfo(p.slug) });

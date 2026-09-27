@@ -56,7 +56,7 @@ console.log('Desktop');
   const { p, context, errors } = await page();
   check('boots without page errors', errors.length === 0, errors.join('; '));
   check('shows the name as the page heading', (await p.locator('h1').first().textContent()).includes('Saiprasaad'));
-  check('opens Finder at the portfolio root', await count(p, '.window[data-app="finder"] .fv-item') === 8);
+  check('opens Files at the portfolio root', await count(p, '.window[data-app="finder"] .fv-item') === 8);
 
   await p.click('.fv-item[data-key="projects"]');
   await p.waitForTimeout(200);
@@ -72,23 +72,23 @@ console.log('Desktop');
 
   await p.click('.fv-item[data-key="repo-vision"]');
   await p.waitForTimeout(300);
-  check('Quick Look opens a project', (await p.locator('.ql #ql-title').textContent()) === 'Repo Vision');
+  check('Preview opens a project', (await p.locator('.ql #ql-title').textContent()) === 'Repo Vision');
   check('the project page explains how it works and what it does', await count(p, '.ql .pd-flow li') >= 3 && await count(p, '.ql .pd-features li') >= 3 && await count(p, '.ql .pd-facts > div') >= 2);
-  check('Quick Look records the project in the URL', p.url().endsWith('#repo-vision'));
+  check('Preview records the project in the URL', p.url().endsWith('#repo-vision'));
   await p.keyboard.press('ArrowRight');
   check('arrow keys move to the next project', (await p.locator('.ql #ql-title').textContent()) !== 'Repo Vision');
   await p.keyboard.press('Escape');
   await p.waitForTimeout(300);
-  check('Escape closes Quick Look', await count(p, '.ql') === 0);
-  check('closing Quick Look restores the folder URL', p.url().endsWith('#projects'), p.url());
+  check('Escape closes the preview', await count(p, '.ql') === 0);
+  check('closing the preview restores the folder URL', p.url().endsWith('#projects'), p.url());
 
   await p.keyboard.press('Control+k');
   await p.keyboard.type('flutter');
   await p.waitForTimeout(150);
-  check('Spotlight finds Flutter projects', (await p.locator('.spotlight-list').textContent()).includes('Campus Cooks'));
+  check('Search finds Flutter projects', (await p.locator('.spotlight-list').textContent()).includes('Campus Cooks'));
   await p.keyboard.press('Enter');
   await p.waitForTimeout(300);
-  check('Spotlight top hit filters Finder by skill', (await p.locator('.finder-filter').textContent()).includes('Flutter') && await count(p, '.fv-icons--projects .fv-item') === 4);
+  check('Search top hit filters Files by skill', (await p.locator('.finder-filter').textContent()).includes('Flutter') && await count(p, '.fv-icons--projects .fv-item') === 4);
 
   await p.keyboard.press('Control+Backquote');
   await p.waitForTimeout(200);
@@ -147,10 +147,20 @@ console.log('Desktop');
   await p.click('.fs-item[data-loc="root"]');
   await p.locator('.fv-item').first().focus();
   await p.keyboard.press('ArrowRight');
-  check('arrow keys move the Finder selection', await p.evaluate(() => document.activeElement?.dataset.key === 'projects'));
+  check('arrow keys move the Files selection', await p.evaluate(() => document.activeElement?.dataset.key === 'projects'));
   await p.keyboard.press('Enter');
   await p.waitForTimeout(200);
   check('Enter opens the selected folder', await count(p, '.fv-icons--projects') === 1);
+
+  const onScreen = await p.evaluate(() => [
+    document.body.innerText,
+    document.title,
+    ...[...document.querySelectorAll('[aria-label], [title]')].map((el) => `${el.getAttribute('aria-label') || ''} ${el.getAttribute('title') || ''}`),
+  ].join(' '));
+  await p.locator('.menubar [role="menuitem"]', { hasText: /^Go$/ }).click();
+  const goMenu = await p.locator('.menu').textContent();
+  await p.keyboard.press('Escape');
+  check('no Apple product names on screen', !/Finder|Quick Look|Time Machine|Spotlight/.test(`${onScreen} ${goMenu}`));
 
   check('no page errors after exercising apps', errors.length === 0, errors.join('; '));
   await context.close();
@@ -191,8 +201,11 @@ console.log('Folio service');
 console.log('Deep links and simple page');
 {
   const { p, context } = await page({ hash: 'repo-vision' });
-  check('#repo-vision opens Quick Look', (await p.locator('.ql #ql-title').textContent()) === 'Repo Vision');
+  check('#repo-vision opens the preview', (await p.locator('.ql #ql-title').textContent()) === 'Repo Vision');
   await context.close();
+  const t = await page({ hash: 'timeline' });
+  check('#timeline opens the career timeline', await count(t.p, '.tm') === 1 && (await t.p.locator('.tm-head h2').textContent()) === 'Timeline');
+  await t.context.close();
   const s = await page({ hash: 'simple' });
   check('#simple shows the simple page', await s.p.evaluate(() => document.body.classList.contains('is-simple')));
   check('simple page lists every project', await count(s.p, '.simple-page .sp-project') === 10);
@@ -211,7 +224,7 @@ console.log('Browser history');
   await p.waitForTimeout(300);
   await p.goBack();
   await p.waitForTimeout(300);
-  check('Back closes Quick Look', await count(p, '.ql') === 0 && p.url().endsWith('#projects'));
+  check('Back closes the preview', await count(p, '.ql') === 0 && p.url().endsWith('#projects'));
   await p.goForward();
   await p.waitForTimeout(300);
   check('Forward reopens it', (await p.locator('.ql #ql-title').textContent()) === 'Wordle Clone');

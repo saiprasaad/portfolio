@@ -34,7 +34,7 @@ function actionItems(os) {
     ...profile.links.map((l) => ({ id: `act:${l.id}`, title: `Open ${l.label}`, subtitle: l.handle, icon: l.id, keywords: [l.label, 'profile', 'social'], href: l.url })),
   ];
   if (os.isMac) {
-    items.push({ id: 'act:tm', title: 'Open Time Machine', subtitle: 'Career history', icon: 'clock-back', app: 'timemachine', keywords: ['time', 'machine', 'history', 'career', 'timeline'], run: () => os.go('time-machine') });
+    items.push({ id: 'act:tm', title: 'Open Timeline', subtitle: 'Career history', icon: 'clock-back', app: 'timemachine', keywords: ['timeline', 'history', 'career', 'time'], run: () => os.go('timeline') });
     items.push({ id: 'act:shortcuts', title: 'Keyboard shortcuts', subtitle: `${mod}K, /, Ctrl+\``, icon: 'keyboard', keywords: ['keyboard', 'shortcuts', 'keys', 'help'], run: () => os.openReadme() });
   }
   return items.map((it) => ({ ...it, type: 'action', weight: 18, text: '' }));
@@ -192,7 +192,7 @@ export function createSpotlight(os) {
       h('span', {}, h('span', { class: 'kbd' }, '↵'), 'open'),
       h('span', {}, h('span', { class: 'kbd' }, `${mod} K`), 'search anytime'));
     panel = h('div', { class: 'spotlight-panel' }, listEl, previewEl, hints);
-    const box = h('div', { class: 'spotlight', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Spotlight search' },
+    const box = h('div', { class: 'spotlight', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Search' },
       h('div', { class: 'spotlight-bar' }, icon('search', 22), input, h('span', { class: 'kbd' }, 'esc')),
       panel,
     );

@@ -129,7 +129,7 @@ export function detectIntent(text) {
   if (!wants) return null;
   if (/\b(resume|cv)\b/.test(t)) return { type: 'resume' };
   if (/\b(terminal|shell)\b/.test(t)) return { type: 'terminal' };
-  if (/\btime machine\b/.test(t)) return { type: 'timemachine' };
+  if (/\b(timeline|career history)\b/.test(t)) return { type: 'timemachine' };
   if (/\b(fit check|job description)\b/.test(t)) return { type: 'fit' };
   if (/\b(email|mail|message)\b/.test(t)) return { type: 'mail' };
   const project = mentionedProject(text);
@@ -456,7 +456,7 @@ export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
     switch (intent.type) {
       case 'resume': actions.openResume(); return { text: 'Opened the resume.' };
       case 'terminal': actions.openTerminal?.(); return { text: 'Opened the Terminal. Try `neofetch`.' };
-      case 'timemachine': actions.openTimeMachine?.(); return { text: 'Opened Time Machine.' };
+      case 'timemachine': actions.openTimeMachine?.(); return { text: 'Opened Timeline.' };
       case 'fit': setTab('fit'); return { text: 'Switched to Fit Check. Paste a job description to compare.' };
       case 'mail': actions.openMail(); return { text: 'Opened a new email to Sai.' };
       case 'project': {
