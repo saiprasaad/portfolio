@@ -1599,28 +1599,7 @@
 }
 
 .t-fetch {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0 22px;
-  align-items: start;
   margin: 4px 0 8px;
-}
-
-.t-art {
-  margin: 0;
-  font: inherit;
-  font-size: 8.2px;
-  line-height: 1.04;
-  letter-spacing: 0.02em;
-  color: #c9d1d9;
-  white-space: pre;
-}
-
-@container (max-width: 560px) {
-  .t-fetch {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-  }
 }
 
 .t-swatches {

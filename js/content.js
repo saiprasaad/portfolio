@@ -431,7 +431,6 @@ export const projects = [
     stack: ['flutter', 'dart', 'firebase', 'logmeal', 'spoonacular', 'figma', 'uiux'],
     links: [
       { type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/Campus-Cooks' },
-      { type: 'video', label: 'Demo video', url: 'https://drive.google.com/file/d/1--LbigJaJ-yDcMmW_RtHZHbswS0q7NNn/view?usp=sharing' },
     ],
     media: [],
     cover: { type: 'camera', from: '#a33a0b', to: '#f08a32' },

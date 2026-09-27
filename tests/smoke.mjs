@@ -93,7 +93,7 @@ console.log('Desktop');
   await p.keyboard.press('Control+Backquote');
   await p.waitForTimeout(200);
   const term = p.locator('.terminal-input');
-  for (const cmd of ['ls', '<b id="xss">x</b>', 'cat about.txt']) {
+  for (const cmd of ['ls', '<b id="xss">x</b>', 'cat about.txt', 'neofetch']) {
     await term.fill(cmd);
     await term.press('Enter');
   }
@@ -101,6 +101,7 @@ console.log('Desktop');
   check('terminal lists the virtual home folder', out.includes('projects/'));
   check('terminal never renders typed HTML', await count(p, '#xss') === 0);
   check('terminal cat prints files', out.includes('Full-Stack Software Engineer'));
+  check('neofetch prints the summary without a portrait', out.includes('Uptime:') && await count(p, '.terminal-output pre') === 0);
   await term.fill('open resume.pdf');
   await term.press('Enter');
   await p.waitForTimeout(300);

@@ -6,7 +6,6 @@ import {
   site, profile, projects, experience, education, skillCategories, accomplishments, certifications,
   aboutParagraphs, experiencePhrase, formatRange, formatMonth, skillLabel,
 } from '../content.js';
-import { ASCII_PORTRAIT } from '../lib/ascii.js';
 
 const HISTORY_KEY = 'saios.terminal.history';
 let cmdHistory = session.get(HISTORY_KEY, []) || [];
@@ -302,7 +301,7 @@ export function createTerminalView(actions, { touch = false } = {}) {
       [seg('Projects: ', 't-cyan'), `${projects.length} · Certifications: ${certifications.length}`],
       [seg('Contact: ', 't-cyan'), link(profile.email, `mailto:${profile.email}`)],
     ];
-    const infoCol = h('div');
+    const infoCol = h('div', { class: 't-fetch' });
     info.forEach((parts) => {
       const line = h('div', { class: 'terminal-line' });
       parts.forEach((p) => {
@@ -314,7 +313,7 @@ export function createTerminalView(actions, { touch = false } = {}) {
     });
     infoCol.append(h('div', { class: 't-swatches', 'aria-hidden': 'true' },
       ['#ff5f57', '#febc2e', '#28c840', '#56d4dd', '#6cb6ff', '#d2a8ff', '#e7e7ea', '#8b8d98'].map((c) => h('i', { style: `background:${c}` }))));
-    output.append(h('div', { class: 't-fetch' }, h('pre', { class: 't-art', 'aria-label': 'ASCII portrait of Sai' }, ASCII_PORTRAIT), infoCol));
+    output.append(infoCol);
     scroller.scrollTop = scroller.scrollHeight;
   }
 

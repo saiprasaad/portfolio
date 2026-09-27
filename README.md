@@ -44,7 +44,7 @@ npm test             # end-to-end smoke test in headless Chromium
 | Command | What it does |
 | --- | --- |
 | `npm run prerender` | Writes the simple page and JSON-LD profile into `index.html`. CI runs it before every deploy. |
-| `npm run assets` | Regenerates the resized photos, project images, ASCII portrait and favicons from their sources. |
+| `npm run assets` | Regenerates the resized photos, project images and favicons from their sources. |
 
 ## Deploying
 
