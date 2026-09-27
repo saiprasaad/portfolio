@@ -229,7 +229,7 @@ console.log('Deep links and simple page');
   check('simple page includes how each project works', await count(s.p, '.simple-page .sp-flow') === 10);
   await s.p.click('.sp-desktop-btn');
   await s.p.waitForTimeout(500);
-  check('simple page can return to the desktop', await count(s.p, '.window[data-app="finder"]') === 1);
+  check('simple page can return to the desktop', await s.p.locator('.window[data-app="finder"]').isVisible());
   await s.context.close();
 }
 
@@ -257,7 +257,13 @@ console.log('Browser history');
   await p.waitForTimeout(200);
   await p.goBack();
   await p.waitForTimeout(500);
-  check('Back from the simple page returns to the desktop', await p.evaluate(() => !document.body.classList.contains('is-simple')) && p.url().endsWith('#projects'), p.url());
+  check('Back from the simple page returns to the desktop', await p.evaluate(() => !document.body.classList.contains('is-simple')) && p.url().endsWith('#projects') && await p.locator('.window[data-app="finder"]').isVisible(), p.url());
+  await p.evaluate(() => document.querySelector('.mb-logo').click());
+  await p.click('.menu-item:has-text("Simple Page")');
+  await p.waitForTimeout(300);
+  await p.click('.sp-desktop-btn');
+  await p.waitForTimeout(500);
+  check('Desktop view brings back the running desktop', await p.locator('.window[data-app="finder"]').isVisible() && await p.locator('.menubar').isVisible());
   await context.close();
 }
 
@@ -268,6 +274,11 @@ console.log('Phone');
   check('phone home has a Contact app and no hiring prompts', await count(p, '.ios-app[aria-label="Contact"]') === 1 && !HIRING.test(await p.locator('.ios-home').textContent()));
   check('the About icon is a drawing, not a photo', await count(p, '.ios-app[aria-label="About"] img') === 0 && await count(p, '.ios-app[aria-label="About"] .app-svg') === 1);
   const card = await p.locator('.ios-profile-card').textContent();
+  await p.click('.ios-home-foot button');
+  await p.waitForTimeout(300);
+  await p.click('.sp-desktop-btn:has-text("App view")');
+  await p.waitForTimeout(400);
+  check('App view brings back the home screen', await p.locator('.ios-grid').isVisible());
   check('phone profile shows the location and profile links', card.includes('New York, USA') && !/\d:\d\d/.test(card) && await count(p, '.ios-profile-links a') === 3);
   await p.click('.ios-dock .ios-app[aria-label="Projects"]');
   await p.waitForTimeout(500);

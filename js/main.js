@@ -17,17 +17,20 @@ let shellType = null;
 
 applySettings();
 
+const layout = () => (phone.matches ? 'ios' : 'mac');
+
 async function mountShell() {
-  const type = phone.matches ? 'ios' : 'mac';
-  if (shell && shellType === type) return shell;
-  shellType = type;
-  if (type === 'ios') {
-    const { mountIOS } = await import('./ios/ios.js');
-    shell = mountIOS(root, { enterSimple });
-  } else {
-    const { mountDesktop } = await import('./os/desktop.js');
-    shell = mountDesktop(root, { enterSimple });
+  if (!shell) {
+    shellType = layout();
+    if (shellType === 'ios') {
+      const { mountIOS } = await import('./ios/ios.js');
+      shell = mountIOS(root, { enterSimple });
+    } else {
+      const { mountDesktop } = await import('./os/desktop.js');
+      shell = mountDesktop(root, { enterSimple });
+    }
   }
+  // The simple page hides the app; show it again whether it was just built or already running.
   root.hidden = false;
   // If the slow-start fallback already showed the simple page, take the app back.
   document.documentElement.classList.replace('no-js', 'js');
@@ -70,8 +73,15 @@ function enterSimple({ record = true, replace = false } = {}) {
 }
 
 async function exitSimple(token = '') {
-  document.body.classList.remove('is-simple');
   storage.set(SIMPLE_KEY, false);
+  // The window crossed between phone and desktop sizes while the simple page was up,
+  // so the running app is the wrong one: load the right one fresh at the same URL.
+  if (shell && shellType !== layout()) {
+    router.record(token, { replace: true });
+    window.location.reload();
+    return;
+  }
+  document.body.classList.remove('is-simple');
   await mountShell();
   if (shellType === 'mac' && !root.dataset.booted) {
     root.dataset.booted = 'true';
