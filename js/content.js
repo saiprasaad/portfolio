@@ -275,7 +275,7 @@ export const projects = [
     stack: ['rrweb', 'javascript', 'react', 'mui', 'reactquery', 'python', 'flask', 'redis', 'postgresql', 'azure', 'teams', 'microservices'],
     links: [],
     media: [
-      { type: 'video', title: 'Product features video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly promo: the three-line SDK, the replay player with speed controls and skip inactivity, console, network and event panels, and a share link to a moment in a session', width: 1920, height: 1080, caption: 'Monitorly’s key features in 24 seconds' },
+      { type: 'video', title: 'Product features video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly product features video: adding the three-line SDK to an app, the project dashboard and its list of recorded sessions, the replay player with speed controls, skip inactivity and console, network and event panels, and sharing a link to a moment in a session', width: 1920, height: 1080, caption: 'Monitorly’s key features in 27 seconds' },
     ],
     cover: { type: 'replay', from: '#0b0d1c', to: '#2d2672' },
   },
