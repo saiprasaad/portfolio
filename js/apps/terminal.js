@@ -4,7 +4,7 @@
 import { h, session, isTypingTarget, openExternal } from '../lib/dom.js';
 import {
   site, profile, projects, experience, education, skillCategories, accomplishments, certifications,
-  aboutParagraphs, formatRange, formatMonth, skillLabel, nowMonth,
+  aboutParagraphs, experiencePhrase, formatRange, formatMonth, skillLabel,
 } from '../content.js';
 import { ASCII_PORTRAIT } from '../lib/ascii.js';
 
@@ -114,13 +114,10 @@ function commonPrefix(list) {
   return p;
 }
 
+// Same figure as the rest of the site: full-time experience, not time since the first job.
 function careerUptime() {
   const first = experience[experience.length - 1].start;
-  const [y, m] = first.split('-').map(Number);
-  const months = nowMonth() - (y * 12 + m - 1);
-  const years = Math.floor(months / 12);
-  const rest = months % 12;
-  return `${years} years, ${rest} month${rest === 1 ? '' : 's'} (since ${formatMonth(first)})`;
+  return `${experiencePhrase()} full-time, plus internships (first job ${formatMonth(first)})`;
 }
 
 const COMMANDS = {
