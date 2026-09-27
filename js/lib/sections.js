@@ -325,10 +325,12 @@ export function renderProjectDetail(p, actions) {
   const related = relatedProjects(p);
   const features = p.features || [];
   const flow = p.flow || [];
-  // A demo video leads the page; screenshots and charts follow the write-up.
-  const videoFirst = p.media.some((m) => m.type === 'video');
-  const media = p.media.length ? h('section', { class: 'pd-section', 'aria-label': videoFirst ? 'Demo' : 'Screens and output' },
-    kicker(videoFirst ? 'Demo' : 'Output'),
+  // A video leads the page under its own title; screenshots and charts follow the write-up.
+  const video = p.media.find((m) => m.type === 'video');
+  const videoFirst = Boolean(video);
+  const mediaLabel = video ? video.title || 'Video' : 'Output';
+  const media = p.media.length ? h('section', { class: 'pd-section', 'aria-label': mediaLabel },
+    kicker(mediaLabel),
     h('div', { class: 'pd-media' }, p.media.map((m) => h('figure', {},
       m.type === 'video'
         // Only the poster loads until someone presses play.

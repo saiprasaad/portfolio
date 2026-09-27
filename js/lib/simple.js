@@ -45,7 +45,7 @@ function renderRole(role, date) {
 }
 
 function renderProject(p) {
-  const videos = p.media.filter((m) => m.type === 'video').map((m) => ({ type: 'video', label: 'Watch the demo', url: m.src }));
+  const videos = p.media.filter((m) => m.type === 'video').map((m) => ({ type: 'video', label: `Watch the ${(m.title || 'video').toLowerCase()}`, url: m.src }));
   const all = [...videos, ...p.links];
   const links = all.length
     ? `<p class="sp-links">${all.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${linkIcon(l.type)}${esc(l.label)}</a>`).join('')}</p>`

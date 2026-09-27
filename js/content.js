@@ -247,9 +247,8 @@ export const projects = [
     year: 2026,
     featured: true,
     status: 'In production',
-    team: 'Solo project',
     tagline: 'Session replay you can drop into any app: record every session, replay it like a video and get alerted when users hit errors or friction.',
-    summary: 'A self-hosted, rrweb-powered session replay and analytics platform, built solo from the SDK to the dashboard. A three-line SDK records what users do, a Flask and Redis pipeline stores it without slowing the page, and a React dashboard replays each session like a video, live or after the fact. It has recorded around 100,000 sessions so far, and when something goes wrong, a Microsoft Teams alert opens the replay at that exact moment.',
+    summary: 'A self-hosted, rrweb-powered session replay and analytics platform, built end to end, from the SDK to the dashboard. A three-line SDK records what users do, a Flask and Redis pipeline stores it without slowing the page, and a React dashboard replays each session like a video, live or after the fact. It has recorded around 100,000 sessions so far, and when something goes wrong, a Microsoft Teams alert opens the replay at that exact moment.',
     facts: [
       { value: '~100k', label: 'sessions recorded so far' },
       { value: '3', label: 'lines to add it to any app' },
@@ -276,7 +275,7 @@ export const projects = [
     stack: ['rrweb', 'javascript', 'react', 'mui', 'reactquery', 'python', 'flask', 'redis', 'postgresql', 'azure', 'teams', 'microservices'],
     links: [],
     media: [
-      { type: 'video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly promo: the three-line SDK, the replay player with speed controls and skip inactivity, console, network and event panels, and a share link to a moment in a session', width: 1920, height: 1080, caption: 'A 24-second tour of Monitorly' },
+      { type: 'video', title: 'Product features video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly promo: the three-line SDK, the replay player with speed controls and skip inactivity, console, network and event panels, and a share link to a moment in a session', width: 1920, height: 1080, caption: 'Monitorly’s key features in 24 seconds' },
     ],
     cover: { type: 'replay', from: '#0b0d1c', to: '#2d2672' },
   },
