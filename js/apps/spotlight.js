@@ -24,8 +24,7 @@ function actionItems(os) {
   const mod = os.isMac ? '⌘' : 'Ctrl+';
   const items = [
     { id: 'act:resume', title: 'Open resume', subtitle: profile.resume.fileName, icon: 'doc', app: 'preview', keywords: ['resume', 'cv', 'pdf'], run: () => os.go('resume') },
-    { id: 'act:fit', title: 'Check a job description', subtitle: 'Fit Check in Folio', icon: 'target', app: 'fit', keywords: ['fit', 'job', 'role', 'hiring', 'recruiter', 'match'], run: () => os.go('fit') },
-    { id: 'act:mail', title: 'Write an email to Sai', subtitle: profile.email, icon: 'mail', app: 'mail', keywords: ['email', 'mail', 'contact', 'message', 'hire'], run: () => os.go('mail') },
+    { id: 'act:mail', title: 'Write an email to Sai', subtitle: profile.email, icon: 'mail', app: 'mail', keywords: ['email', 'mail', 'contact', 'message'], run: () => os.go('mail') },
     { id: 'act:copy', title: 'Copy email address', subtitle: profile.email, icon: 'copy', keywords: ['copy', 'email', 'address'], run: () => os.copy(profile.email, 'Email address copied') },
     { id: 'act:folio', title: 'Ask Folio', subtitle: 'Portfolio assistant', icon: 'sparkle', app: 'folio', keywords: ['folio', 'ai', 'assistant', 'chat', 'ask'], run: () => os.go('folio') },
     { id: 'act:terminal', title: 'Open Terminal', subtitle: 'Ctrl+`', icon: 'terminal', app: 'terminal', keywords: ['terminal', 'shell', 'command', 'cli'], run: () => os.go('terminal') },

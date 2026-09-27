@@ -4,7 +4,7 @@ import { profile, sections, getProject } from '../content.js';
 
 const TITLES = {
   '': 'Saiprasaad Kalyanaraman · Full-Stack Software Engineer',
-  resume: 'Resume', folio: 'Folio', fit: 'Fit Check', terminal: 'Terminal', mail: 'Mail',
+  resume: 'Resume', folio: 'Folio', terminal: 'Terminal', mail: 'Mail',
   timeline: 'Timeline', settings: 'Settings', simple: 'Simple page',
 };
 

@@ -18,10 +18,10 @@ import { createMailView } from '../apps/mail.js';
 import { createResumeView } from '../apps/resume.js';
 import { titleFor } from '../lib/titles.js';
 
-const GRID = ['about', 'experience', 'skills', 'education', 'achievements', 'fit', 'terminal', 'settings'];
+const GRID = ['about', 'experience', 'skills', 'education', 'achievements', 'contact', 'terminal', 'settings'];
 const DOCK = ['folio', 'projects', 'mail', 'preview'];
-const LABELS = { about: 'About', experience: 'Experience', skills: 'Skills', education: 'Education', achievements: 'Awards', fit: 'Fit Check', terminal: 'Terminal', settings: 'Settings', folio: 'Folio', projects: 'Projects', mail: 'Mail', preview: 'Resume' };
-const TOKEN_TO_APP = { about: 'about', experience: 'experience', skills: 'skills', education: 'education', achievements: 'achievements', contact: 'contact', projects: 'projects', resume: 'preview', folio: 'folio', fit: 'fit', terminal: 'terminal', mail: 'mail', settings: 'settings', timeline: 'experience' };
+const LABELS = { about: 'About', experience: 'Experience', skills: 'Skills', education: 'Education', achievements: 'Awards', contact: 'Contact', terminal: 'Terminal', settings: 'Settings', folio: 'Folio', projects: 'Projects', mail: 'Mail', preview: 'Resume' };
+const TOKEN_TO_APP = { about: 'about', experience: 'experience', skills: 'skills', education: 'education', achievements: 'achievements', contact: 'contact', projects: 'projects', resume: 'preview', folio: 'folio', terminal: 'terminal', mail: 'mail', settings: 'settings', timeline: 'experience' };
 const APP_TO_TOKEN = { preview: 'resume' };
 
 export function mountIOS(root, { enterSimple }) {
@@ -171,8 +171,7 @@ export function mountIOS(root, { enterSimple }) {
     filterSkill: (id) => openApp('projects', { filter: id }),
     openResume: () => openApp('preview'),
     openMail: (prefill) => openApp('mail', { prefill }),
-    openFit: () => openApp('fit'),
-    openFolio: ({ question, tab } = {}) => openApp(tab === 'fit' ? 'fit' : 'folio', { question }),
+    openFolio: ({ question } = {}) => openApp('folio', { question }),
     openTerminal: () => openApp('terminal'),
     openTimeMachine: null,
     copy,
@@ -246,7 +245,7 @@ export function mountIOS(root, { enterSimple }) {
       return;
     }
     const token = APP_TO_TOKEN[app] || app;
-    const title = app === 'contact' ? 'Contact' : LABELS[app] || app;
+    const title = LABELS[app] || app;
     let view = null;
     const spec = { title, app, token, build: null, actionsNode: null };
     switch (app) {
@@ -259,8 +258,7 @@ export function mountIOS(root, { enterSimple }) {
       case 'projects': spec.build = (body) => projectList(body, filter); break;
       case 'settings': spec.build = () => settingsScreen(); break;
       case 'folio':
-      case 'fit':
-        view = createFolioView(actions, { tab: app === 'fit' ? 'fit' : 'chat' });
+        view = createFolioView(actions);
         spec.title = 'Folio';
         spec.build = (body) => { body.classList.add('is-app'); body.append(view.el); return null; };
         break;
@@ -312,11 +310,6 @@ export function mountIOS(root, { enterSimple }) {
       }, icon(l.id, 14), h('span', { class: 'ios-link-label' }, l.label)))),
     ),
     h('ul', { class: 'ios-grid', 'aria-label': 'Apps' }, GRID.map((id) => h('li', {}, appButton(id)))),
-    h('button', { class: 'ios-widget ios-fit', type: 'button', onClick: (e) => openApp('fit', { from: e.currentTarget }) },
-      h('span', { class: 'widget-label' }, icon('target', 13), 'Hiring?'),
-      h('strong', {}, "Check a role against Sai's experience"),
-      h('span', {}, 'Paste a job description to see matches and gaps.'),
-    ),
     h('p', { class: 'ios-home-foot' }, h('button', { type: 'button', onClick: () => enterSimple() }, 'Simple page')),
   );
   dock.append(...DOCK.map((id) => appButton(id, false)));

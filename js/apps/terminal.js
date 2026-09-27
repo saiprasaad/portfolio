@@ -78,7 +78,7 @@ function buildFs() {
       file('awards.txt', () => accomplishments.map((a) => [seg('★ ', 't-cmd'), a.title, seg(` · ${a.org}`, 't-dim')])),
       file('certifications.txt', () => certifications.map((c) => [seg('✓ ', 't-ok'), c.title, seg(` · ${c.issuer}`, 't-dim')])),
     ], { open: ['section', 'achievements'] }),
-    file('.secrets', () => [[seg('cat: .secrets: Permission denied', 't-err')], [seg('hint: ', 't-dim'), seg('sudo hire-me', 't-cmd')]], { hidden: true }),
+    file('.secrets', () => [[seg('cat: .secrets: Permission denied', 't-err')], [seg('hint: ', 't-dim'), seg('sudo cat .secrets', 't-cmd')]], { hidden: true }),
   ]);
 }
 
@@ -140,7 +140,6 @@ const COMMANDS = {
   email: 'Write an email to Sai',
   resume: 'Open the resume',
   ask: 'Ask Folio a question, e.g. ask what did he build with AI?',
-  fit: 'Check a job description against his experience',
   theme: 'theme light | dark | auto',
   wallpaper: 'wallpaper dynamic | dawn | day | dusk | night | graphite',
   history: 'Commands you have run',
@@ -408,10 +407,6 @@ export function createTerminalView(actions, { touch = false } = {}) {
     ask(args, raw) {
       return ask(raw.replace(/^ask\s*/i, '').trim());
     },
-    fit() {
-      actions.openFit();
-      print([seg('Opened Fit Check in Folio.', 't-dim')]);
-    },
     theme(args) {
       const v = args[0];
       if (!['light', 'dark', 'auto'].includes(v)) return print([seg('usage: theme light | dark | auto', 't-dim')]);
@@ -459,12 +454,7 @@ export function createTerminalView(actions, { touch = false } = {}) {
       if (!desc) return print([seg(`No manual entry for ${name}`, 't-err')]);
       print([seg(name.toUpperCase(), 't-bold')], `    ${name} — ${desc}`);
     },
-    sudo(args) {
-      if (args.join(' ') === 'hire-me' || args.join(' ') === 'hire sai') {
-        print([seg('[sudo] password for recruiter: ', 't-dim'), seg('••••••••', 't-dim')], [seg('Access granted. Opening a new message to Sai…', 't-ok')]);
-        actions.openMail({ subject: "Let's talk about a role", body: 'Hi Sai,\n\nI found your portfolio and would love to talk.\n\n' });
-        return;
-      }
+    sudo() {
       print([seg('sai is not in the sudoers file. This incident will be reported.', 't-err')]);
     },
     rm(args) {

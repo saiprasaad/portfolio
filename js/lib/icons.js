@@ -101,6 +101,9 @@ export function iconSvg(name, { size = 16, cls = '', label = '' } = {}) {
 
 export const hasIcon = (name) => name in STROKE || name in FILLED;
 
+// A stroke glyph's inner markup, for drawing inside other artwork.
+export const strokeGlyph = (name) => STROKE[name] || STROKE.info;
+
 // macOS-style folder. Gradients live in the page-level <defs> (see index.html) and follow the accent color.
 export function folderSvg(glyph, { size = 64, label = '' } = {}) {
   const inner = STROKE[glyph] || STROKE.folder;
@@ -145,7 +148,7 @@ export const APPS = {
   experience: { label: 'Experience' },
   skills: { label: 'Skills' },
   education: { label: 'Education' },
-  fit: { label: 'Fit Check' },
+  contact: { label: 'Contact' },
   notes: { label: 'Read Me' },
 };
 

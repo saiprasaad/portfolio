@@ -4,6 +4,7 @@
 import { h, fromHtml, escapeHtml } from './dom.js';
 import { iconSvg } from './icons.js';
 import { coverHtml } from './covers.js';
+import { medalSvg, sealSvg } from './badges.js';
 import {
   profile, experience, education, projects, skills, skillCategories, accomplishments, certifications,
   aboutParagraphs, experiencePhrase, formatRange, formatDuration, roleMonths, projectsUsing, listedSkillIds,
@@ -20,7 +21,25 @@ function toneFor(id) {
 }
 
 export const ROLE_TONES = { afficiency: '#4f46e5', 'open-avenues': '#d9480f', hexaware: '#0b7285', ey: '#6d28d9' };
-export const ROLE_MARKS = { afficiency: 'Af', 'open-avenues': 'OA', hexaware: 'Hx', ey: 'EY' };
+const ROLE_MARKS = { afficiency: 'Af', 'open-avenues': 'OA', hexaware: 'Hx', ey: 'EY' };
+
+// A company or school logo on a white tile.
+function logoTile(cls, src, size) {
+  return fromHtml(`<span class="${cls} ${cls}--logo" aria-hidden="true"><img src="${escapeHtml(src)}" alt="" width="${size}" height="${size}" decoding="async"></span>`);
+}
+
+// The company's logo when the role has one, otherwise its initials on a colored tile.
+export function roleMark(r) {
+  if (r.logo) return logoTile('role-mark', r.logo, 44);
+  return h('span', { class: 'role-mark', style: { '--role-tone': ROLE_TONES[r.id] }, 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2));
+}
+
+// The school's logo when there is one, otherwise its initials ("IIT").
+export function schoolMark(e) {
+  if (e.logo) return logoTile('edu-mark', e.logo, 52);
+  const initials = e.school.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join('');
+  return h('span', { class: 'edu-mark', 'aria-hidden': 'true' }, initials);
+}
 
 export function photo(size, cls = '') {
   const p = profile.photo;
@@ -93,7 +112,7 @@ export function renderAbout(actions) {
         h('div', { class: 'doc-row' },
           button('Resume', 'doc', () => actions.openResume(), 'btn btn-primary'),
           button('Email Sai', 'mail', () => actions.openMail()),
-          button('Check role fit', 'target', () => actions.openFit()),
+          button('Ask Folio', 'sparkle', () => actions.openFolio()),
         ),
       ),
     ),
@@ -157,7 +176,7 @@ export function roleCard(r, actions, now = new Date()) {
   const related = r.project ? projects.find((p) => p.slug === r.project) : null;
   return h('li', { class: `role${r.end ? '' : ' is-current'}`, id: `role-${r.id}`, style: { '--role-tone': ROLE_TONES[r.id] } },
     h('div', { class: 'role-head' },
-      h('span', { class: 'role-mark', 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2)),
+      roleMark(r),
       h('div', {},
         h('h3', {}, r.title),
         h('p', { class: 'role-meta' }, `${r.company} · ${r.location}`),
@@ -212,7 +231,7 @@ export function renderEducation() {
     h('h2', { class: 'doc-title' }, 'Education'),
     education.map((e) => h('article', { class: 'edu-card' },
       h('div', { class: 'edu-head' },
-        h('span', { class: 'edu-mark', 'aria-hidden': 'true' }, 'IIT'),
+        schoolMark(e),
         h('div', {},
           h('h3', {}, e.degree),
           h('p', { class: 'role-meta' }, `${e.school} · ${e.location}`),
@@ -234,23 +253,22 @@ export function renderEducation() {
 
 // ---------- Achievements ----------
 
-export function badge({ iconName, tone, title, sub, url }) {
+export function badge({ art, title, sub, url }) {
   return h('li', { class: 'badge-card' },
-    h('span', { class: `badge-art tone-${tone}`, 'aria-hidden': 'true' }, icon(iconName, 30)),
-    h('strong', {}, title),
-    h('span', {}, sub),
-    url ? h('a', { class: 'pill pill--accent', href: url, target: '_blank', rel: 'noopener' }, icon('check', 12), 'Verify') : null,
+    h('span', { class: 'badge-art', 'aria-hidden': 'true', html: art }),
+    h('span', { class: 'badge-text' }, h('strong', {}, title), h('span', { class: 'badge-sub' }, sub)),
+    url ? h('a', { class: 'pill pill--accent', href: url, target: '_blank', rel: 'noopener', 'aria-label': `Verify ${title}` }, icon('check', 12), 'Verify') : null,
   );
 }
 
 export function renderAchievements(filter = 'all') {
   const awards = h('section', { class: 'doc-section', 'aria-label': 'Awards' },
     kicker(`Awards · ${accomplishments.length}`),
-    h('ul', { class: 'badges' }, accomplishments.map((a) => badge({ iconName: a.icon, tone: a.tone, title: a.title, sub: a.org }))),
+    h('ul', { class: 'badges' }, accomplishments.map((a) => badge({ art: medalSvg({ tone: a.tone, icon: a.icon }), title: a.title, sub: a.org }))),
   );
   const certs = h('section', { class: 'doc-section', 'aria-label': 'Certifications' },
     kicker(`Certifications · ${certifications.length}`),
-    h('ul', { class: 'badges' }, certifications.map((c) => badge({ iconName: c.icon, tone: c.tone, title: c.title, sub: c.issuer, url: c.url }))),
+    h('ul', { class: 'badges' }, certifications.map((c) => badge({ art: sealSvg({ tone: c.tone, icon: c.icon }), title: c.title, sub: c.issuer, url: c.url }))),
   );
   return h('div', { class: 'doc doc-stack' }, filter !== 'certs' ? awards : null, filter !== 'awards' ? certs : null);
 }
@@ -258,7 +276,8 @@ export function renderAchievements(filter = 'all') {
 // ---------- Contact ----------
 
 export function renderContact(actions) {
-  const row = (label, value, ...tools) => h('div', { class: 'contact-row' }, h('dt', {}, label), h('dd', {}, value), tools.length ? h('div', { class: 'doc-row' }, tools) : h('span'));
+  // A definition list may only group <dt> and <dd>, so the buttons sit in a second <dd>.
+  const row = (label, value, ...tools) => h('div', { class: 'contact-row' }, h('dt', {}, label), h('dd', {}, value), tools.length ? h('dd', { class: 'doc-row' }, tools) : null);
   return h('div', { class: 'doc doc-stack' },
     h('article', { class: 'contact-card' },
       h('div', { class: 'contact-head' },

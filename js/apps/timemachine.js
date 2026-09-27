@@ -1,8 +1,8 @@
 // Time Machine: career history as windows receding into the past.
 
-import { h, reducedMotion, trapTab } from '../lib/dom.js';
+import { h, append, reducedMotion, trapTab } from '../lib/dom.js';
 import { experience, education, formatRange, formatMonth, formatDuration, roleMonths, skillLabel } from '../content.js';
-import { icon, ROLE_TONES, ROLE_MARKS } from '../lib/sections.js';
+import { icon, ROLE_TONES, roleMark, schoolMark } from '../lib/sections.js';
 
 function entries() {
   const edu = education[0];
@@ -18,21 +18,22 @@ function card(entry) {
   const body = h('div', { class: 'tm-card-body doc' });
   if (entry.kind === 'role') {
     const r = entry.data;
-    body.append(
+    // The helper skips a missing highlights list; the native append() would print "null".
+    append(body, [
       h('div', { class: 'role-head' },
-        h('span', { class: 'role-mark', style: { '--role-tone': ROLE_TONES[r.id] }, 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2)),
+        roleMark(r),
         h('div', {}, h('h3', {}, r.title), h('p', { class: 'role-meta' }, `${r.company} · ${r.location}`)),
         h('div', { class: 'role-when' }, h('time', {}, formatRange(r.start, r.end)), h('span', {}, `${formatDuration(roleMonths(r))} · ${r.type}`)),
       ),
       r.highlights?.length ? h('ul', { class: 'metrics', style: { '--role-tone': ROLE_TONES[r.id], marginTop: '12px' } }, r.highlights.map((m) => h('li', { class: 'metric' }, h('strong', {}, m.value), h('span', {}, m.label)))) : null,
       h('ul', { class: 'bullets', style: 'margin-top:12px' }, r.bullets.slice(0, 3).map((b) => h('li', {}, b))),
       h('p', { class: 'skill-note', style: 'margin-top:10px' }, r.stack.slice(0, 7).map(skillLabel).join(' · ')),
-    );
+    ]);
   } else {
     const e = entry.data;
     body.append(
       h('div', { class: 'edu-head' },
-        h('span', { class: 'edu-mark', 'aria-hidden': 'true' }, 'IIT'),
+        schoolMark(e),
         h('div', {}, h('h3', {}, e.degree), h('p', { class: 'role-meta' }, `${e.school} · ${formatRange(e.start, e.end)}`)),
         h('div', { class: 'edu-gpa' }, h('strong', {}, e.gpa), h('span', {}, 'GPA')),
       ),

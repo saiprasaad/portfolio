@@ -1,4 +1,4 @@
-// Folio: the portfolio assistant, plus Fit Check for job descriptions.
+// Folio: the portfolio assistant.
 // The backend contract is unchanged ({ message, context } -> { reply }). Recent turns are
 // folded into `context` so follow-up questions work. When the service can't be reached,
 // Folio answers from the portfolio data and says so.
@@ -10,8 +10,8 @@ import {
   certifications, portfolioContext, experiencePhrase, formatRange, evidenceFor, skillLabel, projectsUsing,
 } from '../content.js';
 import { buildIndex, search } from '../lib/search.js';
-import { analyzeJobDescription, SAMPLE_JOB } from '../lib/fit.js';
-import { skillChip, icon } from '../lib/sections.js';
+import { skillsIn } from '../lib/skillmatch.js';
+import { icon } from '../lib/sections.js';
 
 const STORE = 'saios.folio.v2';
 let messages = session.get(STORE, []) || [];
@@ -95,10 +95,6 @@ export function renderMarkdown(text) {
 
 // ---------- Understanding questions ----------
 
-function mentionedSkills(text) {
-  return analyzeJobDescription(text).matched.map((m) => m.id);
-}
-
 // Short names people use for projects; plain city or topic words don't count.
 const PROJECT_ALIASES = {
   'repo-vision': ['repo vision', 'repovision'],
@@ -130,11 +126,10 @@ export function detectIntent(text) {
   if (/\b(resume|cv)\b/.test(t)) return { type: 'resume' };
   if (/\b(terminal|shell)\b/.test(t)) return { type: 'terminal' };
   if (/\b(timeline|career history)\b/.test(t)) return { type: 'timemachine' };
-  if (/\b(fit check|job description)\b/.test(t)) return { type: 'fit' };
   if (/\b(email|mail|message)\b/.test(t)) return { type: 'mail' };
   const project = mentionedProject(text);
   if (project) return { type: 'project', slug: project.slug };
-  const skill = mentionedSkills(text).find((id) => projectsUsing(id).length);
+  const skill = skillsIn(text).find((id) => projectsUsing(id).length);
   if (skill) return { type: 'skill', id: skill };
   const section = sections.find((s) => t.includes(s.id) || t.includes(s.short.toLowerCase()));
   if (section) return { type: 'section', id: section.id };
@@ -156,7 +151,7 @@ export function localAnswer(question) {
   const addProject = (p) => sources.push({ label: p.name, kind: 'project', id: p.slug });
 
   if (/^(hi|hello|hey|yo|hola)\b/.test(q)) {
-    return { text: `Hi! I can tell you about Sai's projects, experience and skills. Try asking what he built with AI, or switch to Fit Check to compare a job description with his background.`, sources };
+    return { text: `Hi! I can tell you about Sai's projects, experience and skills. Try asking what he built with AI.`, sources };
   }
   if (/(open to|available|availability|hiring|looking for (a )?(job|role|work)|job search|relocat|visa|sponsor|salary|compensation|notice period|start date)/.test(q)) {
     return {
@@ -197,7 +192,7 @@ export function localAnswer(question) {
     const feats = (project.features || []).map((x) => `**${x.title}**: ${x.text}`);
     return { text: `**${project.name}** (${project.kind}${project.year ? `, ${project.year}` : ''}): ${project.summary}${feats.length ? `\n\n${list(feats)}` : ''}\n\nStack: ${project.stack.map(skillLabel).join(', ')}.`, sources };
   }
-  const skillIds = mentionedSkills(question);
+  const skillIds = skillsIn(question);
   if (skillIds.length) {
     const lines = skillIds.slice(0, 4).map((id) => {
       const ev = evidenceFor(id);
@@ -265,21 +260,6 @@ export async function askFolio(question, { history = messages } = {}) {
   }
 }
 
-// ---------- Fit Check narrative ----------
-
-function fitPrompt(jd) {
-  return `A recruiter pasted the job description below. Using only the portfolio context, assess how well Saiprasaad fits it: his strongest matches with specific evidence, honest gaps, and a one-sentence summary. Keep it under 170 words and use short bullet points.\n\nJOB DESCRIPTION:\n${jd.slice(0, 6000)}`;
-}
-
-function localFitNarrative(result) {
-  const top = result.matched.slice(0, 5).map((m) => `**${m.label}**: ${m.evidence.slice(0, 3).map((e) => e.label).join(', ') || 'listed in his skills'}`);
-  const gaps = result.gaps.map((g) => g.label);
-  const years = result.years.asked != null
-    ? `The role asks for ${result.years.asked}+ years; Sai has ${experiencePhrase()} full-time (about ${result.years.withInternships.toFixed(1)} including internships).`
-    : `Sai has ${experiencePhrase()} of full-time experience.`;
-  return `${years}\n\nStrongest matches:\n${list(top)}${gaps.length ? `\n\nNot shown in the portfolio: ${gaps.join(', ')}.` : ''}`;
-}
-
 // ---------- View ----------
 
 const SUGGESTIONS = [
@@ -289,25 +269,13 @@ const SUGGESTIONS = [
   'How can I contact him?',
 ];
 
-export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
+export function createFolioView(actions, { header = true } = {}) {
   const orb = h('span', { class: 'folio-orb', 'aria-hidden': 'true', html: iconSvg('sparkle', { size: 16 }) });
-  const tabChat = h('button', { type: 'button', role: 'tab', id: `folio-tab-chat-${views.size}`, 'aria-selected': 'true', onClick: () => setTab('chat') }, 'Chat');
-  const tabFit = h('button', { type: 'button', role: 'tab', id: `folio-tab-fit-${views.size}`, 'aria-selected': 'false', onClick: () => setTab('fit') }, 'Fit Check');
-  const tablist = h('div', { class: 'segmented', role: 'tablist', 'aria-label': 'Folio mode' }, tabChat, tabFit);
-  tablist.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      setTab(current === 'chat' ? 'fit' : 'chat');
-      (current === 'chat' ? tabChat : tabFit).focus();
-    }
-  });
   const head = header ? h('div', { class: 'folio-head', 'data-drag': '' },
     orb,
     h('div', { class: 'folio-id' }, h('strong', {}, 'Folio'), h('span', {}, "Sai's portfolio assistant")),
-    tablist,
   ) : null;
 
-  // Chat
   const log = h('div', { class: 'folio-chat scroll', role: 'log', 'aria-live': 'polite', 'aria-label': 'Conversation with Folio' });
   const inputEl = h('textarea', {
     class: 'field', id: `folio-input-${views.size}`, rows: 1, placeholder: 'Ask about projects, skills, experience…', 'aria-label': 'Message Folio', 'data-autofocus': '',
@@ -317,42 +285,10 @@ export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
   const suggest = h('div', { class: 'folio-suggest', role: 'group', 'aria-label': 'Suggested questions' },
     SUGGESTIONS.map((s) => h('button', { class: 'chip chip--plain', type: 'button', onClick: () => send(s) }, s)));
   const privacy = h('p', { class: 'folio-privacy' }, 'Folio uses an AI service and can make mistakes. Check important details on the resume.');
-  const chatPane = h('div', { class: 'folio-pane', role: 'tabpanel', 'aria-labelledby': tabChat.id }, log, suggest, form, privacy);
+  const chatPane = h('div', { class: 'folio-pane' }, log, suggest, form, privacy);
 
-  // Fit Check
-  const jd = h('textarea', { class: 'field', id: `fit-jd-${views.size}`, placeholder: 'Paste a job description…', 'aria-label': 'Job description' });
-  const result = h('div', { class: 'fit-output', 'aria-live': 'polite' });
-  const fitForm = h('form', { class: 'fit-form', onSubmit: (e) => { e.preventDefault(); runFit(); } },
-    jd,
-    h('div', { class: 'doc-row' },
-      h('button', { class: 'btn btn-quiet', type: 'button', onClick: () => { jd.value = SAMPLE_JOB; runFit({ sample: true }); } }, icon('doc', 15), 'Try an example'),
-      h('button', { class: 'btn btn-primary', type: 'submit' }, icon('target', 15), 'Check fit'),
-    ),
-  );
-  const fitPane = h('div', { class: 'folio-pane', role: 'tabpanel', 'aria-labelledby': tabFit.id, hidden: true },
-    h('div', { class: 'fit scroll' },
-      h('div', { class: 'fit-intro' },
-        h('h3', {}, 'Fit Check'),
-        h('p', {}, "Paste a job description to see how it lines up with Sai's projects and roles, gaps included. The match runs in your browser; nothing is sent unless you ask Folio for a written assessment."),
-      ),
-      fitForm,
-      result,
-    ),
-  );
-
-  const el = h('div', { class: 'folio' }, head, chatPane, fitPane);
-  let current = 'chat';
+  const el = h('div', { class: 'folio' }, head, chatPane);
   let busy = false;
-
-  function setTab(next) {
-    current = next;
-    tabChat.setAttribute('aria-selected', String(next === 'chat'));
-    tabFit.setAttribute('aria-selected', String(next === 'fit'));
-    chatPane.hidden = next !== 'chat';
-    fitPane.hidden = next !== 'fit';
-    (next === 'chat' ? inputEl : jd).focus({ preventScroll: true });
-    actions.onTab?.(next);
-  }
 
   function sourceChips(list) {
     if (!list?.length) return null;
@@ -378,7 +314,7 @@ export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
   function renderLog() {
     log.replaceChildren();
     if (!messages.length) {
-      log.append(bubble({ role: 'ai', text: "Hi! I'm **Folio**, Sai's portfolio assistant. Ask me about his projects, experience or skills. Hiring? Switch to **Fit Check** and paste a job description." }));
+      log.append(bubble({ role: 'ai', text: "Hi! I'm **Folio**, Sai's portfolio assistant. Ask me about his projects, experience or skills." }));
     }
     messages.forEach((m) => {
       log.append(bubble(m));
@@ -457,7 +393,6 @@ export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
       case 'resume': actions.openResume(); return { text: 'Opened the resume.' };
       case 'terminal': actions.openTerminal?.(); return { text: 'Opened the Terminal. Try `neofetch`.' };
       case 'timemachine': actions.openTimeMachine?.(); return { text: 'Opened Timeline.' };
-      case 'fit': setTab('fit'); return { text: 'Switched to Fit Check. Paste a job description to compare.' };
       case 'mail': actions.openMail(); return { text: 'Opened a new email to Sai.' };
       case 'project': {
         const p = projects.find((x) => x.slug === intent.slug);
@@ -481,92 +416,6 @@ export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
     }
   }
 
-  // ----- Fit Check -----
-
-  function checkRow(status, text) {
-    const mark = status === 'ok' ? 'check' : status === 'close' ? 'minus' : 'x';
-    return h('li', { class: 'fit-check', 'data-status': status }, h('span', { class: 'fc-mark', html: iconSvg(mark, { size: 12 }) }), h('span', {}, text));
-  }
-
-  function runFit({ sample = false } = {}) {
-    const text = jd.value.trim();
-    result.replaceChildren();
-    if (!text) {
-      result.append(h('p', { class: 'skill-note' }, 'Paste a job description first, or try the example.'));
-      jd.focus();
-      return;
-    }
-    const r = analyzeJobDescription(text);
-    if (r.empty) {
-      result.append(h('div', { class: 'fit-result' }, h('p', {}, "I couldn't find any technologies or requirements in that text. Try pasting the full job description, including the requirements.")));
-      return;
-    }
-    const pct = Math.round(r.coverage * 100);
-    const checks = [];
-    if (r.years.asked != null) {
-      const have = `${experiencePhrase()} full-time, ${r.years.withInternships.toFixed(1)} years including internships`;
-      checks.push(checkRow(r.years.status, `Asks for ${r.years.asked}+ years. Sai has ${have}.`));
-    }
-    if (r.degree) checks.push(checkRow('ok', `Asks for a degree. Sai has an ${r.degree.have}.`));
-    if (r.location) {
-      const modes = r.location.modes.length ? ` (${r.location.modes.join(', ')})` : '';
-      checks.push(checkRow('ok', `${r.location.nyc ? 'New York role' : 'Location'}${modes}. Sai is based in New York.`));
-    }
-
-    const matches = h('ul', { class: 'fit-matches' }, r.matched.map((m) => h('li', { class: 'fit-match' },
-      skillChip(m.id, { actions }),
-      h('span', { class: 'fm-where' }, m.evidence.length ? m.evidence.slice(0, 4).map((e) => e.label).join(', ') : 'Listed in skills'),
-    )));
-
-    const ai = h('div', { class: 'fit-ai', hidden: true, 'aria-live': 'polite' });
-    const askBtn = h('button', {
-      class: 'btn', type: 'button',
-      onClick: async () => {
-        askBtn.disabled = true;
-        ai.hidden = false;
-        ai.replaceChildren(h('p', { class: 'skill-note' }, 'Folio is writing an assessment…'));
-        let text2;
-        let note = '';
-        try {
-          text2 = await callService(fitPrompt(text), []);
-        } catch {
-          text2 = localFitNarrative(r);
-          note = "Folio's AI service didn't respond, so this summary comes from the match above.";
-        }
-        ai.replaceChildren(renderMarkdown(text2));
-        if (note) ai.append(h('p', { class: 'skill-note' }, note));
-        askBtn.disabled = false;
-      },
-    }, icon('sparkle', 15), 'Ask Folio for a written assessment');
-
-    const title = r.title;
-    const emailBtn = h('button', {
-      class: 'btn btn-primary', type: 'button',
-      onClick: () => actions.openMail({
-        subject: title ? `${title}: your portfolio came up` : 'A role that matches your portfolio',
-        body: `Hi Sai,\n\nI ran the Fit Check on your portfolio for ${title ? `our ${title} role` : 'a role on our team'}. It matched ${r.matched.length} of the ${r.considered} technologies we list, including ${r.matched.slice(0, 5).map((m) => m.label).join(', ')}.\n\nWould you be open to a quick chat?\n\n`,
-      }),
-    }, icon('mail', 15), 'Email Sai about this role');
-
-    result.append(h('div', { class: 'fit-result' },
-      sample ? h('span', { class: 'pill' }, 'Example job description') : null,
-      h('div', { class: 'fit-summary' },
-        h('div', { class: 'fit-ring-wrap' }, h('div', { class: 'fit-ring', style: { '--p': pct } }), h('strong', {}, `${pct}%`)),
-        h('div', {},
-          h('h4', {}, `Matches ${r.matched.length} of ${r.considered} technologies this role mentions`),
-          h('p', {}, title ? `Role: ${title}` : 'Based on the technologies named in the description.'),
-        ),
-      ),
-      checks.length ? h('ul', { class: 'fit-checks' }, checks) : null,
-      r.matched.length ? h('div', { class: 'fit-group' }, h('h5', {}, 'Strong matches'), matches) : null,
-      r.gaps.length ? h('div', { class: 'fit-group' }, h('h5', {}, 'Not in the portfolio yet'),
-        h('ul', { class: 'chips' }, r.gaps.map((g) => h('li', {}, h('span', { class: 'chip chip--plain' }, g.label))))) : null,
-      h('div', { class: 'fit-actions' }, emailBtn, askBtn),
-      ai,
-    ));
-    result.scrollIntoView?.({ block: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
-  }
-
   function autoSize() {
     inputEl.style.height = 'auto';
     inputEl.style.height = `${Math.min(120, inputEl.scrollHeight)}px`;
@@ -582,16 +431,12 @@ export function createFolioView(actions, { tab = 'chat', header = true } = {}) {
 
   const api = {
     el,
-    setTab,
-    get tab() { return current; },
-    focus: () => (current === 'chat' ? inputEl : jd).focus({ preventScroll: true }),
-    ask: (q) => { setTab('chat'); send(q); },
-    fitWith: (text) => { setTab('fit'); jd.value = text; runFit(); },
+    focus: () => inputEl.focus({ preventScroll: true }),
+    ask: (q) => send(q),
     refresh: renderLog,
     destroy: () => views.delete(api),
   };
   views.add(api);
   renderLog();
-  if (tab === 'fit') setTab('fit');
   return api;
 }
