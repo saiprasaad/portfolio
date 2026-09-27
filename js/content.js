@@ -190,12 +190,12 @@ export const experience = [
     highlights: [
       { value: '10,000+', label: 'users on web and mobile' },
       { value: '3', label: 'major life-insurance carriers' },
-      { value: '50+', label: 'high-priority production issues resolved' },
+      { value: '100+', label: 'high-priority production issues resolved' },
     ],
     bullets: [
       'Designed and developed responsive user interfaces in React, building a scalable front-end architecture that supports 10,000+ users across web and mobile platforms.',
       'Implemented and maintained microservices in Flask and Spring Boot, using Redis for caching and MySQL for relational data to improve scalability and performance.',
-      'Delivered enterprise applications for three major life-insurance carriers and resolved 50+ high-priority production issues through HubSpot, improving UI/UX and back-end workflows.',
+      'Delivered enterprise applications for three major life-insurance carriers and resolved 100+ high-priority production issues through HubSpot, improving UI/UX and back-end workflows.',
       'Used GitLab for version control, CI/CD and code review, streamlining the deployment pipeline and keeping releases reliable.',
     ],
     stack: ['react', 'flask', 'springboot', 'redis', 'mysql', 'microservices', 'gitlab', 'cicd', 'hubspot'],
