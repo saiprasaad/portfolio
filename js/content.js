@@ -202,6 +202,7 @@ export const experience = [
   },
   {
     id: 'open-avenues',
+    logo: 'images/logos/open-avenues.webp',
     company: 'Open Avenues Career Pathways',
     title: 'Student Consultant, Software Engineering',
     type: 'Internship',
