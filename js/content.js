@@ -138,6 +138,7 @@ export const skillCategories = [
 export const experience = [
   {
     id: 'afficiency',
+    logo: 'images/logos/afficiency.webp',
     company: 'Afficiency',
     title: 'Full Stack Developer',
     type: 'Full-time',
@@ -178,6 +179,7 @@ export const experience = [
   },
   {
     id: 'hexaware',
+    logo: 'images/logos/hexaware.webp',
     company: 'Hexaware Technologies',
     title: 'Software Engineer Intern',
     type: 'Internship',
@@ -193,6 +195,7 @@ export const experience = [
   },
   {
     id: 'ey',
+    logo: 'images/logos/ey.webp',
     company: 'Ernst & Young',
     title: 'Software Engineer',
     type: 'Full-time',
