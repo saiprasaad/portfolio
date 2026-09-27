@@ -19,7 +19,7 @@ export const profile = {
   nickname: 'Sai',
   initials: 'SK',
   role: 'Full-Stack Software Engineer',
-  headline: 'I build web, mobile and AI-powered products end to end, from React and Flutter front ends to Flask and Spring Boot services.',
+  headline: 'I build software the AI-driven way, taking web and mobile applications from idea to production, with AI speeding up the work and powering the features people use.',
   company: 'Afficiency',
   companyBlurb: 'an insurtech startup',
   location: 'New York, USA',
