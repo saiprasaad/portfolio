@@ -2,7 +2,7 @@
 
 import { h, append, reducedMotion, trapTab } from '../lib/dom.js';
 import { experience, education, formatRange, formatMonth, formatDuration, roleMonths, skillLabel } from '../content.js';
-import { icon, ROLE_TONES, roleMark } from '../lib/sections.js';
+import { icon, ROLE_TONES, roleMark, schoolMark } from '../lib/sections.js';
 
 function entries() {
   const edu = education[0];
@@ -33,7 +33,7 @@ function card(entry) {
     const e = entry.data;
     body.append(
       h('div', { class: 'edu-head' },
-        h('span', { class: 'edu-mark', 'aria-hidden': 'true' }, 'IIT'),
+        schoolMark(e),
         h('div', {}, h('h3', {}, e.degree), h('p', { class: 'role-meta' }, `${e.school} · ${formatRange(e.start, e.end)}`)),
         h('div', { class: 'edu-gpa' }, h('strong', {}, e.gpa), h('span', {}, 'GPA')),
       ),

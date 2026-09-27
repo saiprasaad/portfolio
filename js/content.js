@@ -217,6 +217,7 @@ export const experience = [
 export const education = [
   {
     id: 'illinois-tech',
+    logo: 'images/logos/illinois-tech.webp',
     school: 'Illinois Institute of Technology',
     short: 'Illinois Tech',
     degree: 'Master of Computer Science',

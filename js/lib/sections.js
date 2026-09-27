@@ -23,12 +23,22 @@ function toneFor(id) {
 export const ROLE_TONES = { afficiency: '#4f46e5', 'open-avenues': '#d9480f', hexaware: '#0b7285', ey: '#6d28d9' };
 const ROLE_MARKS = { afficiency: 'Af', 'open-avenues': 'OA', hexaware: 'Hx', ey: 'EY' };
 
+// A company or school logo on a white tile.
+function logoTile(cls, src, size) {
+  return fromHtml(`<span class="${cls} ${cls}--logo" aria-hidden="true"><img src="${escapeHtml(src)}" alt="" width="${size}" height="${size}" decoding="async"></span>`);
+}
+
 // The company's logo when the role has one, otherwise its initials on a colored tile.
 export function roleMark(r) {
-  if (r.logo) {
-    return fromHtml(`<span class="role-mark role-mark--logo" aria-hidden="true"><img src="${escapeHtml(r.logo)}" alt="" width="44" height="44" decoding="async"></span>`);
-  }
+  if (r.logo) return logoTile('role-mark', r.logo, 44);
   return h('span', { class: 'role-mark', style: { '--role-tone': ROLE_TONES[r.id] }, 'aria-hidden': 'true' }, ROLE_MARKS[r.id] || r.company.slice(0, 2));
+}
+
+// The school's logo when there is one, otherwise its initials ("IIT").
+export function schoolMark(e) {
+  if (e.logo) return logoTile('edu-mark', e.logo, 52);
+  const initials = e.school.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join('');
+  return h('span', { class: 'edu-mark', 'aria-hidden': 'true' }, initials);
 }
 
 export function photo(size, cls = '') {
@@ -221,7 +231,7 @@ export function renderEducation() {
     h('h2', { class: 'doc-title' }, 'Education'),
     education.map((e) => h('article', { class: 'edu-card' },
       h('div', { class: 'edu-head' },
-        h('span', { class: 'edu-mark', 'aria-hidden': 'true' }, 'IIT'),
+        schoolMark(e),
         h('div', {},
           h('h3', {}, e.degree),
           h('p', { class: 'role-meta' }, `${e.school} · ${e.location}`),

@@ -789,7 +789,8 @@
   background: #fff;
 }
 
-.role-mark--logo img {
+.role-mark--logo img,
+.edu-mark--logo img {
   display: block;
   width: 100%;
   height: 100%;
@@ -797,7 +798,8 @@
 }
 
 /* A hairline edge so a white logo doesn't melt into a light card. */
-.role-mark--logo::after {
+.role-mark--logo::after,
+.edu-mark--logo::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -986,6 +988,12 @@
   font-size: 15px;
   font-weight: 800;
   background: linear-gradient(160deg, #e0343f, #9e1020);
+}
+
+.edu-mark--logo {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
 }
 
 .edu-gpa {

@@ -214,6 +214,10 @@ console.log('Deep links and simple page');
     await x.p.evaluate(() => [...document.querySelectorAll('.role-mark--logo img')].filter((i) => i.naturalWidth > 0).length) === experience.filter((r) => r.logo).length
     && await count(x.p, '.timeline .role-mark:not(.role-mark--logo)') === experience.filter((r) => !r.logo).length);
   await x.context.close();
+  const ed = await page({ hash: 'education' });
+  await ed.p.waitForFunction(() => [...document.querySelectorAll('.edu-mark--logo img')].every((i) => i.complete));
+  check('Education shows the school logo', await ed.p.evaluate(() => [...document.querySelectorAll('.edu-card .edu-mark--logo img')].filter((i) => i.naturalWidth > 0).length) === 1);
+  await ed.context.close();
   const a = await page({ hash: 'achievements' });
   check('#achievements shows a medal for each award and a seal for each certification',
     await count(a.p, '.badge-card .badge-svg') === accomplishments.length + certifications.length
