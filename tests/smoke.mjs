@@ -210,6 +210,14 @@ console.log('Deep links and simple page');
     && await count(m.p, '.ql .pd-media video[poster][preload="none"] source[src$="monitorly.mp4"]') === 1);
   check('the featured widget leads with Monitorly', (await m.p.locator('.widget-project .wpj-text h2').textContent()) === 'Monitorly');
   await m.context.close();
+  const j = await page({ hash: 'json-explorer' });
+  const shots = j.p.locator('.ql .pd-media img');
+  for (let i = 0; i < await shots.count(); i++) await shots.nth(i).scrollIntoViewIfNeeded();
+  await j.p.waitForFunction(() => [...document.querySelectorAll('.ql .pd-media img')].every((i) => i.complete));
+  check('#json-explorer shows its screenshots under a Screenshots heading',
+    await count(j.p, '.ql .pd-section[aria-label="Screenshots"]') === 1
+    && await j.p.evaluate(() => [...document.querySelectorAll('.ql .pd-media img')].filter((i) => i.naturalWidth > 0).length) === 3);
+  await j.context.close();
   const t = await page({ hash: 'timeline' });
   check('#timeline opens the career timeline', await count(t.p, '.tm') === 1 && (await t.p.locator('.tm-head h2').textContent()) === 'Timeline');
   check('Timeline cards show no stray "null" text', await t.p.evaluate(() => [...document.querySelectorAll('.tm-card-body')].every((c) => ![...c.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim() === 'null'))));
