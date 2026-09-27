@@ -1,6 +1,6 @@
 // Time Machine: career history as windows receding into the past.
 
-import { h, reducedMotion, trapTab } from '../lib/dom.js';
+import { h, append, reducedMotion, trapTab } from '../lib/dom.js';
 import { experience, education, formatRange, formatMonth, formatDuration, roleMonths, skillLabel } from '../content.js';
 import { icon, ROLE_TONES, roleMark } from '../lib/sections.js';
 
@@ -18,7 +18,8 @@ function card(entry) {
   const body = h('div', { class: 'tm-card-body doc' });
   if (entry.kind === 'role') {
     const r = entry.data;
-    body.append(
+    // The helper skips a missing highlights list; the native append() would print "null".
+    append(body, [
       h('div', { class: 'role-head' },
         roleMark(r),
         h('div', {}, h('h3', {}, r.title), h('p', { class: 'role-meta' }, `${r.company} · ${r.location}`)),
@@ -27,7 +28,7 @@ function card(entry) {
       r.highlights?.length ? h('ul', { class: 'metrics', style: { '--role-tone': ROLE_TONES[r.id], marginTop: '12px' } }, r.highlights.map((m) => h('li', { class: 'metric' }, h('strong', {}, m.value), h('span', {}, m.label)))) : null,
       h('ul', { class: 'bullets', style: 'margin-top:12px' }, r.bullets.slice(0, 3).map((b) => h('li', {}, b))),
       h('p', { class: 'skill-note', style: 'margin-top:10px' }, r.stack.slice(0, 7).map(skillLabel).join(' · ')),
-    );
+    ]);
   } else {
     const e = entry.data;
     body.append(

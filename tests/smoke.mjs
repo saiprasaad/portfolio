@@ -4,7 +4,7 @@
 
 import { createRequire } from 'node:module';
 import { startServer } from '../scripts/serve.mjs';
-import { accomplishments, certifications } from '../js/content.js';
+import { accomplishments, certifications, experience } from '../js/content.js';
 
 const require = createRequire(import.meta.url);
 let playwright;
@@ -206,7 +206,14 @@ console.log('Deep links and simple page');
   await context.close();
   const t = await page({ hash: 'timeline' });
   check('#timeline opens the career timeline', await count(t.p, '.tm') === 1 && (await t.p.locator('.tm-head h2').textContent()) === 'Timeline');
+  check('Timeline cards show no stray "null" text', await t.p.evaluate(() => [...document.querySelectorAll('.tm-card-body')].every((c) => ![...c.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim() === 'null'))));
   await t.context.close();
+  const x = await page({ hash: 'experience' });
+  await x.p.waitForFunction(() => [...document.querySelectorAll('.role-mark--logo img')].every((i) => i.complete));
+  check('Experience shows each company logo that exists and initials for the rest',
+    await x.p.evaluate(() => [...document.querySelectorAll('.role-mark--logo img')].filter((i) => i.naturalWidth > 0).length) === experience.filter((r) => r.logo).length
+    && await count(x.p, '.timeline .role-mark:not(.role-mark--logo)') === experience.filter((r) => !r.logo).length);
+  await x.context.close();
   const a = await page({ hash: 'achievements' });
   check('#achievements shows a medal for each award and a seal for each certification',
     await count(a.p, '.badge-card .badge-svg') === accomplishments.length + certifications.length
