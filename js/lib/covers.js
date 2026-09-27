@@ -149,7 +149,29 @@ function camera() {
   ${box(96, 86, 44, 44, 'tomato')}${box(152, 86, 42, 44, 'basil')}${box(194, 92, 44, 40, 'pasta')}`;
 }
 
-const ART = { chart, logs, cipher, graph, tasks, video, wordle, battleship, map, camera };
+// A session replay player: live badge, the recorded page, a cursor, and playback controls.
+function replay() {
+  const chip = (x, label, on = false) => `<rect x="${x}" y="156" width="22" height="12" rx="3" fill="${on ? '#6c63ff' : '#fff'}" fill-opacity="${on ? 1 : 0.12}"/><text x="${x + 11}" y="165" text-anchor="middle" font-family="${SANS}" font-size="7.5" font-weight="700" fill="#fff">${label}</text>`;
+  return `<rect x="22" y="22" width="276" height="156" rx="12" fill="#05060d" fill-opacity=".55" stroke="#fff" stroke-opacity=".12"/>
+  <circle cx="38" cy="38" r="3.4" fill="#ff4d5e"/>
+  <text x="46" y="41.5" font-family="${SANS}" font-size="9" font-weight="800" letter-spacing=".8" fill="#ff8a95">LIVE</text>
+  <text x="74" y="41.5" font-family="${SANS}" font-size="9" fill="#fff" fill-opacity=".55">session replay</text>
+  <rect x="34" y="52" width="252" height="86" rx="6" fill="#fff" fill-opacity=".05"/>
+  <rect x="46" y="64" width="64" height="7" rx="3.5" fill="#fff" fill-opacity=".22"/>
+  <rect x="46" y="78" width="148" height="10" rx="5" fill="#fff" fill-opacity=".14"/>
+  <rect x="46" y="96" width="112" height="6" rx="3" fill="#fff" fill-opacity=".12"/>
+  <rect x="46" y="106" width="136" height="6" rx="3" fill="#fff" fill-opacity=".12"/>
+  <rect x="46" y="118" width="62" height="12" rx="4" fill="#6c63ff"/>
+  <path d="M116 119v14l3.6-3.4 2.6 5.6 2.2-1-2.6-5.4 4.8-.2z" fill="#fff" stroke="#05060d" stroke-width=".8" stroke-linejoin="round"/>
+  <rect x="34" y="146" width="252" height="3" rx="1.5" fill="#fff" fill-opacity=".16"/>
+  <rect x="34" y="146" width="104" height="3" rx="1.5" fill="#8b85ff"/>
+  <circle cx="138" cy="147.5" r="4" fill="#fff"/>
+  ${chip(34, '1×')}${chip(60, '2×', true)}${chip(86, '4×')}
+  <rect x="228" y="157" width="18" height="10" rx="5" fill="#3ddc97"/><circle cx="241" cy="162" r="3.6" fill="#fff"/>
+  <text x="251" y="165" font-family="${SANS}" font-size="7.5" fill="#fff" fill-opacity=".75">Skip idle</text>`;
+}
+
+const ART = { chart, logs, cipher, graph, tasks, video, wordle, battleship, map, camera, replay };
 
 export function coverSvg(project) {
   const draw = ART[project.cover?.type] || chart;

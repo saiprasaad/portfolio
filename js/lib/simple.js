@@ -45,8 +45,10 @@ function renderRole(role, date) {
 }
 
 function renderProject(p) {
-  const links = p.links.length
-    ? `<p class="sp-links">${p.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${linkIcon(l.type)}${esc(l.label)}</a>`).join('')}</p>`
+  const videos = p.media.filter((m) => m.type === 'video').map((m) => ({ type: 'video', label: `Watch the ${(m.title || 'video').toLowerCase()}`, url: m.src }));
+  const all = [...videos, ...p.links];
+  const links = all.length
+    ? `<p class="sp-links">${all.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${linkIcon(l.type)}${esc(l.label)}</a>`).join('')}</p>`
     : '';
   const facts = p.facts?.length ? `<p class="sp-facts-line">${p.facts.map((x) => `<span><strong>${esc(x.value)}</strong> ${esc(x.label)}</span>`).join('')}</p>` : '';
   const flow = p.flow?.length ? `<h4 class="sp-sub">How it works</h4><ol class="sp-flow">${p.flow.map((step) => `<li>${esc(step)}</li>`).join('')}</ol>` : '';

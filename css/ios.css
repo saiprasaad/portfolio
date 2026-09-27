@@ -345,10 +345,25 @@
   box-shadow: 0 0 0 4px var(--grouped-bg);
 }
 
-/* The large title already names the screen. */
+/* The large title already names the screen. The document's own title stays in the
+   heading outline for screen readers, so later headings don't skip a level. */
 .ios-screen .doc-title,
 .ios-screen .pd-name {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The accent tint is see-through; over the grey grouped background it gets too dark
+   for the text, so lay it over the card surface as on desktop. */
+.ios-screen .pill--accent {
+  background: linear-gradient(var(--accent-soft), var(--accent-soft)), var(--surface);
 }
 
 .ios-screen .about-hero {

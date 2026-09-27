@@ -4,7 +4,7 @@
 
 import { createRequire } from 'node:module';
 import { startServer } from '../scripts/serve.mjs';
-import { accomplishments, certifications, experience } from '../js/content.js';
+import { accomplishments, certifications, experience, projects } from '../js/content.js';
 
 const require = createRequire(import.meta.url);
 let playwright;
@@ -63,14 +63,14 @@ console.log('Desktop');
 
   await p.click('.fv-item[data-key="projects"]');
   await p.waitForTimeout(200);
-  check('lists 10 projects', await count(p, '.fv-icons--projects .fv-item') === 10);
-  check('each project card shows its description', await count(p, '.fv-icons--projects .fv-desc') === 10);
+  check(`lists ${projects.length} projects`, await count(p, '.fv-icons--projects .fv-item') === projects.length);
+  check('each project card shows its description', await count(p, '.fv-icons--projects .fv-desc') === projects.length);
   check('records #projects in the URL', p.url().endsWith('#projects'));
 
   await p.click('.finder-toolbar [data-mode="list"]');
-  check('list view has 10 rows', await count(p, '.fv-list tbody tr') === 10);
+  check(`list view has ${projects.length} rows`, await count(p, '.fv-list tbody tr') === projects.length);
   await p.click('.finder-toolbar [data-mode="gallery"]');
-  check('gallery view has 10 thumbnails', await count(p, '.fvg-thumb') === 10);
+  check(`gallery view has ${projects.length} thumbnails`, await count(p, '.fvg-thumb') === projects.length);
   await p.click('.finder-toolbar [data-mode="icons"]');
 
   await p.click('.fv-item[data-key="repo-vision"]');
@@ -204,6 +204,12 @@ console.log('Deep links and simple page');
   const { p, context } = await page({ hash: 'repo-vision' });
   check('#repo-vision opens the preview', (await p.locator('.ql #ql-title').textContent()) === 'Repo Vision');
   await context.close();
+  const m = await page({ hash: 'monitorly' });
+  check('#monitorly opens with its demo video, which loads only the poster up front',
+    (await m.p.locator('.ql #ql-title').textContent()) === 'Monitorly'
+    && await count(m.p, '.ql .pd-media video[poster][preload="none"] source[src$="monitorly.mp4"]') === 1);
+  check('the featured widget leads with Monitorly', (await m.p.locator('.widget-project .wpj-text h2').textContent()) === 'Monitorly');
+  await m.context.close();
   const t = await page({ hash: 'timeline' });
   check('#timeline opens the career timeline', await count(t.p, '.tm') === 1 && (await t.p.locator('.tm-head h2').textContent()) === 'Timeline');
   check('Timeline cards show no stray "null" text', await t.p.evaluate(() => [...document.querySelectorAll('.tm-card-body')].every((c) => ![...c.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim() === 'null'))));
@@ -225,8 +231,8 @@ console.log('Deep links and simple page');
   await a.context.close();
   const s = await page({ hash: 'simple' });
   check('#simple shows the simple page', await s.p.evaluate(() => document.body.classList.contains('is-simple')));
-  check('simple page lists every project', await count(s.p, '.simple-page .sp-project') === 10);
-  check('simple page includes how each project works', await count(s.p, '.simple-page .sp-flow') === 10);
+  check('simple page lists every project', await count(s.p, '.simple-page .sp-project') === projects.length);
+  check('simple page includes how each project works', await count(s.p, '.simple-page .sp-flow') === projects.length);
   await s.p.click('.sp-desktop-btn');
   await s.p.waitForTimeout(500);
   check('simple page can return to the desktop', await s.p.locator('.window[data-app="finder"]').isVisible());
@@ -282,10 +288,10 @@ console.log('Phone');
   check('phone profile shows the location and profile links', card.includes('New York, USA') && !/\d:\d\d/.test(card) && await count(p, '.ios-profile-links a') === 3);
   await p.click('.ios-dock .ios-app[aria-label="Projects"]');
   await p.waitForTimeout(500);
-  check('Projects app lists 10 projects', await count(p, '.ios-project') === 10);
+  check(`Projects app lists ${projects.length} projects`, await count(p, '.ios-project') === projects.length);
   await p.locator('.ios-project').first().click();
   await p.waitForTimeout(500);
-  check('tapping a project opens its page', (await p.locator('.ios-screen:last-child .ios-large-title').textContent()) === 'Repo Vision');
+  check('tapping a project opens its page', (await p.locator('.ios-screen:last-child .ios-large-title').textContent()) === projects[0].name);
   await p.click('.ios-screen:last-child .ios-back');
   await p.waitForTimeout(400);
   check('Back returns to the list', await count(p, '.ios-screen') === 1);
@@ -309,7 +315,7 @@ console.log('Without JavaScript');
   const context = await browser.newContext({ javaScriptEnabled: false });
   const p = await context.newPage();
   await p.goto(BASE);
-  check('prerendered page has every project', await count(p, '.simple-page .sp-project') === 10);
+  check('prerendered page has every project', await count(p, '.simple-page .sp-project') === projects.length);
   check('prerendered page has the JSON-LD profile', (await p.locator('script[type="application/ld+json"]').textContent()).includes('Saiprasaad Kalyanaraman'));
   check('page text and share descriptions have no hiring prompts', !HIRING.test(await p.content()));
   await context.close();

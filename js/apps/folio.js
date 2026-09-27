@@ -7,7 +7,7 @@ import { h, session, reducedMotion } from '../lib/dom.js';
 import { iconSvg } from '../lib/icons.js';
 import {
   site, profile, projects, experience, education, sections, skills, skillCategories, accomplishments,
-  certifications, portfolioContext, experiencePhrase, formatRange, evidenceFor, skillLabel, projectsUsing,
+  certifications, portfolioContext, experiencePhrase, formatRange, evidenceFor, skillLabel, projectsUsing, countWord,
 } from '../content.js';
 import { buildIndex, search } from '../lib/search.js';
 import { skillsIn } from '../lib/skillmatch.js';
@@ -178,7 +178,7 @@ export function localAnswer(question) {
   if (/(strongest|best|favou?rite|top|impressive|proud|flagship|highlight)/.test(q) && /(project|work|built)/.test(q) || /featured project/.test(q)) {
     const featured = projects.filter((p) => p.featured);
     featured.forEach(addProject);
-    return { text: `Four projects stand out:\n\n${list(featured.map(projectLine))}\n\nRepo Vision is the most complete: three microservices, three forecasting models and a React dashboard.`, sources };
+    return { text: `${countWord(featured.length)} projects stand out:\n\n${list(featured.map(projectLine))}\n\nMonitorly is the flagship: a session replay platform built end to end, from a three-line SDK to live replay and Teams alerts, with around 100,000 sessions recorded so far.`, sources };
   }
   if (/(\bai\b|llm|machine learning|\bml\b|genai|generative|gpt|openai|ollama|\brag\b|whisper|nlp|model)/.test(q)) {
     const ai = projects.filter((p) => p.stack.some((s) => ['llms', 'openai', 'ollama', 'whisper', 'tensorflow', 'ml', 'genai', 'nlp'].includes(s)));
