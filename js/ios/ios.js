@@ -295,7 +295,7 @@ export function mountIOS(root, { enterSimple }) {
   const appButton = (id, withLabel = true) => h('button', {
     class: 'ios-app', type: 'button', 'aria-label': LABELS[id] || APPS[id]?.label,
     onClick: (e) => openApp(id, { from: e.currentTarget.querySelector('.app-icon') || e.currentTarget }),
-  }, fromHtml(appIconHtml(id === 'achievements' ? 'achievements' : id, { size: 60, photo: profile.photo.src })), withLabel ? h('span', { 'aria-hidden': 'true' }, LABELS[id]) : null);
+  }, fromHtml(appIconHtml(id, { size: 60 })), withLabel ? h('span', { 'aria-hidden': 'true' }, LABELS[id]) : null);
 
   home.append(
     h('section', { class: 'ios-widget ios-profile-card', 'aria-label': 'Profile' },

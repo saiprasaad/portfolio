@@ -248,6 +248,7 @@ console.log('Phone');
 {
   const { p, context, errors } = await page({ width: 390, height: 844, touch: true });
   check('shows the home screen', await count(p, '.ios-grid .ios-app') === 8);
+  check('the About icon is a drawing, not a photo', await count(p, '.ios-app[aria-label="About"] img') === 0 && await count(p, '.ios-app[aria-label="About"] .app-svg') === 1);
   const card = await p.locator('.ios-profile-card').textContent();
   check('phone profile shows the location and profile links', card.includes('New York, USA') && !/\d:\d\d/.test(card) && await count(p, '.ios-profile-links a') === 3);
   await p.click('.ios-dock .ios-app[aria-label="Projects"]');

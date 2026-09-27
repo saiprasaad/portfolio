@@ -252,6 +252,20 @@ function notes(k) {
   });
 }
 
+// A generic profile picture: a person in a white disc.
+function about(k) {
+  return tile(k, {
+    bg: [[0, '#8fb6ff'], [0.5, '#4f7cf7'], [1, '#2847c9']],
+    defs: sheenDef(k)
+      + linear(`${k}d`, [[0, '#ffffff'], [1, '#e3eaff']])
+      + linear(`${k}p`, [[0, '#7c9cff'], [1, '#2f4fd6']])
+      + `<clipPath id="${k}q"><circle cx="50" cy="50" r="29"/></clipPath>`,
+    body: sheen(k)
+      + lifted(`<circle cx="50" cy="50" r="29" fill="url(#${k}d)"/>`, { dy: 2.6, opacity: 0.22, color: '#10236e' })
+      + `<g clip-path="url(#${k}q)" fill="url(#${k}p)"><circle cx="50" cy="42" r="11"/><path d="M24 84C24 66 36 58.5 50 58.5S76 66 76 84Z"/></g>`,
+  });
+}
+
 // The Trash sits in the Dock without a tile, like the real one.
 function trash(k) {
   const ribs = [37, 43.5, 50, 56.5, 63].map((x) => `<path d="M${x} 37L${f(50 + (x - 50) * 0.9)} 83" stroke="#5b6472" stroke-opacity=".28" stroke-width="2.4" stroke-linecap="round"/>`).join('');
@@ -289,7 +303,7 @@ function stack(k) {
 
 const ICONS = {
   finder, folio, terminal, timemachine, mail, preview, projects, experience, skills, education, achievements,
-  fit, settings, notes, trash, stack, about: finder,
+  fit, settings, notes, trash, stack, about,
 };
 
 export function appIconSvg(id) {

@@ -149,9 +149,6 @@ export const APPS = {
   notes: { label: 'Read Me' },
 };
 
-export function appIconHtml(id, { size = 52, photo = '' } = {}) {
-  if (id === 'about' && photo) {
-    return `<span class="app-icon app-icon--photo" style="--size:${size}px" aria-hidden="true"><img src="${esc(photo)}" alt="" width="${size}" height="${size}" loading="lazy" decoding="async"></span>`;
-  }
+export function appIconHtml(id, { size = 52 } = {}) {
   return `<span class="app-icon app-icon--${id}" style="--size:${size}px" aria-hidden="true">${appIconSvg(id)}</span>`;
 }
