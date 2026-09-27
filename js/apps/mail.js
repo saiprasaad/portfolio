@@ -1,5 +1,6 @@
 // Mail: a compose window that hands the message to the visitor's email app.
-// Nothing is sent from the page, and the copy says so.
+// Nothing is sent from the page, and the copy says so. The visitor's email app adds
+// their name and address, so the form only asks for a subject and a message.
 
 import { h, copyText } from '../lib/dom.js';
 import { profile } from '../content.js';
@@ -9,9 +10,7 @@ let counter = 0;
 
 export function createMailView(actions, prefill = {}) {
   const n = ++counter;
-  const nameInput = h('input', { id: `mail-name-${n}`, type: 'text', autocomplete: 'name', placeholder: 'Your name' });
-  const emailInput = h('input', { id: `mail-email-${n}`, type: 'email', autocomplete: 'email', placeholder: 'you@company.com' });
-  const subjectInput = h('input', { id: `mail-subject-${n}`, type: 'text', placeholder: 'Subject', value: prefill.subject || '' });
+  const subjectInput = h('input', { id: `mail-subject-${n}`, type: 'text', value: prefill.subject || '' });
   const body = h('textarea', { id: `mail-body-${n}`, placeholder: 'Write your message…', 'aria-label': 'Message', 'data-autofocus': '' });
   body.value = prefill.body || '';
   const status = h('p', { class: 'mail-status', 'aria-live': 'polite' }, `Sending opens your email app with this message addressed to ${profile.email}.`);
@@ -30,8 +29,6 @@ export function createMailView(actions, prefill = {}) {
   const el = h('form', { class: 'mail', onSubmit: (e) => { e.preventDefault(); send(); } },
     h('div', { class: 'mail-fields' },
       toRow,
-      field('From', nameInput),
-      field('Reply to', emailInput),
       field('Subject', subjectInput),
     ),
     h('div', { class: 'mail-body' }, body),
@@ -39,10 +36,7 @@ export function createMailView(actions, prefill = {}) {
   );
 
   function composed() {
-    const who = nameInput.value.trim();
-    const reply = emailInput.value.trim();
-    const sign = who || reply ? `\n\n— ${who || 'A visitor'}${reply ? ` (${reply})` : ''}` : '';
-    return { subject: subjectInput.value.trim() || 'Hello from your portfolio', text: `${body.value.trim()}${sign}` };
+    return { subject: subjectInput.value.trim() || 'Hello from your portfolio', text: body.value.trim() };
   }
 
   async function copyMessage() {
@@ -55,11 +49,6 @@ export function createMailView(actions, prefill = {}) {
     if (!body.value.trim()) {
       status.textContent = 'Write a message first.';
       body.focus();
-      return;
-    }
-    if (emailInput.value && !emailInput.checkValidity()) {
-      status.textContent = 'Check the reply-to address, or leave it empty.';
-      emailInput.focus();
       return;
     }
     const { subject, text } = composed();

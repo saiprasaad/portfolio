@@ -126,6 +126,7 @@ console.log('Desktop');
   const mail = await p.evaluate(() => { document.querySelector('.dock-item[data-app="mail"]').click(); return true; });
   await p.waitForTimeout(400);
   check('Dock opens Mail', mail && await count(p, '.window[data-app="mail"]') === 1);
+  check('Mail asks only for a subject and a message', await count(p, '.window[data-app="mail"] .mail-field') === 2 && await count(p, '.window[data-app="mail"] input:not([id^="mail-subject"])') === 0);
   check('every Dock item has its artwork', await p.evaluate(() => [...document.querySelectorAll('.dock-item')].every((b) => b.querySelector('.app-svg'))));
   await p.click('.window[data-app="mail"] .tl-min');
   await p.waitForTimeout(600);

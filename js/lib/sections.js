@@ -1,7 +1,7 @@
 // Section documents shared by Finder (desktop) and the phone apps. Each renderer takes an
 // `actions` object so the same markup can open a Quick Look on desktop or push a screen on a phone.
 
-import { h, fromHtml } from './dom.js';
+import { h, fromHtml, escapeHtml } from './dom.js';
 import { iconSvg } from './icons.js';
 import { coverHtml } from './covers.js';
 import {
@@ -24,9 +24,10 @@ export const ROLE_MARKS = { afficiency: 'Af', 'open-avenues': 'OA', hexaware: 'H
 
 export function photo(size, cls = '') {
   const p = profile.photo;
-  return h('img', {
-    class: cls, src: p.src, srcset: p.srcset, sizes: `${size}px`, width: size, height: size, alt: p.alt, decoding: 'async',
-  });
+  // Built from markup in one step. Setting srcset, sizes and src one at a time makes Chrome
+  // start a load for an in-between choice and then cancel it.
+  const attr = escapeHtml;
+  return fromHtml(`<img${cls ? ` class="${attr(cls)}"` : ''} srcset="${attr(p.srcset)}" sizes="${size}px" src="${attr(p.src)}" width="${size}" height="${size}" alt="${attr(p.alt)}" decoding="async">`);
 }
 
 export function skillMark(id) {
