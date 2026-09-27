@@ -37,9 +37,8 @@ export function mountDesktop(root, { enterSimple }) {
   const windowsLayer = h('div', { class: 'windows' });
   const menubar = h('header', { class: 'menubar' });
   const dockWrap = h('nav', { class: 'dock-wrap', 'aria-label': 'Dock' });
-  const notes = h('div', { class: 'notifications', role: 'region', 'aria-label': 'Notifications', 'aria-live': 'polite' });
   const hudEl = h('div', { class: 'hud', role: 'status', 'aria-live': 'polite' });
-  root.append(wallpaper, desktop, windowsLayer, menubar, dockWrap, notes, hudEl);
+  root.append(wallpaper, desktop, windowsLayer, menubar, dockWrap, hudEl);
 
   const seen = storage.get(SEEN_KEY, {}) || {};
   const markSeen = (key) => {
@@ -71,27 +70,19 @@ export function mountDesktop(root, { enterSimple }) {
     hud(ok ? message : 'Copy failed. Select the text instead.', ok ? 'check' : 'info');
   }
 
-  function notify({ app = 'folio', title, body, actions: buttons = [], timeout = 9000 }) {
-    const card = h('div', { class: 'notification', role: 'status' });
-    const close = () => {
-      card.classList.add('is-leaving');
-      setTimeout(() => card.remove(), 260);
-    };
-    let timer = setTimeout(close, timeout);
-    card.addEventListener('pointerenter', () => clearTimeout(timer));
-    card.addEventListener('pointerleave', () => { timer = setTimeout(close, 3000); });
-    card.append(
+  // A notification as it sits in Notification Center. Nothing pops up on its own.
+  function noteCard({ app, title, body, actions: buttons = [] }, close) {
+    return h('article', { class: 'note-card', 'aria-label': title },
       fromHtml(appIconHtml(app, { size: 38 })),
       h('div', {},
-        h('div', { class: 'note-head' }, h('strong', {}, APPS[app]?.label || title), h('time', {}, 'now')),
-        title ? h('p', { class: 'note-title' }, title) : null,
+        h('div', { class: 'note-head' }, h('strong', {}, APPS[app]?.label || app)),
+        h('p', { class: 'note-title' }, title),
         h('p', { class: 'note-body' }, body),
-        buttons.length ? h('div', { class: 'note-actions' }, buttons.map((b) => h('button', { class: b.primary ? 'btn btn-primary' : 'btn', type: 'button', onClick: () => { close(); b.run(); } }, b.label))) : null,
+        buttons.length ? h('div', { class: 'note-actions' }, buttons.map((b) => h('button', {
+          class: b.primary ? 'btn btn-primary' : 'btn', type: 'button', onClick: () => { close(); b.run(); },
+        }, b.label))) : null,
       ),
-      h('button', { class: 'note-close', type: 'button', 'aria-label': 'Dismiss notification', onClick: close }, icon('x', 11)),
     );
-    notes.append(card);
-    return close;
   }
 
   function contextMenu(e, items) {
@@ -189,7 +180,8 @@ export function mountDesktop(root, { enterSimple }) {
       });
       win.view = view;
       singletons.folio = win;
-      markSeen('folio');
+      if (!seen.folioIntro) markSeen('folioIntro');
+      setBadge('folio', 0);
     }
     win.view.setTab(tab);
     if (question) win.view.ask(question);
@@ -368,7 +360,6 @@ export function mountDesktop(root, { enterSimple }) {
     go,
     copy,
     hud,
-    notify,
     contextMenu,
     getInfo,
     enterSimple,
@@ -474,7 +465,7 @@ export function mountDesktop(root, { enterSimple }) {
   const folioBtn = h('button', { class: 'mb-item mb-status', type: 'button', 'aria-label': 'Ask Folio', title: 'Ask Folio', onClick: () => go('folio') }, icon('sparkle', 16));
   const ccBtn = h('button', { class: 'mb-item mb-status', type: 'button', 'aria-label': 'Control Center', 'aria-haspopup': 'dialog', 'aria-expanded': 'false', title: 'Control Center', onClick: () => openControlCenter() }, icon('toggles', 16));
   const spotBtn = h('button', { class: 'mb-item mb-status', type: 'button', 'aria-label': `Search (${MOD}K)`, title: `Search (${MOD}K)`, onClick: () => spotlight.open() }, icon('search', 15));
-  const clockBtn = h('button', { class: 'mb-item mb-clock', type: 'button', 'aria-haspopup': 'dialog', 'aria-expanded': 'false', onClick: () => openClock() }, clock);
+  const clockBtn = h('button', { class: 'mb-item mb-clock', type: 'button', 'aria-haspopup': 'dialog', 'aria-expanded': 'false', onClick: () => openNotificationCenter() }, clock);
   menubar.append(
     h('div', { class: 'menubar-group', role: 'menubar', 'aria-label': 'Menu bar' }, topButtons),
     h('div', { class: 'menubar-group menubar-group--right' }, folioBtn, ccBtn, spotBtn, clockBtn),
@@ -483,7 +474,7 @@ export function mountDesktop(root, { enterSimple }) {
   function tick() {
     const now = new Date();
     clock.textContent = formatMenuDate(now);
-    clockBtn.setAttribute('aria-label', `Clock: ${now.toLocaleString()}. Show time in New York`);
+    clockBtn.setAttribute('aria-label', `${now.toLocaleString()}. Show Notification Center`);
   }
   tick();
   setInterval(tick, 15000);
@@ -652,17 +643,22 @@ export function mountDesktop(root, { enterSimple }) {
     }
   }
 
-  function openClock() {
-    const now = new Date();
-    const local = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const same = local === profile.timeZone;
-    showPopover({
-      anchor: clockBtn, label: 'Clock', align: 'right', className: 'clock-pop',
+  function openNotificationCenter() {
+    let pop = null;
+    const close = () => pop?.close();
+    const today = new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date());
+    pop = showPopover({
+      anchor: clockBtn, label: 'Notification Center', align: 'right', className: 'nc-pop',
       content: [
-        h('div', { class: 'clock-row' }, h('span', { class: 'clock-time' }, formatClock(now)), h('span', { class: 'clock-label' }, 'Your time'),
-          h('span', { class: 'clock-label', style: 'grid-column:1/-1' }, new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).format(now))),
-        same ? h('p', { class: 'skill-note', style: 'margin:0' }, `You're in the same time zone as ${profile.nickname}.`)
-          : h('div', { class: 'clock-row' }, h('span', { class: 'clock-time' }, formatClock(now, profile.timeZone)), h('span', { class: 'clock-label' }, `${profile.nickname} · New York`)),
+        h('p', { class: 'nc-date' }, today),
+        noteCard({
+          app: 'folio', title: 'Hi, I’m Folio', body: "Ask me about Sai's work, or check a job description against his experience.",
+          actions: [{ label: 'Fit Check', primary: true, run: () => go('fit') }, { label: 'Ask a question', run: () => go('folio') }],
+        }, close),
+        noteCard({
+          app: 'finder', title: 'Search everything', body: `Press ${MOD}K or / to search every project, role and skill.`,
+          actions: [{ label: 'Search', run: () => spotlight.open() }],
+        }, close),
       ],
     });
   }
@@ -721,6 +717,19 @@ export function mountDesktop(root, { enterSimple }) {
     dockItems.forEach((btn) => btn.style.setProperty('--s', `${BASE}px`));
   });
 
+  function setBadge(app, count) {
+    const btn = dockItems.get(app);
+    if (!btn) return;
+    btn.querySelector('.dock-badge')?.remove();
+    const label = APPS[app]?.label || app;
+    if (count > 0) {
+      btn.append(h('span', { class: 'dock-badge', 'aria-hidden': 'true' }, String(count)));
+      btn.setAttribute('aria-label', `${label}, ${count} new message${count > 1 ? 's' : ''}`);
+    } else {
+      btn.setAttribute('aria-label', label);
+    }
+  }
+
   function bounce(app) {
     const btn = dockItems.get(app);
     if (!btn || reducedMotion() || btn.classList.contains('is-running')) return;
@@ -763,11 +772,6 @@ export function mountDesktop(root, { enterSimple }) {
   };
   renderFeatured();
 
-  const nyTime = h('span');
-  const updateNy = () => { nyTime.textContent = `${formatClock(new Date(), profile.timeZone)} in New York`; };
-  updateNy();
-  setInterval(updateNy, 30000);
-
   const widgets = h('div', { class: 'widgets' },
     h('section', { class: 'widget widget-profile', 'aria-label': 'Profile' },
       h('div', { class: 'wp-head' },
@@ -783,7 +787,12 @@ export function mountDesktop(root, { enterSimple }) {
         h('button', { class: 'btn btn-glass', type: 'button', onClick: () => go('mail') }, icon('mail', 14), 'Contact'),
         h('button', { class: 'btn btn-glass', type: 'button', onClick: () => go('about') }, icon('user', 14), 'About'),
       ),
-      h('div', { class: 'wp-meta' }, icon('pin', 13), `${profile.location} ·`, nyTime),
+      h('div', { class: 'wp-foot' },
+        h('span', { class: 'wp-meta' }, icon('pin', 13), profile.location),
+        h('div', { class: 'wp-links' }, profile.links.map((l) => h('a', {
+          class: 'btn btn-glass btn-icon', href: l.url, target: '_blank', rel: 'noopener', 'aria-label': l.label, title: l.label,
+        }, icon(l.id, 14)))),
+      ),
     ),
     h('button', { class: 'widget widget-fit', type: 'button', onClick: () => go('fit') },
       h('span', { class: 'widget-label' }, icon('target', 13), 'Hiring?'),
@@ -924,23 +933,12 @@ export function mountDesktop(root, { enterSimple }) {
     }
   });
 
-  // First-visit notifications, each shown once per browser.
-  setTimeout(() => {
-    if (!seen.folioNote && !singletons.folio) {
-      markSeen('folioNote');
-      notify({
-        app: 'folio', title: 'Hi, I’m Folio', body: "I can answer questions about Sai's work, or check a job description against his experience.",
-        actions: [{ label: 'Fit Check', primary: true, run: () => go('fit') }, { label: 'Ask a question', run: () => go('folio') }],
-        timeout: 12000,
-      });
-    }
-  }, 3200);
-  setTimeout(() => {
-    if (!seen.searchNote) {
-      markSeen('searchNote');
-      notify({ app: 'finder', title: 'Search everything', body: `Press ${MOD}K or / to search every project, role and skill.`, timeout: 8000 });
-    }
-  }, 16000);
+  // First visit: a badge on Folio's Dock icon until Folio is opened once. Nothing pops up.
+  if (!seen.folioIntro) {
+    setTimeout(() => {
+      if (!seen.folioIntro && !singletons.folio) setBadge('folio', 1);
+    }, 2500);
+  }
 
   // Finder always starts underneath whatever the link points to.
   os.boot = (token = '') => {

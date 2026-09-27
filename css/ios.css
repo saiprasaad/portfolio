@@ -45,10 +45,56 @@
   box-shadow: inset 0 0.5px 0 var(--glass-shine), inset 0 0 0 0.5px var(--glass-edge), 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
+.ios-profile-card {
+  gap: 12px;
+}
+
 .ios-profile {
+  display: grid;
   grid-template-columns: 64px minmax(0, 1fr);
   align-items: center;
   gap: 14px;
+  width: 100%;
+  text-align: left;
+  color: var(--text);
+}
+
+.ios-profile-links {
+  display: flex;
+  gap: 6px;
+}
+
+.ios-link-pill {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 34px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--fill);
+}
+
+.ios-link-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Very narrow phones: icons only (each link keeps its name for screen readers). */
+@media (max-width: 359px) {
+  .ios-link-label {
+    display: none;
+  }
+}
+
+.ios-link-pill:hover {
+  text-decoration: none;
 }
 
 .ios-profile-text {
@@ -117,25 +163,6 @@
 .ios-fit span:last-child {
   font-size: 13px;
   color: var(--text-2);
-}
-
-.ios-featured-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.ios-featured-item {
-  display: grid;
-  gap: 6px;
-  font-size: 12.5px;
-  font-weight: 600;
-  text-align: left;
-  color: var(--text);
-}
-
-.ios-featured-item .cover {
-  border-radius: 14px;
 }
 
 .ios-home-foot {
@@ -564,5 +591,25 @@
   }
   .spotlight-bar input {
     font-size: 17px;
+  }
+}
+
+/* Shorter phones (iPhone SE and similar): tighten the home screen so it fits above the Dock. */
+@media (max-height: 740px) {
+  .ios-home {
+    gap: 14px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
+  }
+  .ios-widget {
+    padding: 14px;
+  }
+  .ios-grid {
+    gap: 12px 8px;
+  }
+  .ios-app .app-icon {
+    --size: min(54px, 15vw);
+  }
+  .ios-fit span:last-child {
+    display: none;
   }
 }

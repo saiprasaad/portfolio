@@ -29,17 +29,17 @@ const server = await startServer();
 const BASE = `http://127.0.0.1:${server.address().port}/`;
 const browser = await playwright.chromium.launch();
 
-async function page({ width = 1440, height = 900, hash = '', folio = 'fail', touch = false } = {}) {
+async function page({ width = 1440, height = 900, hash = '', folio = 'fail', touch = false, firstVisit = false } = {}) {
   // Reduced motion makes timing deterministic; the animated paths are the same code with transitions.
   const context = await browser.newContext({ viewport: { width, height }, hasTouch: touch, isMobile: touch, reducedMotion: 'reduce' });
   await context.route('https://fonts.googleapis.com/**', (r) => r.fulfill({ contentType: 'text/css', body: '' }));
   await context.route('https://folio-backend-two.vercel.app/**', (r) => (folio === 'ok'
     ? r.fulfill({ contentType: 'application/json', body: JSON.stringify({ reply: 'Mock reply: **Repo Vision** is a strong pick.' }) })
     : r.abort()));
-  await context.addInitScript(() => {
+  await context.addInitScript((first) => {
     localStorage.setItem('saios.hello', 'true');
-    localStorage.setItem('saios.seen', JSON.stringify({ folioNote: true, searchNote: true }));
-  });
+    if (!first && !localStorage.getItem('saios.seen')) localStorage.setItem('saios.seen', JSON.stringify({ folioIntro: true }));
+  }, firstVisit);
   const p = await context.newPage();
   const errors = [];
   p.on('pageerror', (e) => errors.push(e.message));
@@ -151,6 +151,28 @@ console.log('Desktop');
   await context.close();
 }
 
+console.log('First visit');
+{
+  const { p, context, errors } = await page({ firstVisit: true });
+  await p.waitForTimeout(3500);
+  check('nothing pops up on its own', await count(p, '.note-card') === 0 && await count(p, '.popover') === 0);
+  check('Folio Dock icon shows an unread badge', await count(p, '.dock-item[data-app="folio"] .dock-badge') === 1);
+  const profile = await p.locator('.widget-profile').textContent();
+  check('profile widget shows the location without a clock', profile.includes('New York, USA') && !/\d:\d\d/.test(profile));
+  check('profile widget links to GitHub, LinkedIn and HackerRank', await count(p, '.widget-profile .wp-links a') === 3);
+  await p.click('.mb-clock');
+  check('the clock opens Notification Center', await count(p, '.nc-pop .note-card') === 2);
+  await p.click('.nc-pop .btn:has-text("Fit Check")');
+  await p.waitForTimeout(300);
+  check('Notification Center actions open Fit Check', await p.locator('.folio [role="tab"]:has-text("Fit Check")').getAttribute('aria-selected') === 'true');
+  check('opening Folio clears the badge', await count(p, '.dock-item[data-app="folio"] .dock-badge') === 0);
+  await p.reload();
+  await p.waitForTimeout(3200);
+  check('the badge stays cleared on the next visit', await count(p, '.dock-item[data-app="folio"] .dock-badge') === 0);
+  check('no page errors on first visit', errors.length === 0, errors.join('; '));
+  await context.close();
+}
+
 console.log('Folio service');
 {
   const { p, context } = await page({ folio: 'ok', hash: 'folio' });
@@ -207,6 +229,8 @@ console.log('Phone');
 {
   const { p, context, errors } = await page({ width: 390, height: 844, touch: true });
   check('shows the home screen', await count(p, '.ios-grid .ios-app') === 8);
+  const card = await p.locator('.ios-profile-card').textContent();
+  check('phone profile shows the location and profile links', card.includes('New York, USA') && !/\d:\d\d/.test(card) && await count(p, '.ios-profile-links a') === 3);
   await p.click('.ios-dock .ios-app[aria-label="Projects"]');
   await p.waitForTimeout(500);
   check('Projects app lists 10 projects', await count(p, '.ios-project') === 10);

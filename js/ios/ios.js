@@ -1,6 +1,6 @@
 // Phone layout: an iOS-style home screen whose apps reuse the desktop's section renderers.
 
-import { h, fromHtml, copyText, formatClock, reducedMotion, animate, trapTab } from '../lib/dom.js';
+import { h, fromHtml, copyText, reducedMotion, animate, trapTab } from '../lib/dom.js';
 import { appIconHtml, APPS } from '../lib/icons.js';
 import { coverHtml } from '../lib/covers.js';
 import { mountWallpaper } from '../lib/wallpaper.js';
@@ -292,35 +292,30 @@ export function mountIOS(root, { enterSimple }) {
 
   // ---------- Home screen ----------
 
-  const clockLine = h('span');
-  const tick = () => { clockLine.textContent = `${formatClock(new Date(), profile.timeZone)} in New York`; };
-  tick();
-  setInterval(tick, 30000);
-
   const appButton = (id, withLabel = true) => h('button', {
     class: 'ios-app', type: 'button', 'aria-label': LABELS[id] || APPS[id]?.label,
     onClick: (e) => openApp(id, { from: e.currentTarget.querySelector('.app-icon') || e.currentTarget }),
   }, fromHtml(appIconHtml(id === 'achievements' ? 'achievements' : id, { size: 60, photo: profile.photo.src })), withLabel ? h('span', { 'aria-hidden': 'true' }, LABELS[id]) : null);
 
-  const featured = projects.filter((p) => p.featured);
   home.append(
-    h('button', { class: 'ios-widget ios-profile', type: 'button', onClick: (e) => openApp('about', { from: e.currentTarget }) },
-      photo(64, 'wp-photo'),
-      h('span', { class: 'ios-profile-text' },
-        h('strong', {}, profile.name),
-        h('span', {}, `${profile.role} at ${profile.company}`),
-        h('small', {}, icon('pin', 12), clockLine),
+    h('section', { class: 'ios-widget ios-profile-card', 'aria-label': 'Profile' },
+      h('button', { class: 'ios-profile', type: 'button', onClick: (e) => openApp('about', { from: e.currentTarget }) },
+        photo(64, 'wp-photo'),
+        h('span', { class: 'ios-profile-text' },
+          h('strong', {}, profile.name),
+          h('span', {}, `${profile.role} at ${profile.company}`),
+          h('small', {}, icon('pin', 12), profile.location),
+        ),
       ),
+      h('div', { class: 'ios-profile-links' }, profile.links.map((l) => h('a', {
+        class: 'ios-link-pill', href: l.url, target: '_blank', rel: 'noopener', 'aria-label': l.label,
+      }, icon(l.id, 14), h('span', { class: 'ios-link-label' }, l.label)))),
     ),
     h('ul', { class: 'ios-grid', 'aria-label': 'Apps' }, GRID.map((id) => h('li', {}, appButton(id)))),
     h('button', { class: 'ios-widget ios-fit', type: 'button', onClick: (e) => openApp('fit', { from: e.currentTarget }) },
       h('span', { class: 'widget-label' }, icon('target', 13), 'Hiring?'),
       h('strong', {}, "Check a role against Sai's experience"),
       h('span', {}, 'Paste a job description to see matches and gaps.'),
-    ),
-    h('section', { class: 'ios-widget ios-featured', 'aria-label': 'Featured projects' },
-      h('span', { class: 'widget-label' }, icon('star', 13), 'Featured'),
-      h('div', { class: 'ios-featured-row' }, featured.slice(0, 2).map((p) => h('button', { type: 'button', class: 'ios-featured-item', onClick: () => openProject(p.slug) }, fromHtml(coverHtml(p)), h('span', {}, p.name)))),
     ),
     h('p', { class: 'ios-home-foot' }, h('button', { type: 'button', onClick: () => enterSimple() }, 'Simple page')),
   );

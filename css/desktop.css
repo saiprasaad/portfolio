@@ -256,31 +256,18 @@
   text-shadow: none;
 }
 
-/* Clock popover */
-.clock-pop {
-  width: 280px;
+/* Notification Center (opened from the clock) */
+.nc-pop {
+  width: 360px;
   display: grid;
   gap: 10px;
 }
 
-.clock-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: 4px 10px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: var(--fill);
-}
-
-.clock-row .clock-time {
-  font-size: 22px;
+.nc-date {
+  margin: 0;
+  padding: 0 4px 2px;
+  font-size: 13px;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.clock-row .clock-label {
-  font-size: 12px;
   color: var(--text-2);
 }
 
@@ -486,12 +473,30 @@
   gap: 6px;
 }
 
+.wp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .wp-meta {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--text-2);
+}
+
+.wp-links {
+  display: flex;
+  gap: 4px;
+}
+
+.wp-links .btn-icon {
+  width: 30px;
+  min-height: 30px;
+  color: var(--text);
 }
 
 .widget-label {
@@ -971,49 +976,19 @@
   margin-top: 10px;
 }
 
-/* ---------- Notifications ---------- */
+/* ---------- Notification cards ---------- */
 
-.notifications {
-  position: fixed;
-  top: calc(var(--menubar-h) + 10px);
-  right: 12px;
-  z-index: 4500;
-  width: 360px;
-  max-width: calc(100vw - 24px);
+.note-card {
   display: grid;
-  gap: 10px;
-  pointer-events: none;
-}
-
-.notification {
-  display: grid;
-  grid-template-columns: 38px 1fr;
+  grid-template-columns: 38px minmax(0, 1fr);
   gap: 10px;
   padding: 12px 14px;
-  border-radius: 20px;
-  pointer-events: auto;
+  border-radius: 18px;
   color: var(--text);
-  background: var(--glass-bg-strong);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: inset 0 0.5px 0 var(--glass-shine), 0 0 0 0.5px var(--hairline), var(--shadow-lg);
-  animation: note-in 0.42s var(--ease-spring);
-  position: relative;
+  background: var(--fill);
 }
 
-.notification.is-leaving {
-  animation: note-out 0.25s var(--ease) forwards;
-}
-
-@keyframes note-in {
-  from { opacity: 0; transform: translateX(40px); }
-}
-
-@keyframes note-out {
-  to { opacity: 0; transform: translateX(40px); }
-}
-
-.notification .app-icon {
+.note-card .app-icon {
   --size: 38px;
 }
 
@@ -1026,12 +1001,9 @@
 }
 
 .note-head strong {
-  color: var(--text);
-  font-size: 13px;
-}
-
-.note-head time {
-  margin-left: auto;
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .note-body {
@@ -1047,25 +1019,29 @@
   margin-top: 8px;
 }
 
-.note-close {
+/* Unread badge on a Dock icon */
+.dock-badge {
   position: absolute;
-  top: -6px;
-  left: -6px;
+  top: -5px;
+  right: -5px;
   display: grid;
   place-items: center;
-  width: 20px;
+  min-width: 20px;
   height: 20px;
-  border-radius: 50%;
-  color: var(--text-2);
-  background: var(--glass-bg-strong);
-  box-shadow: 0 0 0 0.5px var(--hairline-2), var(--shadow-sm);
-  opacity: 0;
-  transition: opacity 0.15s var(--ease);
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: #ff3b30;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+  animation: badge-in 0.3s var(--ease-spring);
 }
 
-.notification:hover .note-close,
-.note-close:focus-visible {
-  opacity: 1;
+@keyframes badge-in {
+  from { transform: scale(0); }
 }
 
 /* ---------- Spotlight ---------- */

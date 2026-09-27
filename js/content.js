@@ -24,7 +24,6 @@ export const profile = {
   companyBlurb: 'an insurtech startup',
   location: 'New York, USA',
   city: 'New York',
-  timeZone: 'America/New_York',
   email: 'saiprasaad1999@gmail.com',
   photo: {
     src: 'images/sai-320.webp',

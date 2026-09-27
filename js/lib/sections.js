@@ -1,7 +1,7 @@
 // Section documents shared by Finder (desktop) and the phone apps. Each renderer takes an
 // `actions` object so the same markup can open a Quick Look on desktop or push a screen on a phone.
 
-import { h, fromHtml, formatClock } from './dom.js';
+import { h, fromHtml } from './dom.js';
 import { iconSvg } from './icons.js';
 import { coverHtml } from './covers.js';
 import {
@@ -104,7 +104,7 @@ export function renderAbout(actions) {
       fact('Experience', `${capitalize(experiencePhrase(now))} full-time`),
       fact('Currently', `${current.title}, ${current.company}`),
       fact('Education', `${edu.degree.replace('Master of ', 'M.S. ')}, ${edu.short}`),
-      fact('Time in New York', formatClock(now, profile.timeZone)),
+      fact('Based in', profile.location),
     ),
     h('section', { class: 'doc-section', 'aria-label': 'Featured projects' },
       h('div', { class: 'doc-row', style: 'justify-content:space-between' },
@@ -257,7 +257,6 @@ export function renderAchievements(filter = 'all') {
 // ---------- Contact ----------
 
 export function renderContact(actions) {
-  const now = new Date();
   const row = (label, value, ...tools) => h('div', { class: 'contact-row' }, h('dt', {}, label), h('dd', {}, value), tools.length ? h('div', { class: 'doc-row' }, tools) : h('span'));
   return h('div', { class: 'doc doc-stack' },
     h('article', { class: 'contact-card' },
@@ -272,7 +271,7 @@ export function renderContact(actions) {
         row('Email', h('span', { class: 'selectable' }, profile.email),
           button('Copy', 'copy', () => actions.copy(profile.email, 'Email address copied')),
           button('Write', 'mail', () => actions.openMail(), 'btn btn-primary')),
-        row('Location', `${profile.location} · ${formatClock(now, profile.timeZone)} local time`),
+        row('Location', profile.location),
         ...profile.links.map((l) => row(l.label,
           h('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.handle),
           h('a', { class: 'btn btn-icon', href: l.url, target: '_blank', rel: 'noopener', 'aria-label': `Open ${l.label}` }, brandIcon(l.id)))),
