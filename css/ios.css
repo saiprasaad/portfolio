@@ -154,17 +154,6 @@
   filter: brightness(0.85) var(--icon-shadow);
 }
 
-.ios-fit strong {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.ios-fit span:last-child {
-  font-size: 13px;
-  color: var(--text-2);
-}
-
 .ios-home-foot {
   margin: 0;
   text-align: center;
@@ -618,8 +607,5 @@
   }
   .ios-app .app-icon {
     --size: min(54px, 15vw);
-  }
-  .ios-fit span:last-child {
-    display: none;
   }
 }

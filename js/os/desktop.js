@@ -136,7 +136,6 @@ export function mountDesktop(root, { enterSimple }) {
       switch (token) {
         case 'resume': openPreview(); break;
         case 'folio': openFolio(); break;
-        case 'fit': openFolio({ tab: 'fit' }); break;
         case 'terminal': openTerminal(); break;
         case 'mail': openMail(); break;
         case 'timeline': timeMachine.open(); break;
@@ -167,23 +166,23 @@ export function mountDesktop(root, { enterSimple }) {
     return win;
   }
 
-  function openFolio({ tab = 'chat', question = null } = {}) {
+  function openFolio({ question = null } = {}) {
     let win = focusExisting('folio');
     if (!win) {
       bounce('folio');
-      const view = createFolioView(os.actions, { tab });
+      const view = createFolioView(os.actions);
       const a = area();
       win = wm.create({
         app: 'folio', title: 'Folio', titlebar: false, body: view.el, width: 440, height: 640, minWidth: 360, minHeight: 420,
         x: a.right - 440 - 24, y: a.top + 14,
-        onClose: () => { view.destroy(); delete singletons.folio; released('folio', 'fit'); },
+        onClose: () => { view.destroy(); delete singletons.folio; released('folio'); },
       });
       win.view = view;
       singletons.folio = win;
       if (!seen.folioIntro) markSeen('folioIntro');
       setBadge('folio', 0);
     }
-    win.view.setTab(tab);
+    win.view.focus();
     if (question) win.view.ask(question);
     return win;
   }
@@ -275,7 +274,7 @@ export function mountDesktop(root, { enterSimple }) {
       h('h3', {}, 'Good places to start'),
       h('ul', {},
         h('li', {}, 'Projects in Files, with a preview of each'),
-        h('li', {}, 'Fit Check in Folio: paste a job description to compare it with his experience'),
+        h('li', {}, 'Folio in the Dock, for questions about his work'),
         h('li', {}, 'Timeline in the Dock for his career history'),
         h('li', {}, 'Terminal, if you like typing: try neofetch or git log'),
       ),
@@ -335,7 +334,7 @@ export function mountDesktop(root, { enterSimple }) {
         p.team ? [h('dt', {}, 'Team:'), h('dd', {}, p.team)] : null,
         h('dt', {}, 'Links:'), h('dd', {}, p.links.length ? p.links.map((l, i) => [i ? ', ' : '', h('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.label)]) : 'Private work'),
       ),
-      h('div', { class: 'fit-group' }, h('h5', {}, 'Tags'), chipList(p.stack, { actions: os.actions })),
+      h('div', { class: 'info-group' }, h('h5', {}, 'Tags'), chipList(p.stack, { actions: os.actions })),
       h('button', { class: 'btn btn-primary', type: 'button', onClick: () => go(p.slug) }, icon('eye', 14), 'Preview'),
     );
     wm.create({ app: 'info', title: `${p.name} Info`, body, width: 320, height: 540, minWidth: 280, minHeight: 320, zoomable: false, titlebar: false });
@@ -379,9 +378,9 @@ export function mountDesktop(root, { enterSimple }) {
       quickLook.close({ fromHistory: true });
       finder.open('projects', { filter: id });
     },
-    openFolio: ({ question, tab } = {}) => {
-      openFolio({ question, tab });
-      record(tab === 'fit' ? 'fit' : 'folio');
+    openFolio: ({ question } = {}) => {
+      openFolio({ question });
+      record('folio');
     },
   };
 
@@ -391,7 +390,6 @@ export function mountDesktop(root, { enterSimple }) {
     filterSkill: os.filterSkill,
     openResume: () => go('resume'),
     openMail: (prefill) => { openMail(prefill); record('mail'); },
-    openFit: () => go('fit'),
     openFolio: os.openFolio,
     openTerminal: () => go('terminal'),
     openTimeMachine: () => go('timeline'),
@@ -652,8 +650,8 @@ export function mountDesktop(root, { enterSimple }) {
       content: [
         h('p', { class: 'nc-date' }, today),
         noteCard({
-          app: 'folio', title: 'Hi, I’m Folio', body: "Ask me about Sai's work, or check a job description against his experience.",
-          actions: [{ label: 'Fit Check', primary: true, run: () => go('fit') }, { label: 'Ask a question', run: () => go('folio') }],
+          app: 'folio', title: 'Hi, I’m Folio', body: "Ask me about Sai's projects, experience and skills.",
+          actions: [{ label: 'Ask a question', primary: true, run: () => go('folio') }],
         }, close),
         noteCard({
           app: 'finder', title: 'Search everything', body: `Press ${MOD}K or / to search every project, role and skill.`,
@@ -762,7 +760,7 @@ export function mountDesktop(root, { enterSimple }) {
   const featured = projects.filter((p) => p.featured);
   let featuredAt = 0;
   const fpCover = h('div');
-  const fpName = h('h3');
+  const fpName = h('h2');
   const fpLine = h('p');
   const renderFeatured = () => {
     const p = featured[featuredAt];
@@ -793,12 +791,6 @@ export function mountDesktop(root, { enterSimple }) {
           class: 'btn btn-glass btn-icon', href: l.url, target: '_blank', rel: 'noopener', 'aria-label': l.label, title: l.label,
         }, icon(l.id, 14)))),
       ),
-    ),
-    h('button', { class: 'widget widget-fit', type: 'button', onClick: () => go('fit') },
-      h('span', { class: 'widget-label' }, icon('target', 13), 'Hiring?'),
-      h('h2', { class: 'wf-title' }, "Check a role against Sai's experience"),
-      h('p', {}, 'Paste a job description and Folio matches it to his projects and roles, gaps included.'),
-      h('span', { class: 'wf-cta' }, 'Open Fit Check', icon('arrow-right', 13)),
     ),
     h('section', { class: 'widget widget-project', 'aria-label': 'Featured project' },
       h('button', { type: 'button', style: 'display:grid;gap:10px;text-align:left', onClick: () => os.openProject(featured[featuredAt].slug, { list: featured.map((p) => p.slug) }), 'aria-label': 'Open featured project' }, fpCover),

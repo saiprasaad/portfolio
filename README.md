@@ -4,7 +4,7 @@ Saiprasaad Kalyanaraman's portfolio, built as a small operating system called Sa
 
 - **Desktop** (wide screens): a macOS-style desktop with a menu bar, Dock, widgets and windows.
   Files holds the portfolio (icon, list and gallery views, project previews, tags), plus Terminal,
-  Folio (an AI assistant with a job-description Fit Check), Mail, Resume and Timeline.
+  Folio (an AI assistant that answers questions about the portfolio), Mail, Resume and Timeline.
 - **Phone**: an iOS-style home screen whose apps show the same content.
 - **Simple page**: everything on one fast, printable page (View → Simple Page, or `#simple`).
   It is also prerendered into `index.html`, so crawlers, link previews and visitors without
@@ -59,4 +59,3 @@ Pushing to `main` runs the smoke test and, if it passes, deploys to GitHub Pages
 Folio sends `{ message, context }` to the backend at `site.folioEndpoint` and expects
 `{ reply }`. `context` is the portfolio as text plus the recent conversation, so follow-up
 questions work. If the service can't be reached, Folio answers from `content.js` and says so.
-The Fit Check's matching runs entirely in the browser.

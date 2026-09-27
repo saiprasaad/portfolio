@@ -148,7 +148,7 @@ export const APPS = {
   experience: { label: 'Experience' },
   skills: { label: 'Skills' },
   education: { label: 'Education' },
-  fit: { label: 'Fit Check' },
+  contact: { label: 'Contact' },
   notes: { label: 'Read Me' },
 };
 

@@ -222,14 +222,18 @@ function achievements(k) {
   });
 }
 
-function fit(k) {
+// A contact card: portrait on the left, name and details on the right.
+function contact(k) {
   return tile(k, {
     bg: [[0, '#5ff0dd'], [0.5, '#16bfb0'], [1, '#08857f']],
-    defs: sheenDef(k),
+    defs: sheenDef(k) + `<clipPath id="${k}a"><circle cx="35" cy="49" r="11.5"/></clipPath>`,
     body: sheen(k)
-      + lifted('<circle cx="47" cy="54" r="27" fill="#fff"/>', { dy: 2.4, opacity: 0.2, color: '#034a46' })
-      + '<circle cx="47" cy="54" r="19" fill="#12a89c"/><circle cx="47" cy="54" r="11.5" fill="#fff"/><circle cx="47" cy="54" r="5" fill="#ff5a5f"/>'
-      + '<path d="M49 52L77 24" stroke="#1f2937" stroke-width="3.6" stroke-linecap="round"/><path d="M71 20l7 1 1 7-6-2z" fill="#1f2937" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/>',
+      + lifted('<rect x="13" y="27" width="74" height="46" rx="8" fill="#fff"/>', { dy: 2.6, opacity: 0.2, color: '#034a46' })
+      + '<circle cx="35" cy="49" r="11.5" fill="#d3f5f0"/>'
+      + `<g clip-path="url(#${k}a)" fill="#12a89c"><circle cx="35" cy="45.5" r="4.8"/><path d="M24.5 62c0-6.8 4.7-10 10.5-10s10.5 3.2 10.5 10z"/></g>`
+      + '<rect x="53" y="40" width="25" height="4.6" rx="2.3" fill="#17544f"/>'
+      + '<rect x="53" y="48.5" width="18" height="3.6" rx="1.8" fill="#9fd9d2"/>'
+      + '<rect x="53" y="55.5" width="21" height="3.6" rx="1.8" fill="#9fd9d2"/>',
   });
 }
 
@@ -303,7 +307,7 @@ function stack(k) {
 
 const ICONS = {
   finder, folio, terminal, timemachine, mail, preview, projects, experience, skills, education, achievements,
-  fit, settings, notes, trash, stack, about,
+  contact, settings, notes, trash, stack, about,
 };
 
 export function appIconSvg(id) {

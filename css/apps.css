@@ -523,8 +523,7 @@
 }
 
 .doc-prose a,
-.folio-message a,
-.fit-ai a {
+.folio-message a {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -1466,6 +1465,15 @@
 
 /* ---------- Get Info panel ---------- */
 
+.info-group h5 {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
 .info-panel {
   display: grid;
   gap: 14px;
@@ -1630,7 +1638,7 @@
 .folio-head {
   flex: none;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   min-height: 56px;
@@ -1834,186 +1842,6 @@
   padding: 0 16px 10px;
   font-size: 11px;
   color: var(--text-3);
-}
-
-/* Fit Check */
-.fit {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  align-content: start;
-  gap: 14px;
-  padding: 16px;
-}
-
-.fit-intro h3 {
-  margin: 0;
-  font-size: 16px;
-  letter-spacing: -0.01em;
-}
-
-.fit-intro p {
-  margin: 4px 0 0;
-  color: var(--text-2);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.fit-form {
-  display: grid;
-  gap: 8px;
-}
-
-.fit-form textarea {
-  min-height: 150px;
-  font-size: 13px;
-}
-
-.fit-form .doc-row {
-  justify-content: space-between;
-}
-
-.fit-result {
-  display: grid;
-  gap: 12px;
-  padding: 14px;
-  border-radius: 16px;
-  background: var(--surface-2);
-  box-shadow: inset 0 0 0 0.5px var(--hairline);
-}
-
-.fit-summary {
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 14px;
-  align-items: center;
-}
-
-.fit-ring {
-  --p: 0;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: conic-gradient(var(--accent) calc(var(--p) * 1%), var(--fill-2) 0);
-  -webkit-mask: radial-gradient(circle, transparent 57%, #000 58%);
-  mask: radial-gradient(circle, transparent 57%, #000 58%);
-}
-
-.fit-ring-wrap {
-  position: relative;
-  width: 64px;
-  height: 64px;
-}
-
-.fit-ring-wrap strong {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 15px;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-}
-
-.fit-summary h4 {
-  margin: 0;
-  font-size: 14.5px;
-  line-height: 1.3;
-}
-
-.fit-summary p {
-  margin: 3px 0 0;
-  font-size: 12.5px;
-  color: var(--text-2);
-}
-
-.fit-checks {
-  display: grid;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.fit-check {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 8px;
-  align-items: start;
-  font-size: 12.5px;
-  line-height: 1.45;
-}
-
-.fit-check .fc-mark {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-
-.fit-check[data-status="ok"] .fc-mark { background: var(--ok-bg); color: var(--ok); }
-.fit-check[data-status="close"] .fc-mark { background: var(--warn-bg); color: var(--warn); }
-.fit-check[data-status="below"] .fc-mark { background: var(--bad-bg); color: var(--bad); }
-
-.fit-group h5 {
-  margin: 0 0 8px;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-
-.fit-matches {
-  display: grid;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.fit-match {
-  display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  gap: 10px;
-  align-items: center;
-  font-size: 12.5px;
-}
-
-.fit-match .fm-where {
-  color: var(--text-3);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.fit-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.fit-ai {
-  display: grid;
-  gap: 8px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 0.5px var(--hairline);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.fit-ai p {
-  margin: 0;
-}
-
-.fit-ai ul {
-  margin: 0;
-  padding-left: 18px;
 }
 
 /* ---------- Mail ---------- */
@@ -2453,9 +2281,6 @@
 /* Single-column grids: let long no-wrap text shrink instead of widening the column. */
 .doc-stack,
 .doc-section,
-.fit,
-.fit-form,
-.fit-result,
 .spotlight-preview,
 .info-panel,
 .pd-text,

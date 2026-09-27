@@ -102,7 +102,7 @@ export function renderAbout(actions) {
         h('div', { class: 'doc-row' },
           button('Resume', 'doc', () => actions.openResume(), 'btn btn-primary'),
           button('Email Sai', 'mail', () => actions.openMail()),
-          button('Check role fit', 'target', () => actions.openFit()),
+          button('Ask Folio', 'sparkle', () => actions.openFolio()),
         ),
       ),
     ),
@@ -266,7 +266,8 @@ export function renderAchievements(filter = 'all') {
 // ---------- Contact ----------
 
 export function renderContact(actions) {
-  const row = (label, value, ...tools) => h('div', { class: 'contact-row' }, h('dt', {}, label), h('dd', {}, value), tools.length ? h('div', { class: 'doc-row' }, tools) : h('span'));
+  // A definition list may only group <dt> and <dd>, so the buttons sit in a second <dd>.
+  const row = (label, value, ...tools) => h('div', { class: 'contact-row' }, h('dt', {}, label), h('dd', {}, value), tools.length ? h('dd', { class: 'doc-row' }, tools) : null);
   return h('div', { class: 'doc doc-stack' },
     h('article', { class: 'contact-card' },
       h('div', { class: 'contact-head' },

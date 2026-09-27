@@ -49,9 +49,9 @@ export const profile = {
   ],
 };
 
-// Skill ids are shared by the Skills view, project and role stacks, Spotlight and the Fit Check.
+// Skill ids are shared by the Skills view, project and role stacks, Spotlight and Folio.
 // `listed` skills are the ones Sai lists under Skills; the rest are evidenced by projects and roles.
-// `match` holds regular-expression sources used to spot the skill in a job description.
+// `match` holds regular-expression sources Folio uses to spot the skill in a question.
 export const skills = {
   c: { label: 'C', logo: 'c', match: ['\\bC\\s*/\\s*C\\+\\+', '\\bC programming', '\\bC language'] },
   java: { label: 'Java', logo: 'java', match: ['\\bjava\\b(?!\\s*script)'] },
@@ -123,48 +123,6 @@ export const skills = {
   azure: { label: 'Azure', logo: 'azure', match: ['\\bazure\\b'] },
   oci: { label: 'Oracle Cloud', mono: 'OCI', match: ['\\boracle cloud\\b', '\\boci\\b'] },
   postman: { label: 'Postman', mono: 'PM', match: ['\\bpostman\\b'] },
-};
-
-// Technologies that often appear in job descriptions but aren't in Sai's portfolio yet.
-// The Fit Check reports these as gaps instead of guessing.
-export const gapTerms = {
-  kubernetes: { label: 'Kubernetes', match: ['\\bkubernetes\\b', '\\bk8s\\b'] },
-  terraform: { label: 'Terraform', match: ['\\bterraform\\b'] },
-  graphql: { label: 'GraphQL', match: ['\\bgraphql\\b'] },
-  golang: { label: 'Go', match: ['\\bgolang\\b', 'CS:\\bGo\\b(?=\\s*(?:,|/|\\)|and\\b|or\\b))'] },
-  rust: { label: 'Rust', match: ['\\brust\\b'] },
-  cpp: { label: 'C++', match: ['C\\+\\+'] },
-  csharp: { label: 'C#', match: ['C#', '\\.net\\b', '\\bdotnet\\b'] },
-  ruby: { label: 'Ruby / Rails', match: ['\\bruby\\b', '\\brails\\b'] },
-  django: { label: 'Django', match: ['\\bdjango\\b'] },
-  fastapi: { label: 'FastAPI', match: ['\\bfastapi\\b'] },
-  vue: { label: 'Vue', match: ['\\bvue(?:\\.js|js)?\\b'] },
-  svelte: { label: 'Svelte', match: ['\\bsvelte(?:kit)?\\b'] },
-  nextjs: { label: 'Next.js', match: ['\\bnext(?:\\.js|js)\\b'] },
-  reactnative: { label: 'React Native', match: ['\\breact native\\b'] },
-  redux: { label: 'Redux', match: ['\\bredux\\b'] },
-  tailwind: { label: 'Tailwind CSS', match: ['\\btailwind\\b'] },
-  kafka: { label: 'Kafka', match: ['\\bkafka\\b'] },
-  rabbitmq: { label: 'RabbitMQ', match: ['\\brabbitmq\\b'] },
-  spark: { label: 'Spark', match: ['\\b(?:apache\\s)?spark\\b', '\\bpyspark\\b'] },
-  airflow: { label: 'Airflow', match: ['\\bairflow\\b'] },
-  snowflake: { label: 'Snowflake', match: ['\\bsnowflake\\b'] },
-  pytorch: { label: 'PyTorch', match: ['\\bpytorch\\b'] },
-  langchain: { label: 'LangChain', match: ['\\blangchain\\b'] },
-  vectordb: { label: 'Vector databases', match: ['\\bvector (?:db|database|store)s?\\b', '\\bpinecone\\b', '\\bweaviate\\b', '\\bpgvector\\b'] },
-  kotlin: { label: 'Kotlin', match: ['\\bkotlin\\b'] },
-  scala: { label: 'Scala', match: ['\\bscala\\b'] },
-  swiftui: { label: 'SwiftUI', match: ['\\bswift\\s*ui\\b'] },
-  express: { label: 'Express', match: ['\\bexpress(?:\\.js|js)?\\b'] },
-  nestjs: { label: 'NestJS', match: ['\\bnest(?:\\.js|js)\\b'] },
-  dynamodb: { label: 'DynamoDB', match: ['\\bdynamo\\s?db\\b'] },
-  cassandra: { label: 'Cassandra', match: ['\\bcassandra\\b'] },
-  jenkins: { label: 'Jenkins', match: ['\\bjenkins\\b'] },
-  githubactions: { label: 'GitHub Actions', match: ['\\bgithub actions\\b'] },
-  jest: { label: 'Jest', match: ['\\bjest\\b'] },
-  cypress: { label: 'Cypress', match: ['\\bcypress\\b'] },
-  playwright: { label: 'Playwright', match: ['\\bplaywright\\b'] },
-  selenium: { label: 'Selenium', match: ['\\bselenium\\b'] },
 };
 
 export const skillCategories = [
@@ -703,6 +661,7 @@ export function portfolioContext(date = new Date()) {
   lines.push(`EXPERIENCE: ${experiencePhrase(date)} full-time, plus two internships`);
   lines.push(`EMAIL: ${profile.email}`);
   lines.push(`LINKS: ${profile.links.map((l) => `${l.label} ${l.url}`).join('; ')}; Resume ${profile.resume.view}`);
+  lines.push("AVAILABILITY: Don't describe Sai as job hunting or available for hire. If asked about availability, hiring or job offers, say you don't have details and suggest email or LinkedIn.");
   lines.push('');
   lines.push('ABOUT:');
   aboutParagraphs(date).forEach((p) => lines.push(p));

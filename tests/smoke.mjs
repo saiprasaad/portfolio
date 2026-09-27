@@ -51,6 +51,8 @@ async function page({ width = 1440, height = 900, hash = '', folio = 'fail', tou
 }
 
 const count = (p, sel) => p.locator(sel).count();
+// Wording that reads as job hunting. None of it belongs anywhere on the site.
+const HIRING = /hiring\?|\bhire me\b|hire-me|fit check|job description|open to (?:work|new roles|opportunities)|looking for (?:a )?(?:new )?(?:job|role)/i;
 
 console.log('Desktop');
 {
@@ -119,11 +121,8 @@ console.log('Desktop');
   await p.waitForTimeout(400);
   check('Folio can drive the site', (await p.locator('.finder-filter').textContent()).includes('Flutter'));
 
-  await p.click('.folio [role="tab"]:has-text("Fit Check")');
-  await p.click('.fit-form .btn-quiet');
-  await p.waitForTimeout(200);
-  const fit = await p.locator('.fit-result').textContent();
-  check('Fit Check scores the example', /Matches \d+ of \d+ technologies/.test(fit) && fit.includes('Kubernetes'));
+  check('Folio is a plain assistant with no job-description tab', await count(p, '.folio [role="tab"]') === 0);
+  check('no hiring or job-hunting prompts on the desktop', !HIRING.test(await p.evaluate(() => document.body.innerText)));
 
   const mail = await p.evaluate(() => { document.querySelector('.dock-item[data-app="mail"]').click(); return true; });
   await p.waitForTimeout(400);
@@ -178,9 +177,10 @@ console.log('First visit');
   check('profile widget links to GitHub, LinkedIn and HackerRank', await count(p, '.widget-profile .wp-links a') === 3);
   await p.click('.mb-clock');
   check('the clock opens Notification Center', await count(p, '.nc-pop .note-card') === 2);
-  await p.click('.nc-pop .btn:has-text("Fit Check")');
+  check('Notification Center has no hiring prompts', !HIRING.test(await p.locator('.nc-pop').textContent()));
+  await p.click('.nc-pop .btn:has-text("Ask a question")');
   await p.waitForTimeout(300);
-  check('Notification Center actions open Fit Check', await p.locator('.folio [role="tab"]:has-text("Fit Check")').getAttribute('aria-selected') === 'true');
+  check('Notification Center actions open Folio', await count(p, '.window[data-app="folio"]') === 1);
   check('opening Folio clears the badge', await count(p, '.dock-item[data-app="folio"] .dock-badge') === 0);
   await p.reload();
   await p.waitForTimeout(3200);
@@ -261,6 +261,7 @@ console.log('Phone');
 {
   const { p, context, errors } = await page({ width: 390, height: 844, touch: true });
   check('shows the home screen', await count(p, '.ios-grid .ios-app') === 8);
+  check('phone home has a Contact app and no hiring prompts', await count(p, '.ios-app[aria-label="Contact"]') === 1 && !HIRING.test(await p.locator('.ios-home').textContent()));
   check('the About icon is a drawing, not a photo', await count(p, '.ios-app[aria-label="About"] img') === 0 && await count(p, '.ios-app[aria-label="About"] .app-svg') === 1);
   const card = await p.locator('.ios-profile-card').textContent();
   check('phone profile shows the location and profile links', card.includes('New York, USA') && !/\d:\d\d/.test(card) && await count(p, '.ios-profile-links a') === 3);
@@ -295,6 +296,7 @@ console.log('Without JavaScript');
   await p.goto(BASE);
   check('prerendered page has every project', await count(p, '.simple-page .sp-project') === 10);
   check('prerendered page has the JSON-LD profile', (await p.locator('script[type="application/ld+json"]').textContent()).includes('Saiprasaad Kalyanaraman'));
+  check('page text and share descriptions have no hiring prompts', !HIRING.test(await p.content()));
   await context.close();
 }
 
