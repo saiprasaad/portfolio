@@ -53,6 +53,8 @@ async function page({ width = 1440, height = 900, hash = '', folio = 'fail', tou
 
 const count = (p, sel) => p.locator(sel).count();
 // Wording that reads as job hunting. None of it belongs anywhere on the site.
+// The order projects are listed in content.js is the order every list should show.
+const ORDER = projects.map((x) => x.slug).join(',');
 const HIRING = /hiring\?|\bhire me\b|hire-me|fit check|job description|open to (?:work|new roles|opportunities)|looking for (?:a )?(?:new )?(?:job|role)/i;
 
 console.log('Content');
@@ -72,6 +74,7 @@ console.log('Desktop');
   await p.click('.fv-item[data-key="projects"]');
   await p.waitForTimeout(200);
   check(`lists ${projects.length} projects`, await count(p, '.fv-icons--projects .fv-item') === projects.length);
+  check('lists them in the order set in content.js', (await p.$$eval('.fv-icons--projects .fv-item', (els) => els.map((e) => e.dataset.key))).join(',') === ORDER);
   check('each project card shows its description', await count(p, '.fv-icons--projects .fv-desc') === projects.length);
   check('records #projects in the URL', p.url().endsWith('#projects'));
 
@@ -251,6 +254,7 @@ console.log('Deep links and simple page');
   const s = await page({ hash: 'simple' });
   check('#simple shows the simple page', await s.p.evaluate(() => document.body.classList.contains('is-simple')));
   check('simple page lists every project', await count(s.p, '.simple-page .sp-project') === projects.length);
+  check('simple page lists projects in the order set in content.js', (await s.p.$$eval('.simple-page .sp-project', (els) => els.map((e) => e.id))).join(',') === ORDER);
   check('simple page includes how each project works', await count(s.p, '.simple-page .sp-flow') === projects.length);
   await s.p.click('.sp-desktop-btn');
   await s.p.waitForTimeout(500);
@@ -308,6 +312,7 @@ console.log('Phone');
   await p.click('.ios-dock .ios-app[aria-label="Projects"]');
   await p.waitForTimeout(500);
   check(`Projects app lists ${projects.length} projects`, await count(p, '.ios-project') === projects.length);
+  check('Projects app lists them in the order set in content.js', (await p.$$eval('.ios-project .ios-project-text strong', (els) => els.map((e) => e.textContent))).join('|') === projects.map((x) => x.name).join('|'));
   await p.locator('.ios-project').first().click();
   await p.waitForTimeout(500);
   check('tapping a project opens its page', (await p.locator('.ios-screen:last-child .ios-large-title').textContent()) === projects[0].name);
