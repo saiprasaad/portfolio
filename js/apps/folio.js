@@ -106,7 +106,7 @@ const PROJECT_ALIASES = {
   'asana-automation': ['asana'],
   'encryption-module': ['encryption module', 'decryption module', 'aes module'],
   battleships: ['battleship'],
-  'wordle-clone': ['wordle'],
+  voila: ['voilà', 'wordle'],
 };
 
 function mentionedProject(text) {

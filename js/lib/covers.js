@@ -83,12 +83,13 @@ function video() {
   <rect x="42" y="160" width="236" height="3" rx="1.5" fill="#fff" fill-opacity=".3"/><rect x="42" y="160" width="92" height="3" rx="1.5" fill="#fff"/>`;
 }
 
-function wordle() {
+// Three guesses at VOILA, scored the way the game scores them.
+function voila() {
   const G = '#538d4e', Y = '#b59f3b', X = '#3a3a3c';
   const rows = [
-    [['C', X], ['R', Y], ['A', Y], ['N', X], ['E', X]],
-    [['S', Y], ['T', Y], ['R', G], ['A', Y], ['P', X]],
-    [['D', G], ['A', G], ['R', G], ['T', G], ['S', G]],
+    [['C', X], ['R', X], ['A', Y], ['N', X], ['E', X]],
+    [['S', X], ['O', G], ['L', Y], ['I', Y], ['D', X]],
+    [['V', G], ['O', G], ['I', G], ['L', G], ['A', G]],
   ];
   const size = 22, gap = 4, x0 = 97, y0 = 24;
   let out = '';
@@ -171,7 +172,7 @@ function replay() {
   <text x="251" y="165" font-family="${SANS}" font-size="7.5" fill="#fff" fill-opacity=".75">Skip idle</text>`;
 }
 
-const ART = { chart, logs, cipher, graph, tasks, video, wordle, battleship, map, camera, replay };
+const ART = { chart, logs, cipher, graph, tasks, video, voila, battleship, map, camera, replay };
 
 export function coverSvg(project) {
   const draw = ART[project.cover?.type] || chart;
