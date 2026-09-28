@@ -4,12 +4,16 @@
 
 const listeners = new Set();
 
+// Tokens that were renamed, so links shared before a rename still open the right place.
+const MOVED = { 'wordle-clone': 'voila' };
+
 export function parseToken(hash = window.location.hash) {
   let raw = String(hash || '').replace(/^#\/?/, '');
   try {
     raw = decodeURIComponent(raw);
   } catch { /* keep raw */ }
-  return raw.trim().toLowerCase().replace(/[^a-z0-9._~-]/g, '');
+  const token = raw.trim().toLowerCase().replace(/[^a-z0-9._~-]/g, '');
+  return MOVED[token] || token;
 }
 
 let current = parseToken();
