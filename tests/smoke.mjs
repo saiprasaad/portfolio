@@ -2,6 +2,7 @@
 //   npm test
 // Needs Playwright's Chromium (npx playwright install chromium).
 
+import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { startServer } from '../scripts/serve.mjs';
 import { accomplishments, certifications, experience, projects } from '../js/content.js';
@@ -53,6 +54,13 @@ async function page({ width = 1440, height = 900, hash = '', folio = 'fail', tou
 const count = (p, sel) => p.locator(sel).count();
 // Wording that reads as job hunting. None of it belongs anywhere on the site.
 const HIRING = /hiring\?|\bhire me\b|hire-me|fit check|job description|open to (?:work|new roles|opportunities)|looking for (?:a )?(?:new )?(?:job|role)/i;
+
+console.log('Content');
+{
+  const files = projects.flatMap((pr) => pr.media.flatMap((m) => [m.src, m.poster]).filter(Boolean));
+  const missing = files.filter((f) => !existsSync(new URL(`../${f}`, import.meta.url)));
+  check(`every project image, video and poster exists (${files.length} files)`, missing.length === 0, missing.join(', '));
+}
 
 console.log('Desktop');
 {
