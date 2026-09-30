@@ -242,6 +242,7 @@ export const education = [
 // `features` what it does, `facts` a few numbers worth scanning. Everything here comes
 // from the project's code or README. cover.type picks an illustration from js/lib/covers.js;
 // `media` holds real outputs, app screenshots (type 'screenshot') or a video (type 'video').
+// `license` (only when the repository has one) links its license file from Details.
 export const projects = [
   {
     slug: 'monitorly',
@@ -368,6 +369,7 @@ export const projects = [
       { type: 'github', label: 'GitHub repo', url: 'https://github.com/saiprasaad/JsonExplorer' },
       { type: 'github', label: 'Claude Code plugin', url: 'https://github.com/saiprasaad/JsonExplorer/tree/main/plugins/json-explorer' },
     ],
+    license: { name: 'MIT', url: 'https://github.com/saiprasaad/JsonExplorer/blob/main/LICENSE' },
     media: [
       { type: 'video', title: 'Web app and Claude Code plugin video', src: 'images/projects/json-explorer.mp4', poster: 'images/projects/json-explorer-poster.webp', alt: 'JSON Explorer video: the web app’s graph, tree, table, compare and convert views, then the Claude Code plugin writing an offline graph page, outlining a file, masking secrets, diffing two files and catching a broken edit', width: 1920, height: 1080, caption: 'JSON Explorer in the browser and in Claude Code, in 24 seconds' },
       { type: 'screenshot', src: 'images/projects/json-explorer-graph.webp', alt: 'JSON Explorer graph view: a product catalog in the editor on the left, drawn as connected nodes in the middle, with a details panel showing the selected product’s path, size and value', width: 1000, height: 597, caption: 'Graph view with a product open in the details panel' },

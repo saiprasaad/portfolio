@@ -25,6 +25,8 @@ Terminal, Folio and the simple page all read from it, so a change there shows up
   - `features`: `{ title, text }` pairs.
   - `facts` (optional): a few `{ value, label }` numbers, like `{ value: '5', label: 'repositories tracked' }`.
   - `status` (optional): for example `Live · updated April 2026`.
+  - `license` (optional, only when the repository has one): `{ name: 'MIT', url }`, linking its license
+    file from the project's Details.
   - `cover.type`: picks an illustration from `js/lib/covers.js`.
   - `media` (optional): real images. Put the PNG in `images/projects/src/`, run
     `npm run assets -- projects`, and add `{ src, alt, width, height, caption }` pointing at the `.webp`.

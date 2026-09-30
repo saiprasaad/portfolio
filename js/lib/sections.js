@@ -377,6 +377,7 @@ export function renderProjectDetail(p, actions) {
             p.year ? [h('dt', {}, 'Year'), h('dd', {}, String(p.year))] : null,
             p.team ? [h('dt', {}, 'Team'), h('dd', {}, p.team.replace('Built with ', 'With '))] : null,
             h('dt', {}, 'Code'), h('dd', {}, p.links.some((l) => l.type === 'github') ? 'Public on GitHub' : 'Not public'),
+            p.license ? [h('dt', {}, 'License'), h('dd', {}, h('a', { href: p.license.url, target: '_blank', rel: 'noopener' }, p.license.name))] : null,
           ),
         ),
         related.length ? h('div', { class: 'pd-box' }, h('h3', {}, 'Related'),

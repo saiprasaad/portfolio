@@ -332,9 +332,10 @@ export function mountDesktop(root, { enterSimple }) {
         h('dt', {}, 'Year:'), h('dd', {}, p.year ? String(p.year) : 'Not listed'),
         h('dt', {}, 'Where:'), h('dd', {}, 'Portfolio › Projects'),
         p.team ? [h('dt', {}, 'Team:'), h('dd', {}, p.team)] : null,
+        p.license ? [h('dt', {}, 'License:'), h('dd', {}, h('a', { href: p.license.url, target: '_blank', rel: 'noopener' }, p.license.name))] : null,
         h('dt', {}, 'Links:'), h('dd', {}, p.links.length ? p.links.map((l, i) => [i ? ', ' : '', h('a', { href: l.url, target: '_blank', rel: 'noopener' }, l.label)]) : 'Private work'),
       ),
-      h('div', { class: 'info-group' }, h('h5', {}, 'Tags'), chipList(p.stack, { actions: os.actions })),
+      h('div', { class: 'info-group' }, h('h4', {}, 'Tags'), chipList(p.stack, { actions: os.actions })),
       h('button', { class: 'btn btn-primary', type: 'button', onClick: () => go(p.slug) }, icon('eye', 14), 'Preview'),
     );
     wm.create({ app: 'info', title: `${p.name} Info`, body, width: 320, height: 540, minWidth: 280, minHeight: 320, zoomable: false, titlebar: false });

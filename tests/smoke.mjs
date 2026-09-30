@@ -220,6 +220,7 @@ console.log('Deep links and simple page');
     (await m.p.locator('.ql #ql-title').textContent()) === 'Monitorly'
     && await count(m.p, '.ql .pd-media video[poster][preload="none"] source[src$="monitorly.mp4"]') === 1);
   check('the featured widget leads with Monitorly', (await m.p.locator('.widget-project .wpj-text h2').textContent()) === 'Monitorly');
+  check('a project without a license shows no License row', await m.p.evaluate(() => ![...document.querySelectorAll('.ql .pd-kv dt')].some((d) => d.textContent === 'License')));
   await m.context.close();
   const v = await page({ hash: 'wordle-clone' });
   check('the old #wordle-clone link opens Voila, its new name', (await v.p.locator('.ql #ql-title').textContent()) === 'Voila');
@@ -234,6 +235,19 @@ console.log('Deep links and simple page');
   check('#json-explorer leads with its video, loading only the poster, with the screenshots kept apart',
     await count(j.p, '.ql .pd-main > .pd-section:first-child video[poster][preload="none"] source[src$="json-explorer.mp4"]') === 1
     && await count(j.p, '.ql .pd-section[aria-label="Screenshots"] video') === 0);
+  check('#json-explorer lists its MIT license in Details, linked to the license file', await j.p.evaluate(() => {
+    const dt = [...document.querySelectorAll('.ql .pd-kv dt')].find((d) => d.textContent === 'License');
+    const a = dt?.nextElementSibling?.querySelector('a');
+    return a?.textContent === 'MIT' && a.getAttribute('href').endsWith('/JsonExplorer/blob/main/LICENSE');
+  }));
+  await j.p.click('.ql button:has-text("Get Info")');
+  await j.p.waitForSelector('.info-panel');
+  check('Get Info keeps the name below the cover, even with many tags, and shows the license', await j.p.evaluate(() => {
+    const panel = document.querySelector('.info-panel');
+    const cover = panel.querySelector('.cover').getBoundingClientRect();
+    const name = panel.querySelector('h3').getBoundingClientRect();
+    return name.top >= cover.bottom && [...panel.querySelectorAll('dt')].some((d) => d.textContent === 'License:');
+  }));
   await j.context.close();
   const t = await page({ hash: 'timeline' });
   check('#timeline opens the career timeline', await count(t.p, '.tm') === 1 && (await t.p.locator('.tm-head h2').textContent()) === 'Timeline');
