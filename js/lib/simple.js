@@ -45,7 +45,9 @@ function renderRole(role, date) {
 }
 
 function renderProject(p) {
-  const videos = p.media.filter((m) => m.type === 'video').map((m) => ({ type: 'video', label: `Watch the ${(m.title || 'video').toLowerCase()}`, url: m.src }));
+  // "Product features video" reads as "Watch the product features video"; names like Claude Code keep their capitals.
+  const lowerFirst = (t) => t.charAt(0).toLowerCase() + t.slice(1);
+  const videos = p.media.filter((m) => m.type === 'video').map((m) => ({ type: 'video', label: `Watch the ${lowerFirst(m.title || 'video')}`, url: m.src }));
   const all = [...videos, ...p.links];
   const links = all.length
     ? `<p class="sp-links">${all.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${linkIcon(l.type)}${esc(l.label)}</a>`).join('')}</p>`
@@ -57,7 +59,7 @@ function renderProject(p) {
     ${coverHtml(p, { cls: 'sp-cover' })}
     <div class="sp-project-body">
       <h3>${esc(p.name)}</h3>
-      <p class="sp-meta">${esc(p.kind)}${p.year ? ` · ${p.year}` : ''}${p.status ? ` · ${esc(p.status)}` : ''}${p.team ? ` · ${esc(p.team)}` : ''}</p>
+      <p class="sp-meta">${esc(p.kind)}${p.year ? ` · ${p.year}` : ''}${p.status ? ` · ${esc(p.status)}` : ''}${p.team ? ` · ${esc(p.team)}` : ''}${p.license ? ` · ${esc(p.license.name)} license` : ''}</p>
       <p class="sp-tagline">${esc(p.tagline)}</p>
       ${facts}
       <p>${esc(p.summary)}</p>

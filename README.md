@@ -25,11 +25,14 @@ Terminal, Folio and the simple page all read from it, so a change there shows up
   - `features`: `{ title, text }` pairs.
   - `facts` (optional): a few `{ value, label }` numbers, like `{ value: '5', label: 'repositories tracked' }`.
   - `status` (optional): for example `Live · updated April 2026`.
+  - `license` (optional, only when the repository has one): `{ name: 'MIT', url }`, linking its license
+    file from the project's Details.
   - `cover.type`: picks an illustration from `js/lib/covers.js`.
   - `media` (optional): real images. Put the PNG in `images/projects/src/`, run
     `npm run assets -- projects`, and add `{ src, alt, width, height, caption }` pointing at the `.webp`.
     Give app screenshots `type: 'screenshot'` so the section is titled Screenshots (other images show as
-    Output). A `type: 'video'` item with a `poster` and a `title` leads the page instead.
+    Output). A `type: 'video'` item with a `poster` and a `title` leads the page under that title, and
+    any screenshots or outputs still follow at the end.
 - To show a company logo in Experience, put the image in `images/logos/src/` (for example `ey.jpg`),
   run `npm run assets -- logos`, and set that role's `logo` to `images/logos/ey.webp`. Roles without a
   logo show their initials.
