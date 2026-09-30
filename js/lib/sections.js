@@ -326,19 +326,20 @@ export function renderProjectDetail(p, actions) {
   const features = p.features || [];
   const flow = p.flow || [];
   // A video leads the page under its own title; screenshots and charts follow the write-up at full width.
-  const video = p.media.find((m) => m.type === 'video');
-  const videoFirst = Boolean(video);
-  const mediaLabel = video ? video.title || 'Video' : p.media.every((m) => m.type === 'screenshot') ? 'Screenshots' : 'Output';
-  const media = p.media.length ? h('section', { class: 'pd-section', 'aria-label': mediaLabel },
-    kicker(mediaLabel),
-    h('div', { class: 'pd-media' }, p.media.map((m) => h('figure', {},
+  const videos = p.media.filter((m) => m.type === 'video');
+  const stills = p.media.filter((m) => m.type !== 'video');
+  const mediaSection = (items, label) => (items.length ? h('section', { class: 'pd-section', 'aria-label': label },
+    kicker(label),
+    h('div', { class: 'pd-media' }, items.map((m) => h('figure', {},
       m.type === 'video'
         // Only the poster loads until someone presses play.
         ? h('video', { controls: true, playsinline: true, preload: 'none', poster: m.poster, width: m.width, height: m.height, 'aria-label': m.alt }, h('source', { src: m.src, type: 'video/mp4' }))
         : h('img', { src: m.src, alt: m.alt, width: m.width, height: m.height, loading: 'lazy', decoding: 'async' }),
       m.caption ? h('figcaption', {}, m.caption) : null,
     ))),
-  ) : null;
+  ) : null);
+  const videoSection = mediaSection(videos, videos[0]?.title || 'Video');
+  const stillsSection = mediaSection(stills, stills.every((m) => m.type === 'screenshot') ? 'Screenshots' : 'Output');
   return h('article', { class: 'pd', 'aria-labelledby': `pd-${p.slug}` },
     h('div', { class: 'pd-hero' },
       fromHtml(coverHtml(p)),
@@ -357,7 +358,7 @@ export function renderProjectDetail(p, actions) {
     p.facts?.length ? h('dl', { class: 'pd-facts' }, p.facts.map((x) => h('div', {}, h('dt', {}, x.value), h('dd', {}, x.label)))) : null,
     h('div', { class: 'pd-body' },
       h('div', { class: 'pd-main' },
-        videoFirst ? media : null,
+        videoSection,
         h('section', { class: 'pd-section', 'aria-label': 'Overview' }, kicker('Overview'), h('p', { class: 'pd-summary' }, p.summary)),
         flow.length ? h('section', { class: 'pd-section', 'aria-label': 'How it works' },
           kicker('How it works'),
@@ -382,6 +383,6 @@ export function renderProjectDetail(p, actions) {
           h('div', { class: 'doc-row' }, related.map((o) => button(o.name, null, () => actions.openProject(o.slug), 'btn')))) : null,
       ),
     ),
-    videoFirst ? null : media,
+    stillsSection,
   );
 }
