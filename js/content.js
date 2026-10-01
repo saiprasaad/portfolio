@@ -279,7 +279,7 @@ export const projects = [
     stack: ['rrweb', 'javascript', 'react', 'mui', 'reactquery', 'python', 'flask', 'redis', 'postgresql', 'azure', 'teams', 'microservices'],
     links: [],
     media: [
-      { type: 'video', title: 'Product features video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly product features video: adding the three-line SDK to an app, the project dashboard and its list of recorded sessions, the replay player with speed controls, skip inactivity and console, network and event panels, and sharing a link to a moment in a session', width: 1920, height: 1080, caption: 'Monitorly’s key features in 27 seconds' },
+      { type: 'video', title: 'Product features video', src: 'images/projects/monitorly.mp4', poster: 'images/projects/monitorly-poster.webp', alt: 'Monitorly product features video: recording an application form through three SDK calls across five channels while sensitive fields stay masked in the browser, batches that are replayable in seconds, the replay player with its timeline, speeds up to 8x and network inspection, watching a session live, friction alerts such as rage clicks flagged in Microsoft Teams with a link to the moment, and the three-line setup', width: 1920, height: 1080, caption: 'Monitorly’s key features in 65 seconds' },
     ],
     cover: { type: 'replay', from: '#0b0d1c', to: '#2d2672' },
   },
